@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib\json-toTreeString.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">lib/</a> json-toTreeString.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.06% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>134/144</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>84/112</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>14/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.96% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>132/142</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">67×</span>
+<span class="cline-any cline-yes">67×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">920×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-yes">427×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">427×</span>
+<span class="cline-any cline-yes">427×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">412×</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-yes">572×</span>
+<span class="cline-any cline-yes">572×</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-yes">264×</span>
+<span class="cline-any cline-yes">264×</span>
+<span class="cline-any cline-yes">262×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">26×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">274×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">274×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">var Type = require("./typeOf"),
+    travelJson = require("./json-travel");
+/**
+ * 缩略字符串
+ * @param str
+ * @returns {*|string}
+ */
+function trimRight(str){
+    return str.replace(/(\s|\u00A0)+$/,"");
+}
+&nbsp;
+/**
+ * 将string进行转义输出
+ */
+// https://github.com/douglascrockford/JSON-js/blob/e39db4b7e6249f04a195e7dd0840e610cc9e941e/json2.js#L195
+var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+    meta = { // table of character substitutions
+        '\b': '\\b',
+        '\t': '\\t',
+        '\n': '\\n',
+        '\f': '\\f',
+        '\r': '\\r',
+        '"' : '\\"',
+        '\\': '\\\\'
+    };
+function escapeString(string) {
+    // If the string contains no control characters, no quote characters, and no
+    // backslash characters, then we can safely slap some quotes around it.
+    // Otherwise we must also replace the offending characters with safe escape
+    // sequences.
+    escapable.lastIndex = 0;//复原
+    return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+        var c = meta[a];
+        return typeof c === 'string' ?
+            c :
+<span class="branch-1 cbranch-no" title="branch not covered" >        '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);</span>
+    }) + '"' : '"' + string + '"';
+}
+// console.log(escapeString("english中文汉字博大精神\n\t\r\"\f\b"));
+&nbsp;
+// 不可用正则中的字符代替，如果需要，请转义
+// _TreeChar_中的字符与后面的正则逻辑强相关，请勿更改，请勿有重复的value
+var _TreeChar_ = {
+    "I":  "│",
+    "T":  "├",
+    "L":  "└",
+    "_":  "─",
+    "SPLIT": ":",
+    "1":  " ",
+    "2":  "  ",
+    "3":  "   ",
+    "4":  "    ",
+    "5":  "     ",
+    "6":  "      ",
+    "7":  "       ",
+    "8":  "        ",
+    "9":  "         ",
+    "10": "          "
+};
+&nbsp;
+// char里面不要包含特殊正则字符，如果有，请转义
+function _isStartWith(char){
+    var c = "";
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(Type.isArray(char)){
+        c = char.join("|");
+    }else{
+<span class="cstat-no" title="statement not covered" >        c = char || c;</span>
+    }
+    var reg = new RegExp("^(" + c + ")+");
+    return function(str){
+        return Type.isString(str) &amp;&amp; !!str.match(reg);
+    };
+}
+// 是否为节点：父或者子节点
+var isNodeStr = _isStartWith([_TreeChar_.T,_TreeChar_.L,"ROOT"]);
+&nbsp;
+// 检查是否包含连接符号
+var _RegTreeLinkChars = new RegExp("^("+[_TreeChar_.I,_TreeChar_.T,_TreeChar_._,_TreeChar_.L].join("|")+")","g");
+function _hasTreeLinkChar(str){
+    return Type.isString(str) &amp;&amp; str.match(_RegTreeLinkChars);
+}
+// 替换值中包含的连接符号
+var _Reg_I_ = new RegExp("^"+_TreeChar_.I,"g"),
+    _Reg_T_ = new RegExp("^"+_TreeChar_.T,"g"),
+    _Reg_L_ = new RegExp("^"+_TreeChar_.L,"g"),
+    _Reg___ = new RegExp("^"+_TreeChar_._,"g");
+var _repl_I_ = "'"+_TreeChar_.I+"'",
+    _repl_T_ = "'"+_TreeChar_.T+"'",
+    _repl_L_ = "'"+_TreeChar_.L+"'",
+    _repl___ = "'"+_TreeChar_._+"'";
+function replaceTreeLinkChar(str){
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!!_hasTreeLinkChar(str)){
+<span class="cstat-no" title="statement not covered" >        return str.replace(_Reg_I_,_repl_I_)</span>
+            .replace(_Reg_T_,_repl_T_)
+            .replace(_Reg_L_,_repl_L_)
+            .replace(_Reg___,_repl___);
+    }
+    return str;
+}
+&nbsp;
+//通过二维数组检查兄弟节点情况
+function checkNextSibling(w,h,arr){
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(arr)){
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("arr is not a array!");</span>
+    }
+    var i,hasNextSibling = false;
+    for(i=(h+1);i&lt;arr.length;i++){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isUndefined(arr[i]) &amp;&amp; !Type.isArray(arr[i])){
+<span class="cstat-no" title="statement not covered" >            throw new TypeError("arr is not a two-dimensional-array !");</span>
+        }
+&nbsp;
+        var ele = arr[i][w];
+        if(undefined===ele){
+            break;
+        }else if(isNodeStr(ele+"")){
+            hasNextSibling = true;
+            break;
+        }
+    }
+    return {
+        "wPos":w,
+        "hPos":i,
+        "isLast":!hasNextSibling
+    };
+}
+//修复简单粗暴生成的二位数字，以便生成正确的节点连接符
+function fixArr(arr){
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(arr)){
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("arr is not a array!");</span>
+    }
+    var regNode = new RegExp("^" + _TreeChar_.T, "g"),
+        regVert = new RegExp("^" + _TreeChar_.I ,"g"),
+        S = " ";
+    var i,iLen = arr.length;
+    for(i=0;i&lt;iLen;i++){
+        var row = arr[i];
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(row)){
+<span class="cstat-no" title="statement not covered" >            throw  new TypeError("arr is not a two-dimensional-array !");</span>
+        }
+        var j,jLen = row.length;
+        for(j=0;j&lt;jLen;j++){
+            var o = row[j];
+            if(undefined!==o &amp;&amp; isNodeStr(o)){// 开始检查，且仅检查节点
+                var checkNext = checkNextSibling(j,i,arr);
+                if(checkNext.isLast){
+                    arr[i][j] = o.replace(regNode, _TreeChar_.L);// "├" =&gt; "└"
+                    var c,cLen = checkNext.hPos;
+                    for(c=i+1;c&lt;cLen;c++){
+                        <span class="missing-if-branch" title="else path not taken" >E</span>if(arr[c]){
+                            if(!!arr[c][j] &amp;&amp; !!arr[c][j].match(regVert)){
+                                arr[c][j] = arr[c][j].replace(regVert,S);// "│" =&gt; " "
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+&nbsp;
+    // 最后修正根节点: "└" =&gt; "", "─" =&gt; " "
+    var regSimRoot1 = new RegExp(_TreeChar_._,"gi"),
+        regSimRoot2 = new RegExp(_TreeChar_.T + "|" +  _TreeChar_.L,"g");
+    arr[0][0] = arr[0][0].replace(regSimRoot1," ").replace(regSimRoot2,"");
+&nbsp;
+    return arr;
+}
+// 重复产生n和char并组成字符串返回
+function repeatChar(char,n){
+    var res = "";
+    char = Type.isChar(char) ? char : <span class="branch-1 cbranch-no" title="branch not covered" >"*";</span>
+    n = parseInt(n) || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+    n = n &gt; 0 ? n : <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(n&gt;0) while(n--) res += char;
+    return res;
+}
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * 将json对象转换成树状形式的字符串
+ *   view process with 'example/img/flow.png'
+ * @param {Object} json
+ * @param  {Object} options
+ *         {String} options.rootName
+ *    {char|Number} options.space  [1,8]
+ *         {Number} options.vSpace [0,2]
+ *        {Boolean} options.valueOut
+ * @returns {string} a tree-like string
+ */
+function treeString(json,options){
+&nbsp;
+    // config
+    options =  options || {};
+    var jsonName,space,vSpace,needValueOut;//不做空值保护，后面挨个做
+    jsonName = options.rootName;
+    space = options.space;
+    vSpace = options.vSpace;
+    needValueOut = options.valueOut;
+&nbsp;
+    // 根节点名称
+    jsonName = (Type.isString(jsonName) ? jsonName : 0) || "ROOT";
+    if(Type.isNullOrUndefined(json)){
+        return jsonName + "'s content is " + String(json);
+    }else if(Type.isObject.isEmptyOwn(json)){
+        return jsonName + "'s content is empty!";
+    }else if(!Type.isSpreadable(json)){
+        return jsonName + "'s content is " + (Type.isString(json) ? (escapeString(json)||<span class="branch-1 cbranch-no" title="branch not covered" >String(json))</span> : String(json)) || <span class="branch-1 cbranch-no" title="branch not covered" >"empty!";</span>
+    }
+    // 间距
+    var _SPACE_ = space;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if("\t"!==space){
+        space = parseInt(space);
+        space = Type.isNaN(space) ? 3 : space;
+        space = space &lt;= 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >1 </span>: space &gt; 8 ? <span class="branch-0 cbranch-no" title="branch not covered" >8 </span>: space;//1 &lt;= space &lt;= 8
+        _SPACE_ = _TreeChar_[space];
+    }else{
+<span class="cstat-no" title="statement not covered" >        _SPACE_ = "" + (space || " ");</span>
+<span class="cstat-no" title="statement not covered" >        space = 1;</span>
+    }
+    vSpace = parseInt(vSpace);
+    vSpace = Type.isNaN(vSpace) ? (space &gt; 5 ? <span class="branch-0 cbranch-no" title="branch not covered" >2 </span>: 1) : vSpace;
+    vSpace = vSpace&lt; 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >0 </span>: vSpace &gt; 2 ? <span class="branch-0 cbranch-no" title="branch not covered" >2 </span>: vSpace;//0 &lt;= vSpace &lt;= 2
+    // 是否需要输出值
+    needValueOut = Type.isNullOrUndefined(needValueOut) ? true : !!needValueOut;
+&nbsp;
+    var rpN = parseInt((space-1)/2);//为了美观一点，控制节点间距 1-&gt;0 2-&gt;0 3-&gt;1 4-&gt;1 5-&gt;2 6-&gt;2 7-&gt;3 8-&gt;3
+    var _I_ = _TreeChar_.I + _SPACE_,//连接符
+        _T_ = _TreeChar_.T + repeatChar(_TreeChar_._,rpN) + " ",//叶节点
+        SPLIT = _TreeChar_.SPLIT + " ";//尾叶节点
+    var ft = (Math.floor(jsonName.length/2))  % 10;// 左间距 max 10
+    var _rT_ = _TreeChar_.T + " ";//求取根节点的符号
+    var _I1_ = _TreeChar_.I + repeatChar(" ",ft-1);// 最左边的符号和间距
+&nbsp;
+    //res:用于存储节点信息的二维数组,末尾显式加上值undefined来区分是否为父节点
+    var res = [
+        [_rT_ + jsonName, undefined]//加上 _T_ 开头是为了表明这是一个节点，为了fixArr做准备
+    ];
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(vSpace&gt;0){
+        var q;
+        for(q=0;q&lt;vSpace;q++){
+            res.push([_I1_ , _I_]); //此行元素用以增加根节点之下的连字符的竖直距离
+        }
+    }
+&nbsp;
+    // travel
+    travelJson(json,function(key,value,curKeyPath,typeStr,isSpreadable,curDepth){
+        var depth = curDepth;
+        var v;
+        if(!isSpreadable){
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(needValueOut){
+                if(typeStr==="string"){
+                    // 如果v值中就包含了特殊连接符号，需要转换一下
+                    v = replaceTreeLinkChar(value);//v = value; //其实不转也行的
+                    v = escapeString(v) || <span class="branch-1 cbranch-no" title="branch not covered" >String(v);</span>
+                }else if(typeStr==="array"){//空数组
+                    v = "[]";
+                }else if(typeStr=="object"){//空对象
+                    v = "{}";
+                }else <span class="missing-if-branch" title="if path not taken" >I</span>if(typeStr === "function"){
+<span class="cstat-no" title="statement not covered" >                    v = "[function code]";</span>
+                }else{
+                    v = String(value);
+                }
+                // 只有叶子节点才放值，父节点放undefined,采用显式赋值undefined作为父节点的标识（显式加入undefined元素可以占一个位置，会增加数组的length）
+                v = SPLIT + v;
+            }else{
+                // 不输出值，（此时应该是空字符串，而非undefined!，不然跟父节点混淆了）
+<span class="cstat-no" title="statement not covered" >                v = "";</span>
+            }
+        }else{
+            // 显式的赋值undefined，仅仅是为了标识区别出‘可拓展节点’（含有子属性的父节点）
+            v = undefined;
+        }
+        // 一横行：res[n]
+        var lineArr = [],i;
+        for(i=1;i&lt;depth;i++){// 左边缩进用的元素
+            lineArr.push(i===1?_I1_:_I_);//首元素加入的是_I1_
+        }
+        lineArr.push(_T_ + escapeString(key).slice(1,-1));// 节点名
+        lineArr.push(v);// 节点值
+&nbsp;
+        // 保存行信息
+        res.push(lineArr);
+&nbsp;
+        // 竖直方向上的间距
+        var vs;
+        for(vs=0;vs&lt;vSpace;vs++){
+            // 增加一行竖直方向上的距离
+            res.push(lineArr.map(function(item,index){
+                var isFirst = index===0,//首元素加入的是_I1_
+                    isLast = index===(lineArr.length-1),
+                    isSpreadableNodeEndFlag = isLast &amp;&amp; item===undefined;
+                return index&lt;(lineArr.length-1) || isSpreadableNodeEndFlag ? (isFirst?_I1_:_I_) : undefined;
+            }));
+        }
+&nbsp;
+    },"obj");
+&nbsp;
+    // 修正节点连接符
+    fixArr(res);
+&nbsp;
+    // 打印输出
+    // var color = require("./cli/colorful");
+    // res.forEach(function(item){
+    //     var strOut = "[";
+    //     item.forEach(function(sub,subIndex){
+    //         strOut += ((sub===undefined?color.magenta("undefined"):color.yellow("'"+sub+"'"))  + (subIndex===(item.length-1) ? "" : ", "));
+    //     });
+    //     strOut += "]";
+    //     console.log(strOut);
+    // });
+&nbsp;
+    return res.map(function(item){
+        return trimRight(item.join(""));//item.join("");
+    }).join("\r\n");// '\r' just for windows
+    // 可以考虑在完全生成之后，做replace替换那几个特殊字符，以便完成自定义连接符
+}
+&nbsp;
+// exports
+module.exports = treeString;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Nov 21 2016 18:05:19 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

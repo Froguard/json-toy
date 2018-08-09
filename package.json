@@ -1,0 +1,60 @@
+{
+  "name": "json-toy",
+  "version": "1.0.13",
+  "description": "Get tree string(├└│─), get value by keyPath like 'a.b.c', safe travel, object circular check,browser none dependencies!",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "copy-paste": "^1.3.0"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2",
+    "rewire": "^2.5.2",
+    "should": "^11.1.1"
+  },
+  "_doPackNeedDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "cross-env": "^3.1.3",
+    "npm-run-all": "^3.1.1",
+    "webpack": "^1.13.3"
+  },
+  "main": "index.js",
+  "bin": {
+    "j-tree-str": "bin/j-tree-str.js",
+    "jts": "bin/j-tree-str.js",
+    "jtls": "bin/jtls.js"
+  },
+  "scripts": {
+    "test": "npm run testWithJsCover",
+    "testWithoutJsCover": "mocha --harmony",
+    "testWithJsCover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --harmony",
+    "packSrc": "cross-env WEBPACK_ENV=dev    webpack --progress --colors --display-error-details",
+    "packMin": "cross-env WEBPACK_ENV=build  webpack --progress --colors --display-error-details",
+    "pack": "run-s  packSrc  packMin",
+    "testone": "mocha --harmony ./test/cli/walk-dir.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Froguard/json-toy.git"
+  },
+  "engines": {
+    "node": ">= 4.0",
+    "npm": ">= 2"
+  },
+  "keywords": [
+    "directory tree",
+    "json tree",
+    "object tree",
+    "circular check",
+    "travel safe",
+    "keyPath",
+    "tree string"
+  ],
+  "author": "froguard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Froguard/json-toy/issues"
+  },
+  "homepage": "https://github.com/Froguard/json-easy#readme"
+}

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib\json-get-val-by-keypath.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">lib/</a> json-get-val-by-keypath.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.33% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.67% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>11/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.33% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>14/15</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">39×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Type = require("./typeOf");
+/**
+ * 通过keypath获取json的值，eg getValByKey({a:{b:{c:1}}}, "a.b.c") = 1
+ * @param json
+ * @param keyPath
+ * @param ownKeyCheck
+ * @returns {*}
+ * 注意：没办法支持 路径中带有 a.b.c[1][2]这样的形式，建议写成a.b.c.1.2
+ * a.b.c[1][2]这样的形式会被解析成 "a","b","c[1][2]"这样的属性名称
+ * 这里之所以不支持这样的原因是：
+ * 字符'['和']'也是可以作为属性名称存在的
+ * a ={
+ *    "c[1][2]": 1
+ * }
+ * 只能通过'.'操作符来进行分割
+ * 然后，对于属性名称中，已经含有'.'的，要转化写法变成'&amp;bull;'
+ * 对于属性名中含有'&amp;'的，需要转化成'&amp;amp;',这样一来，如果属性名中含有'&amp;bull;'，可以转化写成'&amp;amp;bull;'
+ */
+function getValByKey(json,keyPath, ownKeyCheck){
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isObject(json) || !Type.isString(keyPath)){
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("Error type-in,check plz! (jsonObj,stringKeyPath)");</span>
+    }
+    ownKeyCheck = Type.isNullOrUndefined(ownKeyCheck) ? true : !!ownKeyCheck;
+    var v = json;
+    var propsArr = keyPath.split(".");
+    // var hasArrFlag = /\[|]/g;
+    // var outPrint = "obj['" + propsArr.join("']['") + "'] ",
+    //     needWarn = false;
+    propsArr.forEach(function(k){
+        // if(!!k.match(hasArrFlag)){ needWarn = true; }
+        if(!Type.isNullOrUndefined(v)){
+            k = k.replace(/&amp;bull;/g,".");//&amp;bull; -&gt; .
+            k = k.replace(/&amp;amp;/g,"&amp;"); //&amp;amp; -&gt; &amp;  eg:如果你需要'&amp;bull;'这个组合，可以写成'&amp;amp;bull'
+            v = !ownKeyCheck ? v[k] : (v.hasOwnProperty(k) ? v[k] : undefined);
+        }else{
+            return v;
+        }
+    });
+    // needWarn &amp;&amp; console.warn("It was deprecated that put char '[' or ']' in your keyPath,or in you property name");
+    // needWarn &amp;&amp; console.log(outPrint + " = " , v);
+    return v;
+}
+&nbsp;
+module.exports = getValByKey;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Nov 21 2016 18:05:19 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

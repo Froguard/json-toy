@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>jsonToy</title>
+<meta name="keywords" content="demo"/>
+<meta name="description" content="demo"/>
+<meta name="viewport" content="width=device-width"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<style>
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+textarea{overflow:auto;resize:none;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
+body{background-color: #3C3F41;color:#fefefe;/*font-family: 'PingFang SC', Georgia, 'Times New Roman', 'Microsoft YaHei', 微软雅黑, STXihei, 华文细黑, serif;*/}
+pre,xmp{background-color:#333;color:#dedede;min-height:490px;margin:0;padding:5px;font-size:14px;line-height:14px;font-weight:bold;}
+h1{font-size:30px;text-align:center;line-height:1.5;padding:5px 0;}
+hr{border-bottom:1px solid #555;border-top:1px solid #888;margin:0;padding:0;background-color:transparent;height:0;}
+.g-con{zoom:1;margin: 3px auto 0;min-width: 1200px;max-width:1400px;}
+.g-con .m-frame{margin:8px 6px 0;border-radius:3px;border:1px solid #555;overflow: hidden;}
+.g-con:before,.g-con:after{display:table;content:"";line-height:0;}
+.g-in-l,.g-in-r{min-height:500px;}
+.g-in-l .m-frame{margin-left:10px;color:#E8BF6A;background-color:#2B2B2B;}
+.g-in-r .m-frame{margin-right:10px;}
+.g-in-l{float:left;width:550px;}
+.g-in-i{float:left;width:30px;padding-top:275px;margin-top:46px;}
+.g-in-i>p{text-align:center;font-weight:bold;font-size:24px;overflow:hidden;color:#dedede;}
+.g-in-i>p.show{color:#dedede;transition:all 1500ms ease-in-out;}
+.g-in-r{overflow: hidden;}
+.g-con textarea{background-color:transparent;color:inherit;vertical-align:top;margin:0;padding:0;resize:vertical;width:100%;border:none;min-height:490px;font-size:16px;line-height:20px;}
+.g-con pre,.g-con xmp,.g-con textarea{min-height:756px;}
+.u-options{padding:8px 10px 0;height:30px;line-height:30px;text-align:left;font-size:14px;}
+.u-options input{color:#fff;background-color: #333;vertical-align:middle;height:24px;line-height:24px;padding:0 5px;border-radius: 3px; border: 1px solid #555;}
+.u-options input[type='number']{width:30px;}
+.u-options input[type='text']{width:56px;}
+.u-options label{cursor:pointer;color:#bbb;display:inline-block;line-height: 24px;height:24px;user-select:none;-moz-user-select:none;-webkit-user-select:none;}
+</style>
+</head>
+<body>
+<h1>Usage in browser</h1>
+<hr>
+<div class="g-con">
+<div class="g-in-l"><div class="m-frame" style="margin-top:46px;"><div style="margin:5px;overflow: hidden;"><textarea name="inputJsonText" id="j-in-json">
+{
+  "name": "json-toy",
+  "dependencies": {},
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2",
+    "rewire": "^2.5.2",
+    "should": "^11.1.1"
+  },
+  "main": "index.js",
+  "bin": {
+    "jts": "bin/j-tree-str.js"
+  },
+  "scripts": {
+    "test": "mocha --harmony"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Froguard/json-toy.git"
+  },
+  "engines": {
+    "node": ">= 4.0",
+    "npm": ">= 2"
+  },
+  "keywords": [
+    "json",
+    "travel",
+    "keyPath",
+    "tree string"
+  ],
+  "bugs": {
+    "url": "https://github.com/Froguard/json-toy/issues"
+  },
+  "homepage": "https://github.com/Froguard/json-easy#readme"
+}
+</textarea></div></div></div>
+<div class="g-in-i"><p id="j-trans-flag"></p></div>
+<!-- output -->
+<div class="g-in-r">
+<p class="u-options">
+    <label>space(h):&nbsp;<input name="option.space" min="0" max="8" value="3" type="number" id="j-space-x"></label>&nbsp;&nbsp;&nbsp;
+    <label>space(v):&nbsp;<input name="option.spaceV" min="0" max="2" value="1" type="number" id="j-space-y"></label>&nbsp;&nbsp;&nbsp;
+    <label>rootName:&nbsp;<input name="option.rootName" value="ROOT" type="text" id="j-root-name"></label>&nbsp;&nbsp;&nbsp;
+    <label><input type="checkbox" name="option.valueOut" checked  id="j-chk-output">&nbsp;&nbsp;show property value?</label>
+</p>
+<div class="m-frame"><xmp title="click to select all" id="j-out-tree"></xmp></div>
+</div>
+</div>
+
+<!-- import scripts file start-->
+<script src="../dist/jsonToy.min.js"></script>
+<!-- use width window.jsonToy -->
+<script>
+    var $input = document.querySelector("#j-in-json");
+    var $trans = document.querySelector("#j-trans-flag");
+    var $output = document.querySelector("#j-out-tree");
+    var $sx = document.querySelector("#j-space-x");
+    var $sy = document.querySelector("#j-space-y");
+    var $rootName = document.querySelector("#j-root-name");
+    var $outV = document.querySelector("#j-chk-output");
+    function _doTreeify(){
+        var inJson;
+        var text = $input.value || "";
+        try{
+            inJson = JSON.parse(text);
+        }catch(err){
+            try{
+                inJson = (new Function("return " + text))();
+            }catch(err2){
+                console.error("解析出错：\r\n"+err.toString()+"\r\n"+err2.toString());
+                inJson = false;
+            }
+        }
+        if(!!inJson){
+
+            // --- do convert start ------------------------------------------------------------------------------------
+            $output.innerText = window.jsonToy.treeString(inJson,{
+                 rootName: $rootName.value || "",
+                 valueOut: $outV.checked,
+                 space: parseInt($sx.value) || 0,
+                 vSpace: parseInt($sy.value) || 0
+            });
+            // --- do convert end --------------------------------------------------------------------------------------
+
+            $trans.className = "success";
+            $trans.innerText = "√";
+        }else{
+            $trans.className = "fail";
+            $trans.innerText = "×";
+            $output.innerText = "";
+        }
+        setTimeout(function(){
+            $trans.className = "";
+            $trans.style.display = "none";
+            $trans.innerText = "→";
+        },1000);
+    }
+    var _t;
+    function doTreeify(){
+        !!_t && window.clearTimeout(_t);
+        _t = window.setTimeout(function(){
+            _doTreeify();
+        },300);
+    }
+    function onChange(e){
+        $trans.innerText = "→";
+        $trans.className = "show";
+        $trans.style.display = "block";
+        doTreeify();
+    }
+    $input.addEventListener("input",onChange,false);
+    $input.addEventListener("blur",onChange,false);
+    $sx.addEventListener("input",onChange,false);
+    $sy.addEventListener("input",onChange,false);
+    $rootName.addEventListener("input",onChange,false);
+    $outV.addEventListener("change",onChange,false);
+    // click to select result, for copy
+    var _st;
+    function selectOutput(){
+        !!_st && window.clearTimeout(_st);
+        _st = window.setTimeout(function() {
+            var range;
+            if (document.selection) {
+                range = document.body.createTextRange();
+                range.moveToElementText($output);
+                range.select();
+            } else if (window.getSelection) {
+                range = document.createRange();
+                range.selectNode($output);
+                window.getSelection().addRange(range);
+            }
+        },50);
+    }
+    $output.addEventListener("click",selectOutput,false);
+    $output.addEventListener("focus",selectOutput,false);
+    // init
+    doTreeify($input.value);
+    $input.focus();
+</script>
+</body>
+</html>

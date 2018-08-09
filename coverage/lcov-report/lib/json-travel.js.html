@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib\json-travel.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">lib/</a> json-travel.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.33% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>42/45</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">86.67% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>26/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.18% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>41/44</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">10548×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10548×</span>
+<span class="cline-any cline-yes">66×</span>
+<span class="cline-any cline-yes">66×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">66×</span>
+<span class="cline-any cline-yes">66×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10548×</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-yes">140×</span>
+<span class="cline-any cline-yes">140×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">126×</span>
+<span class="cline-any cline-yes">126×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10622×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10621×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10621×</span>
+<span class="cline-any cline-yes">10532×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Type = require("./typeOf");
+/**
+ * 递归遍历一个json
+ * @param {Object} json
+ * @param {Function} cb callback(key,val,curKeyPath,typeStr,isComplexObj,curDepth,isCircular) and context is parent obj
+ * @param {string} rootAlias
+ * @param {Boolean} safeMode default is true
+ * @returns {Array} keysArr
+ */
+function travelJson(json,cb,rootAlias,safeMode){
+    if(!Type.isObject(json)){ throw new TypeError("The first param should be an Object instance!"); }
+    // 安全模式
+    safeMode = safeMode===undefined ? true : !!safeMode;
+    var safeStack = [];//记录safe检查时候的对象
+    var safeKeys = []; //记录safe检查时候的key值
+    // res
+    var keysArr = [];
+    var needCb = Type.isFunction(cb);
+    rootAlias = (Type.isString(rootAlias) ? rootAlias : "") || "ROOT";
+    // loop
+    function travel(obj,curKeyPath,depth,cb){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(obj!==null &amp;&amp; obj!==undefined){
+            // safeMode
+            if(safeMode){
+                var objIndex = safeStack.indexOf(obj);
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(~objIndex){// ~-1 == 0
+<span class="cstat-no" title="statement not covered" >                    safeStack.splice(objIndex + 1);/</span>/ pop
+<span class="cstat-no" title="statement not covered" >                    safeKeys.splice(objIndex + 1);/</span>/ pop
+                }else{
+                    safeStack.push(obj);// push
+                    safeKeys.push(curKeyPath);
+                }
+            }
+            // loop
+            for(var k in obj){
+                <span class="missing-if-branch" title="else path not taken" >E</span>if(obj.hasOwnProperty(k)){
+                    //这里即使curKeyPath为空字符串""也请加上".",这样做是为了统一的循环次数，不管rootAlias是否为空字符串""
+                    var newKeyPath = curKeyPath + "." + k;
+                    keysArr.push(newKeyPath+"");//push a new string
+                    // 记录下层级
+                    var curDepth = depth + 1;
+                    // 值
+                    var v = obj[k];
+                    var isCircular = false;
+                    // safeMode
+                    if(safeMode){
+                        var kIndex = safeStack.indexOf(v);
+                        if(~kIndex){// Circular
+                            isCircular = true;
+                            v = "[Circular-&gt;" + safeKeys[kIndex] + "]";
+                        }else{
+                            isCircular = false;
+                            v = obj[k];
+                        }
+                    }
+                    // 是否可以再展开，这里，函数被视为不可再展开
+                    var spreadable  = Type.isSpreadable(v) &amp;&amp; !Type.isFunction(v);
+                    // do sth in callback...
+                    needCb &amp;&amp; cb.call(obj,k,v,newKeyPath+"",Type.getTypeOf(v),spreadable,curDepth,isCircular);
+                    // then travel in deep
+                    if(spreadable){
+                        travel(v,newKeyPath,curDepth,cb);
+                    }
+                }
+            }
+        }
+    }
+    // do on catch mode
+    try{
+        travel(json, rootAlias || <span class="branch-1 cbranch-no" title="branch not covered" >"",</span> 1, cb);// 栈溢出，递归次数导致内存超限
+    }catch(eTravel){
+        try{
+            JSON.stringify(json);
+        }catch(eStringify){
+            throw eStringify;
+        }
+<span class="cstat-no" title="statement not covered" >        throw eTravel;</span>
+    }
+    return keysArr;
+}
+&nbsp;
+module.exports = travelJson;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Nov 21 2016 18:05:19 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

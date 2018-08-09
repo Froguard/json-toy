@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib\typeOf.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">lib/</a> typeOf.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.69% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>117/121</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.6% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>106/121</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.89% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>34/37</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.69% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>117/121</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11396×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11402×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11396×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11395×</span>
+<span class="cline-any cline-yes">11395×</span>
+<span class="cline-any cline-yes">11233×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11395×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">40×</span>
+<span class="cline-any cline-yes">40×</span>
+<span class="cline-any cline-yes">11297×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">11276×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">10716×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">10647×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">427×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">995×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">10639×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">10615×</span>
+<span class="cline-any cline-yes">10523×</span>
+<span class="cline-any cline-yes">10520×</span>
+<span class="cline-any cline-yes">10520×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">95×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">82×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">82×</span>
+<span class="cline-any cline-yes">82×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">82×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Type check
+ *
+ * You'd better do not init a primitive type variable via 'new Object'
+ * is would make somme confused in program!!!
+ */
+var Type = {};
+&nbsp;
+/*
+ * 获取typeString，结果里会带有'['和']'字符
+ * @param obj
+ * @returns {string}
+ * @private
+ */
+function _typeString(obj){
+    return Object.prototype.toString.call(obj);
+}
+Type.typeStr = _typeString;
+&nbsp;
+/*
+ * 获取Type
+ * @param obj
+ * @returns {string}
+ *   _getType(1);//"number"
+ *   _getType([]);//"array"
+ *   _getType({});//"object"
+ *   var p1 = new Person("petter");//custom type
+ *   _getType(p1);//"person"
+ */
+function _getType(obj){
+    if(obj === null || obj === undefined){
+        return obj === undefined ? "undefined" : "null";// String(obj)
+    }else{
+        var typeName = _typeString(obj).slice(8,-1).toLowerCase();
+        //将object类型再细化一下,以区分出自定义类型以及细化类型
+        var tpOf = typeof obj;// 这里要用typeof关键字而非typeName这个结果,不然error的子类会不准确
+        if(typeName!=="arguments" &amp;&amp; (tpOf==="object" || tpOf==="function")){
+            typeName = (obj.constructor &amp;&amp; obj.constructor.name) ? obj.constructor.name.toLowerCase() : <span class="branch-1 cbranch-no" title="branch not covered" >typeName;</span>
+        }
+        return typeName;
+    }
+}
+Type.getTypeOf = _getType;
+&nbsp;
+/*
+ * 判断类型函数
+ * @param type
+ * @returns {Function}
+ */
+function _isTypeOf(type){
+    type = ( (typeof type === "string" || <span class="branch-1 cbranch-no" title="branch not covered" >type instanceof String)</span> ? type : <span class="branch-1 cbranch-no" title="branch not covered" >"" </span>).toLowerCase();
+    return function(obj){
+        return type === _getType(obj);
+    }
+}
+Type.isTypeOf = _isTypeOf;
+&nbsp;
+/*
+ * 判断类型isXxx(obj)
+ * @param obj
+ * @returns {Boolean}
+ */
+var _Type_ = {};
+[
+    "arguments","array","date",
+    "error","syntaxError","typeError",
+    "regExp","symbol",
+    "set","weakSet",
+    "map","weakMap"
+].forEach(function(t){
+    _Type_["is" + t[0].toUpperCase() + t.substr(1)] = _isTypeOf(t);
+});
+Type.isArguments = _Type_.isArguments;
+Type.isSymbol = _Type_.isSymbol;
+Type.isSet = _Type_.isSet;
+Type.isWeakSet = _Type_.isWeakSet;
+Type.isMap = _Type_.isMap;
+Type.isWeakMap = _Type_.isWeakMap;
+Type.isArray = function(obj){
+    return _Type_.isArray(obj) || (typeof Array.isArray !=='undefined' &amp;&amp; Array.isArray(obj));
+};
+// date 和 RegExp的判断必须要在 toString函数执行之前
+Type.isDate = function(obj){
+    return obj instanceof Date || <span class="branch-1 cbranch-no" title="branch not covered" >_Type_.isDate(obj);</span>
+};
+Type.isRegExp = function(obj){
+    return obj instanceof RegExp || _Type_.isRegExp(obj);
+};
+Type.isError = function(obj){
+    return _Type_.isError(obj) || <span class="branch-1 cbranch-no" title="branch not covered" >obj instanceof Error;</span>
+};
+Type.isSyntaxError = <span class="fstat-no" title="function not covered" >function(obj){</span>
+<span class="cstat-no" title="statement not covered" >    return _Type_.isSyntaxError(obj) || obj instanceof SyntaxError;</span>
+};
+Type.isTypeError = <span class="fstat-no" title="function not covered" >function(obj){</span>
+<span class="cstat-no" title="statement not covered" >    return _Type_.isTypeError(obj) || obj instanceof TypeError;</span>
+};
+Type.isRangeError = <span class="fstat-no" title="function not covered" >function(obj){</span>
+<span class="cstat-no" title="statement not covered" >    return _Type_.isRangeError(obj) || obj instanceof RangeError;</span>
+};
+&nbsp;
+// isObject:这里采用原生关键字typeof判定，即：数组，任何自定义类型，都属于Object
+/* eg:
+   function Person(){};
+   var p1 = new Person();
+   Type.isObject(p1);//true
+   Type.isObject(Person);//false, function
+   Type.isObject("12aa");//false, string is primitive type
+   Type.isObject([1,2,3]);//true, array is object via 'typeof'
+*/
+Type.isObject = function(obj) {
+    return (typeof obj === "object" || obj instanceof Object) &amp;&amp; obj !==null;
+};
+Type.isFunction = function(obj) {
+    return typeof obj === "function" || obj instanceof Function;
+};
+Type.isNull = function(obj){
+    return obj === null;
+};
+Type.isUndefined = function(obj){
+    return obj === undefined;
+};
+Type.isUndefinedOrNull = Type.isNullOrUndefined = function(obj){
+    return (obj === null || obj === undefined);
+};
+Type.isBoolean = function(obj){
+    return obj === true || obj === false || obj instanceof Boolean;
+};
+Type.isString = function(obj) {
+    return typeof obj === "string" || obj instanceof String;
+};
+Type.isChar = function(obj){
+    return Type.isString(obj) &amp;&amp; obj.length === 1;
+};
+Type.isNumber = function(obj,warn) {
+    warn = warn===undefined ? true : !!warn;//default true
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(warn &amp;&amp; obj !== obj){// warning when NaN
+<span class="cstat-no" title="statement not covered" >        console.warn("obj is NaN. Using 'Type.isRealNumber(obj)' instead of 'Type.isNumber(obj)'\nOr using 'Type.isNumber(obj,false)' to stop warning out\n");</span>
+    }
+    return typeof obj === "number" || obj instanceof Number;
+};
+Type.isNaN = function(obj){
+    return obj !== obj;
+};
+Type.isRealNumber = function(obj){
+    return !Type.isNaN(obj) &amp;&amp; Type.isNumber(obj) ;
+};
+// 检查是否为简单类型：除开function和object之外的所有类型均为简单类型
+Type.isPrimitive = function(obj){
+    return !Type.isObject(obj) &amp;&amp; !Type.isFunction(obj);
+};
+// 是否还可以再展开: Object,Array,以及某些Function
+Type.isSpreadable = function(obj){
+    if(Type.isArray(obj)){
+        return !!obj.length;
+    }else if(Type.isObject(obj) || Type.isFunction(obj)){
+        for(var j in obj){
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(obj.hasOwnProperty(j)){
+                return true
+            }
+        }
+    }
+    return false;
+};
+// 递归函数判断是否为json
+function _isJSON(value, visited) {
+    (visited || (visited = [])).push(value);
+    return  Type.isPrimitive(value) ||
+        (Type.isArray(value) &amp;&amp;  value.every(function(element) {
+            return _isJSON(element, visited);
+        })) ||
+        (Type.isObject.isFlat(value) &amp;&amp; Object.keys(value).every(function(key) {
+            var $ = Object.getOwnPropertyDescriptor(value, key);
+            return  ((!Type.isObject($.value) || <span class="branch-1 cbranch-no" title="branch not covered" >!~visited.indexOf($.value))</span>
+                    &amp;&amp; !('get' in $) &amp;&amp; !('set' in $)
+                    &amp;&amp; _isJSON($.value, visited));
+        }));
+}
+// isJSON
+Type.isJSON = function(obj){
+    return _isJSON(obj);
+};
+// isObject.isEmpty
+Type.isObject.isEmpty = function(obj,ownCheck){
+    if(!Type.isObject(obj) &amp;&amp; !Type.isArray(obj)){
+        return false;
+    }
+    ownCheck = ownCheck || false;
+    for(var k in obj){
+        if(ownCheck){
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(obj.hasOwnProperty(k)){
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    return true;
+};
+// isObject.isEmptyOwn: return true if has none own property
+Type.isObject.isEmptyOwn = function(obj){
+    return Type.isObject.isEmpty(obj,true);
+};
+/*
+ flat (对象的直接来源 `Object.prototype` or `null`).
+ eg:
+ isFlat({}) // true
+ isFlat(new Type()) // false
+ */
+Type.isObject.isFlat = function(obj) {
+    if(Type.isNull(obj)){
+        return true;
+    }else if(Type.isObject(obj)){
+        return null===Object.getPrototypeOf(obj)
+            || (null===Object.getPrototypeOf(Object.getPrototypeOf(obj)));
+    }else{
+        return false;
+    }
+};
+// decimal 浮点
+Type.isNumber.decimal = function(obj){
+    return !Type.isNaN(obj) &amp;&amp; Type.isNumber(obj) &amp;&amp; (obj % 1 !== 0);
+};
+// integer 整型
+Type.isNumber.integer = function(obj){
+    return !Type.isNaN(obj) &amp;&amp; Type.isNumber(obj) &amp;&amp; (obj % 1 === 0);
+};
+// 奇数
+Type.isNumber.odd = function(obj){
+    return !Type.isNaN(obj) &amp;&amp; Type.isNumber(obj) &amp;&amp; (obj % 2 !== 0);//这里判断不使用位操作符&amp;，因为会使得一些特殊数如Infinity的结果不对
+};
+// 偶数
+Type.isNumber.even = function(obj){
+    return !Type.isNaN(obj) &amp;&amp; Type.isNumber(obj) &amp;&amp; (obj % 2 === 0);
+};
+/*
+ ECMAScript当对数值应用位操作符时会发生如下转换过程：
+ 64位的数值被转换成32位数值，然后执行位操作，最后再将32位的结果转换回64位数值。这样，表面上看起来就好像是在操作32位数值。
+ 但这个转换过程也导致了一个严重的负效应，即在对特殊的NaN和Infinity值应用位操作时，这两个值都会被当成0来处理。
+ 如果对非数值进行位操作，会先使用Number()函数将该数值转换成一个数值（自动完成），然后再应用位操作，得到的结果是一个数值。
+*/
+&nbsp;
+/*
+ * query prototype chain to check instanceof
+ * @param value
+ * @param Type
+ * @returns {boolean}
+ *
+ * 用法：
+ *    余原生的instanceof有区别，原生的instanceof对于简单类型的判定都是false
+ *    而本例中会递归去查询原型链
+ *    Type.isInstanceOf(NaN,Number);// false
+ */
+// isInstanceOf
+function _instOf(value, type) {
+    // 先用原生instanceof判断
+    var isInstanceOf = value instanceof type;
+    // 对于非undefined和非null的value，需要再用构造器名称判断，以避免原生instanceof的判定
+    var isConstructorNameSame,isConstructorSourceSame;
+    if (!isInstanceOf &amp;&amp; undefined!==value &amp;&amp; null!==value) {
+        isConstructorNameSame = (value.constructor &amp;&amp; value.constructor.name === type.name);
+        isConstructorSourceSame = (value.constructor &amp;&amp; String(value.constructor) == String(type));
+        isInstanceOf = (isConstructorNameSame &amp;&amp; isConstructorSourceSame);
+        isInstanceOf = isInstanceOf || _instOf(Object.getPrototypeOf(value), type);
+    }
+    return isInstanceOf;
+}
+Type.isInstanceOf = _instOf;
+&nbsp;
+&nbsp;
+// exports
+module.exports = Type;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Nov 21 2016 18:05:19 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
