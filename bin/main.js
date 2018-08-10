@@ -11,45 +11,55 @@ let os = require('os'),
     clipboardy = require('clipboardy'),
     colorful = require('../lib/cli/colorful'),
     existsSync = fs.existsSync || path.existsSync;
-// parse argv
-let args = parseArgv(process.argv.slice(2));
+
 let EOL = os.EOL;
 let needMsEol = EOL === '\r\n';
 
-// tools
-function trimAndDelQuotes(str){
-    return !Type.isString(str) ? "" : str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'').replace(/'|"/g,"");
-}
-function warningOut(str){
-    console.log(colorful.warn(str));
-}
-function errorOut(str){
-    console.log(colorful.error(str));
-}
-function help(){
-    console.log("\n  json-toy "+version+"\n"
-        + "\n  Usage:  jts [options]\n"
-        + "\n     eg:  jts ./package.json"
-        + "\n          jts './' --copy=0"
-        + "\n          jts '{a:1,b:{c:2},d:3,}'"
-        + "\n          jtls"
-        + "\n"
-        + "\n  Options:\n"
-        + "\n    -h, --help                   show help information"
-        + "\n    -V, --version                show current version"
-        + "\n    -j, --json   <string>        Necessary! Accept 3 type:"
-        + "\n                                   1.A file path of target XXX.json file"
-        + "\n                                   2.A directory path to travel"
-        + "\n                                   3.A json string to convert(need ''or \"\" to warp it's boundary)"
-        + "\n    -c, --copy   <boolean>       copy to system clipboard(0|1)? default is 1, --copy=0 to close"
-        + "\n    -x, --xspace <number>        tree horizon-space, default is 2"
-        + "\n    -y, --yspace <number>        tree vertical-space,default is 1"
-        + "\n    -d, --dir    <string>        convert a directory to a tree string"
-        + "\n    -m, --max    <number>        set max depth during converting a directory to a tree string"
-        + "\n"
-    );
-}
-
+// parse argv
+// let args = parseArgv(process.argv.slice(2));
+let yargs = require('yargs').usage('Usage:  jts [options]')
+    .help('h')
+    .alias('h', 'help')
+    .alias('v', 'version')
+    .option('j', {
+        alias: 'json',
+        describe: 'Necessary! Accept 3 type:\n' +
+        '1.A file path of target XXX.json file\n' +
+        '2.A directory path to travel\n' +
+        '3.A json string to convert(need \'\'or "" warpped)'
+    })
+    .option('c', {
+        alias: 'copy',
+        describe: 'copy to clipboard, set 0 to close',
+        default: 1,
+        choices: [0, 1]
+    })
+    .option('x', {
+        alias: 'xspace',
+        describe: 'tree horizon-space',
+        default: 2
+    })
+    .option('y', {
+        alias: 'yspace',
+        describe: 'tree vertical-space',
+        default: 0
+    })
+    .option('d', {
+        alias: 'dir',
+        describe: 'convert a directory to a tree string'
+    })
+    .option('m', {
+        alias: 'max',
+        type: 'number',
+        describe: 'set max depth during converting a directory to a tree string',
+        default: 5
+    })
+    .example('jts ./package.json', 'treeify a json file (a path with tail \'.json\' )')
+    .example('jts ./ --copy=0', 'treeify current directory')
+    .example('jts \'{a:1,b:{c:2},d:3}\'', 'treeify a json string (need \'\'or "" warpped)')
+    .example('jtls', 'short for \'jts ./ --copy=0\'')
+    .epilog('About more: https://github.com/Froguard/json-toy\n');
+const args = yargs.argv;
 
 // main argv
 let argJ = args.j || args.json || (Type.isArray(args._) ? args._[0] : args._);
@@ -62,6 +72,35 @@ let s = parseInt(args.x !== undefined ? args.x : args.xspace),
     v = parseInt(args.y !== undefined ? args.y : args.yspace);
 let outputVal = undefined===args.outv ? true : !!args.outv;
 let jsonName = "";
+
+/* main */
+if(args.v || args.V || args.version){
+    console.log(version);
+
+}else if(argJ){
+    jsonFile2TreeStr()
+
+}else if(argD){
+    dir2TreeStr();
+
+}else{
+    help();
+
+}
+
+// tools
+function trimAndDelQuotes(str){
+    return !Type.isString(str) ? "" : str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'').replace(/'|"/g,"");
+}
+function warningOut(str){
+    console.log(colorful.warn(str));
+}
+function errorOut(str){
+    console.log(colorful.error(str));
+}
+function help(){
+    yargs.showHelp();
+}
 
 // convert and print and copy a tree-string from a json obj
 function _doMain(jsonObj,isDir2TreeStr){
@@ -201,19 +240,3 @@ function jsonFile2TreeStr(){
     v = Type.isNaN(v) ? 1 : v;
     _doMain(targetJson);
 }
-
-/* main */
-if(args.v || args.V || args.version){
-    console.log(version);
-
-}else if(args.h || args.help || (!argJ && !argD)){
-    help();
-
-}else if(argJ){
-    jsonFile2TreeStr()
-
-}else if(argD){
-    dir2TreeStr();
-
-}
-
