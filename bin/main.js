@@ -1,5 +1,6 @@
 'use strict';
-let parseArgv = require('minimist'),
+let os = require('os'),
+    parseArgv = require('minimist'),
     version = require('../package.json').version,
     jsonToy = require('../index'),
     dir2Json = require('../lib/cli/walk-dir'),
@@ -7,11 +8,13 @@ let parseArgv = require('minimist'),
     path = require('path'),
     cwd = process.cwd(),
     Type = require('../lib/typeOf'),
-    copyPaste = require('copy-paste'),
+    clipboardy = require('clipboardy'),
     colorful = require('../lib/cli/colorful'),
     existsSync = fs.existsSync || path.existsSync;
 // parse argv
 let args = parseArgv(process.argv.slice(2));
+let EOL = os.EOL;
+let needMsEol = EOL === '\r\n';
 
 // tools
 function trimAndDelQuotes(str){
@@ -71,7 +74,8 @@ function _doMain(jsonObj,isDir2TreeStr){
                 rootName: jsonName,
                 space: s,
                 vSpace: v,
-                valueOut: outputVal
+                valueOut: outputVal,
+                msReturnChar: needMsEol
             });
             // console.timeEnd(colorful.green("\nConvert takes"));
         }catch(e2){
@@ -84,13 +88,13 @@ function _doMain(jsonObj,isDir2TreeStr){
                 // 当显示的是文件目录，将"文件夹"字段变成蓝色显示，这里仅仅是对显示进行转换，而不对源内容转换，因为远内容还要用做复制到剪切板
                 let newTreeStr = "" + treeStr;
                 let resArr = [];
-                let filterOutStr = " (filter-out) /";
+                let filterOutStr = " (ignored) /";
                 newTreeStr.split("\n").forEach(k=>{
                     k = k.replace(/\r/g,"");
                     let mt = k.match(/[└├─]\s([\S]+[\s\S]*\s\/$)/);
                     if(mt && mt[1]){
                         let ov = mt[1],nv;
-                        if(ov.substr(-15)=== filterOutStr){
+                        if(ov.substr(-filterOutStr.length) === filterOutStr){
                           let foArr = ov.split(filterOutStr);
                           nv = colorful.cyan(foArr[0]) + colorful.gray(filterOutStr);
                         }else{
@@ -103,9 +107,8 @@ function _doMain(jsonObj,isDir2TreeStr){
                 console.log(resArr.join("\n"));
             }
             if(!Type.isObject.isEmptyOwn(jsonObj) && needCopy){
-                copyPaste.copy(treeStr,()=>{
-                    console.log(colorful.success("Copy tree-string success!"));
-                });
+                clipboardy.write(treeStr)
+                    .then(()=>console.log(colorful.success("Copy tree-string success!")));
             }
         }
     }
