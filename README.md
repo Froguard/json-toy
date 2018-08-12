@@ -13,10 +13,7 @@ Some simple methods for operating object as json in an easy way!
 
 [![download:25419](https://nodei.co/npm/json-toy.png?downloads=true)](https://www.npmjs.com/package/json-toy)
 
-Online Parser: [https://froguard.github.io/funny/treeString](https://froguard.github.io/funny/treeString)
-
 ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/demo2.gif)
-
 
 ### feature
 
