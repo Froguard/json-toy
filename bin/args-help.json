@@ -31,6 +31,13 @@
       "type": "number",
       "describe": "set max depth during treeifing a dir",
       "default": 5
+    },
+    "o": {
+      "alias": "outv",
+      "type": "number",
+      "default": 1,
+      "describe": "if u dont need print value,set --outv 0",
+      "choices": [0, 1]
     }
   },
   "example": {
