@@ -1,0 +1,43 @@
+{
+  "usage": "Usage:  jts [option]",
+  "help": "h",
+  "alias": {
+    "h": "help",
+    "v": "version"
+  },
+  "option": {
+    "j": {
+      "alias": "json",
+      "describe": "Necessary! Accept 3 type:\n1.A file path of target XXX.json file\n2.A directory path to travel\n3.A json string to convert(need 'or \" warpped)"
+    },
+    "c": {
+      "alias": "copy",
+      "describe": "copy to clipboard, set 0 to close",
+      "default": 1,
+      "choices": [0, 1]
+    },
+    "x": {
+      "alias": "xspace",
+      "describe": "tree horizon-space",
+      "default": 2
+    },
+    "Y": {
+      "alias": "Yspace",
+      "describe": "tree vertical-space",
+      "default": 2
+    },
+    "m": {
+      "alias": "max",
+      "type": "number",
+      "describe": "set max depth during converting a directory to a tree string",
+      "default": 5
+    }
+  },
+  "example": {
+    "jts ./package.json": "treeify a json file",
+    "jts ./ -c 0": "treeify current directory",
+    "jts '{a:1,b:{c:2},d:3}'": "treeify a json string (need 'or \" warpped)",
+    "jtls": "short for jts ./ --copy=0"
+  },
+  "epilog": "About more: https://github.com/Froguard/json-toy"
+}

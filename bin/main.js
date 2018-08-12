@@ -8,6 +8,8 @@ let os = require('os'),
     cwd = process.cwd(),
     Type = require('../lib/typeOf'),
     clipboardy = require('clipboardy'),
+    yargs = require('yargs'),
+    argHelp = require('./args-help'),
     colorful = require('../lib/cli/colorful'),
     existsSync = fs.existsSync || path.existsSync;
 
@@ -15,48 +17,17 @@ let EOL = os.EOL;
 let needMsEol = EOL === '\r\n';
 
 // parse argv
-let yargs = require('yargs').usage('Usage:  jts [options]')
-    .help('h')
-    .alias('h', 'help')
-    .alias('v', 'version')
-    .option('j', {
-        alias: 'json',
-        describe: 'Necessary! Accept 3 type:\n' +
-        '1.A file path of target XXX.json file\n' +
-        '2.A directory path to travel\n' +
-        '3.A json string to convert(need \'\'or "" warpped)'
-    })
-    .option('c', {
-        alias: 'copy',
-        describe: 'copy to clipboard, set 0 to close',
-        default: 1,
-        choices: [0, 1]
-    })
-    .option('x', {
-        alias: 'xspace',
-        describe: 'tree horizon-space',
-        default: 2
-    })
-    .option('y', {
-        alias: 'yspace',
-        describe: 'tree vertical-space',
-        default: 0
-    })
-    .option('d', {
-        alias: 'dir',
-        describe: 'convert a directory to a tree string'
-    })
-    .option('m', {
-        alias: 'max',
-        type: 'number',
-        describe: 'set max depth during converting a directory to a tree string',
-        default: 5
-    })
-    .example('jts ./package.json', 'treeify a json file (a path with tail \'.json\' )')
-    .example('jts ./ --copy=0', 'treeify current directory')
-    .example('jts \'{a:1,b:{c:2},d:3}\'', 'treeify a json string (need \'\'or "" warpped)')
-    .example('jtls', 'short for \'jts ./ --copy=0\'')
-    .epilog('About more: https://github.com/Froguard/json-toy\n');
+Object.keys(argHelp).forEach((key) => {
+    let v = argHelp[key];
+    if(Type.isSpreadable(v)){
+        Object.keys(v).forEach((sk) => {
+            let sv = v[sk];
+            yargs[key](sk, sv);
+        });
+    }else{
+        yargs[key](v);
+    }
+});
 const args = yargs.argv;
 
 // main argv
