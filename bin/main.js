@@ -1,6 +1,5 @@
 'use strict';
 let os = require('os'),
-    parseArgv = require('minimist'),
     version = require('../package.json').version,
     jsonToy = require('../index'),
     dir2Json = require('../lib/cli/walk-dir'),
@@ -16,7 +15,6 @@ let EOL = os.EOL;
 let needMsEol = EOL === '\r\n';
 
 // parse argv
-// let args = parseArgv(process.argv.slice(2));
 let yargs = require('yargs').usage('Usage:  jts [options]')
     .help('h')
     .alias('h', 'help')
