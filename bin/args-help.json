@@ -34,9 +34,8 @@
     },
     "o": {
       "alias": "outv",
-      "type": "number",
       "default": 1,
-      "describe": "if u dont need print value,set --outv 0",
+      "describe": "print value in json, set to close0",
       "choices": [0, 1]
     }
   },
