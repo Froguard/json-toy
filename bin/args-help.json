@@ -29,7 +29,7 @@
     "m": {
       "alias": "max",
       "type": "number",
-      "describe": "set max depth during converting a directory to a tree string",
+      "describe": "set max depth during treeifing a dir",
       "default": 5
     }
   },

@@ -29,8 +29,6 @@ Object.keys(argHelp).forEach((key) => {
     }
 });
 const args = yargs.argv;
-
-// main argv
 let argJ = args.j || args.json || (Type.isArray(args._) ? args._[0] : args._);
 let argD = args.d || args.dir;
 let argM = args.m || args.max;
@@ -45,16 +43,12 @@ let jsonName = "";
 /* main */
 if(args.v || args.V || args.version){
     console.log(version);
-
 }else if(argJ){
-    jsonFile2TreeStr()
-
+    jsonFile2TreeStr();
 }else if(argD){
     dir2TreeStr();
-
 }else{
     help();
-
 }
 
 // tools
@@ -69,6 +63,7 @@ function errorOut(str){
 }
 function help(){
     yargs.showHelp();
+    console.log();
 }
 
 // convert and print and copy a tree-string from a json obj
