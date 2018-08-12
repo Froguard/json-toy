@@ -13,8 +13,6 @@ Some simple methods for operating object as json in an easy way!
 
 [![download:25419](https://nodei.co/npm/json-toy.png?downloads=true)](https://www.npmjs.com/package/json-toy)
 
-![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/demo2.gif)
-
 ### feature
 
 - 1.**jt.treeString(jsonObj1)** &nbsp; or &nbsp;&nbsp; ````$ jts ./path/1.json```` (cmd line)&nbsp;&nbsp; convert a jsonObj to a tree-like string to print out
@@ -398,3 +396,7 @@ Lines        : 94.44% ( 289/306 )
           └─ xxx: 1
               
   ````
+
+Online Parser: [https://froguard.github.io/funny/treeString](https://froguard.github.io/funny/treeString)
+
+![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/demo2.gif)
