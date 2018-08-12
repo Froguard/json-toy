@@ -1,17 +1,16 @@
 'use strict';
 let os = require('os'),
-    version = require('../package.json').version,
-    jsonToy = require('../index'),
-    dir2Json = require('../lib/cli/walk-dir'),
     fs = require('fs'),
     path = require('path'),
-    cwd = process.cwd(),
-    Type = require('../lib/typeOf'),
-    clipboardy = require('clipboardy'),
     yargs = require('yargs'),
+    clipboardy = require('clipboardy'),
+    cwd = process.cwd(),
+    existsSync = fs.existsSync || path.existsSync,
+    jsonToy = require('../index'),
+    dir2Json = require('../lib/cli/walk-dir'),
+    Type = require('../lib/typeOf'),
     argHelp = require('./args-help'),
-    colorful = require('../lib/cli/colorful'),
-    existsSync = fs.existsSync || path.existsSync;
+    colorful = require('../lib/cli/colorful');
 
 let EOL = os.EOL;
 let needMsEol = EOL === '\r\n';
@@ -19,13 +18,16 @@ let needMsEol = EOL === '\r\n';
 // parse argv
 Object.keys(argHelp).forEach((key) => {
     let v = argHelp[key];
-    if(Type.isSpreadable(v)){
-        Object.keys(v).forEach((sk) => {
-            let sv = v[sk];
-            yargs[key](sk, sv);
-        });
-    }else{
-        yargs[key](v);
+    let fn = yargs[key];
+    if(fn){
+        if(Type.isSpreadable(v)){
+            Object.keys(v).forEach((sk) => {
+                let sv = v[sk];
+                fn(sk, sv);
+            });
+        }else{
+            fn(v);
+        }
     }
 });
 const args = yargs.argv;
@@ -41,9 +43,7 @@ let outputVal = undefined===args.outv ? true : !!args.outv;
 let jsonName = "";
 
 /* main */
-if(args.v || args.V || args.version){
-    console.log(version);
-}else if(argJ){
+if(argJ){
     jsonFile2TreeStr();
 }else if(argD){
     dir2TreeStr();
@@ -63,7 +63,6 @@ function errorOut(str){
 }
 function help(){
     yargs.showHelp();
-    console.log();
 }
 
 // convert and print and copy a tree-string from a json obj
