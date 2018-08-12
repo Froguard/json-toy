@@ -35,7 +35,7 @@
     "o": {
       "alias": "outv",
       "default": 1,
-      "describe": "print value in json, set to close0",
+      "describe": "print value,only use in json,set 0 to close",
       "choices": [0, 1]
     }
   },
