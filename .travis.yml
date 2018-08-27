@@ -9,6 +9,7 @@ node_js:
  - '6.0.0'
 branch: master
 script: npm run test
+after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
 env:
   global:
     secure: "o5TeBjePFCeppsHXFJPOH3Xr/W7xybLYl+TC1B3ONl78DwN7vY5pSVRxXYH4f9FJtaiK+bVEeW/wlxwmZzBmBZ4mCV7Y4EQqVTgGoXSqVd/7q0bMcLAOwtEttDEca7a5xSMjxR0SJNz0ArHLHFuPNLgucDElpWTJxD5sNpAQ/AuEb8EEdiQRJiwmhzIrW9OHmbQao373HFWygJf71N/KsDFhoiG9Mpsehqn+RhxWOUJBLQC6UEq0tE+ZlJjX1jibQAN0yIDvuySY34mww0ggTIvYvuJO59X7R9RYI60IXaLPKcCohWA0VnxGAP4XeSvBZ6TKCsa/9lNE+GUI28e5KoZovqOYvHjBj86Q7dwkEGhSBWA7ZnQ0mhc04FKppL2bZZifwO8hAZEqL3gLAre5Cu+06SS6LX63gJUo06BgcE1fQqcMnB+aIYiFs3FAJPWN0ipi0V/tRIUK5tBOOFsUMT6028uQoQAX/UfG78VROxVlf6CqWysZQqaVHXm9BqcSgEGvcmKEPK1k2E1e/jBsVzntRaYCXH9/UCMWzvoyp0zm50V4W06HsU1bCgpdkagsMeXPIqJeG0ydiiM3/RZp0MlpFlpDnE5wEwqVL5dWG6p7vsWZ9TMAWMPfPoX5dgCNTMRIfnkyzqXXmn33jdsuICq1rX/m1hE6+aXcL7+nTso="
