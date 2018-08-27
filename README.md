@@ -7,6 +7,7 @@ Some simple methods for operating object as json in an easy way!
 
 [![version](https://img.shields.io/npm/v/json-toy.svg "version")](https://www.npmjs.com/package/json-toy)&nbsp;
 [![Build Status](https://img.shields.io/travis/Froguard/json-toy.svg)](https://travis-ci.org/Froguard/json-toy)&nbsp;
+[![Coverage Status](https://coveralls.io/repos/github/Froguard/json-toy/badge.svg?branch=master)](https://coveralls.io/github/Froguard/json-toy?branch=master)&nbsp;
 [![GitHub issues](https://img.shields.io/github/issues/Froguard/json-toy.svg)](https://github.com/Froguard/json-toy/issues?q=is%3Aopen+is%3Aissue)&nbsp;
 [![download](https://img.shields.io/npm/dt/json-toy.svg "download")](https://www.npmjs.com/package/json-toy)&nbsp;
 [![license](https://img.shields.io/github/license/froguard/json-toy.svg)](https://github.com/froguard/json-toy/blob/master/LICENSE)
@@ -179,6 +180,11 @@ $ j-tree-str ./package.json
 ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/jsonObj.jpg) =&gt; ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/treeString.jpg)
 
 
+Online Parser: [https://froguard.github.io/funny/treeString](https://froguard.github.io/funny/treeString)
+
+![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/demo2.gif)
+
+
 ### Feature2. get property 's value by key-path
 
 ```js
@@ -335,7 +341,6 @@ console.log(Type.getTypeOf(new DiyClass("d1")));// diyclass
 ````
 
 
-
 ### others: parse stringify stringifySafe stringifyJSON5
 These is no method about parse stringify in this tool,If you need,I Recommend
 [json5](https://www.npmjs.com/package/json5) and [stringifySafe](https://www.npmjs.com/package/json-stringify-safe)
@@ -396,7 +401,3 @@ Lines        : 94.44% ( 289/306 )
           └─ xxx: 1
               
   ````
-
-Online Parser: [https://froguard.github.io/funny/treeString](https://froguard.github.io/funny/treeString)
-
-![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/demo2.gif)
