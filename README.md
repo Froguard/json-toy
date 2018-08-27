@@ -48,7 +48,7 @@ $ jtls
 ````
 
 Or if you haven't use the npm,you can do like this ,add [jsonToy.min.js](https://github.com/Froguard/json-toy/blob/master/dist/jsonToy.min.js)
-or [jsonToy.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/jsonToy.min.js) *just 8kb*
+or [jsonToy.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/jsonToy.min.js) **just 8kb**
 
 ```html
 <script src="https://unpkg.com/json-toy/dist/jsonToy.min.js"></script>
@@ -65,7 +65,7 @@ or [jsonToy.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/jsonToy.min.
 </script>
 ```
 
-The core file has no dependencies,and just ````8kb```` size;
+The core file has no dependencies,and just **8kb** size;
 
 ## Usage
 
