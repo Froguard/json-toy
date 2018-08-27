@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib/cli/walk-dir.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">lib/cli/</a> walk-dir.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.36% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>76/87</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">59.41% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>60/101</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/3</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.36% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>76/87</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">let path = require('path');
+let fs = require('fs');
+let Type = require('../typeOf');//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
+let fileExistSync = fs.existsSync || <span class="branch-1 cbranch-no" title="branch not covered" >path.existsSync;</span>
+let colorful = require('./colorful');
+&nbsp;
+let REGEXP_IGNORE_DIR = /(\.git|\.svn|\.idea|node_modules|bower_components)/g;
+let REGEXP_IGNORE_FILE = /(Thumbs\.db|\.DS_store)/g;
+&nbsp;
+/**
+ * 将文件目录转换为json对象
+ * @param {String} rootPath 目标根目录
+ * @param {Object} options
+ *        {Object} options.exclude
+ *        {RegExp} options.exclude.all,file,directory 正则表达式去匹配 “排除项”
+ *        {Object} options.extChars
+ *        {String} options.extChars.file,directory 文件节点，文件夹节点的末尾字符
+ * @returns {JSON|String}
+ */
+function dir2Json(rootPath,options) {
+    // root
+    rootPath = path.normalize(rootPath) || <span class="branch-1 cbranch-no" title="branch not covered" >"./";</span>
+    if(!fileExistSync(rootPath)){
+        throw new Error("The path '"+rootPath+"' is not existed!");
+    }
+    let statRootPath = fs.statSync(rootPath);
+    if(!statRootPath.isDirectory()){
+        return "not a directory";
+    }
+&nbsp;
+    // options
+    options = options || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+    let exclude = options.exclude;
+    let extChars = options.extChars;
+    let preChars = options.preChars;
+    let maxDepth = parseInt(options.maxDepth);
+    maxDepth = maxDepth || 0;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(!maxDepth || <span class="branch-1 cbranch-no" title="branch not covered" >maxDepth&gt;5)</span>{
+        // “潜在的长时等待”提示
+        console.log(colorful.warn("Potential long-time-wait: You`d better set a max depth (letter than 5) to access directories,or it will spend a long time!"));
+    }
+    // options.exclude: 排除某些文件或文件夹
+    if(Type.isNullOrUndefined(exclude)){
+        exclude = {
+            // all:/pom\.xml/g,
+            file: REGEXP_IGNORE_FILE,
+            directory: REGEXP_IGNORE_DIR,
+            outExcludeDir: false //是否将exclude的dir进行输出
+        }
+    }else{
+        exclude = Type.isObject(exclude) ? (exclude||<span class="branch-1 cbranch-no" title="branch not covered" >{})</span> : <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+        exclude.file =  exclude.file || REGEXP_IGNORE_FILE;
+        exclude.directory = exclude.directory || REGEXP_IGNORE_DIR;
+        exclude.outExcludeDir = exclude.outExcludeDir || false;
+    }
+    let filterGlobal = exclude.all || false;
+    let filterFile = exclude.file || <span class="branch-1 cbranch-no" title="branch not covered" >false;</span>
+    let filterDir = exclude.directory || <span class="branch-1 cbranch-no" title="branch not covered" >false;</span>
+    let outExcludeDir = exclude.outExcludeDir;
+    filterGlobal = Type.isRegExp(filterGlobal) ? <span class="branch-0 cbranch-no" title="branch not covered" >filterGlobal </span>: Type.isString(filterGlobal) ? <span class="branch-0 cbranch-no" title="branch not covered" >new RegExp(filterGlobal,"g") </span>: false;
+    filterFile = Type.isRegExp(filterFile) ? filterFile : <span class="branch-1 cbranch-no" title="branch not covered" >Type.isString(filterFile) ? new RegExp(filterFile,"g") : false;</span>
+    filterDir = Type.isRegExp(filterDir) ? filterDir : <span class="branch-1 cbranch-no" title="branch not covered" >Type.isString(filterDir) ? new RegExp(filterDir,"g") : false;</span>
+    // options.extChars：文件或文件夹后面的符号，比如一般文件夹后面的符号是'/'
+    if(Type.isNullOrUndefined(extChars)){
+        extChars = { file: "", directory: "" };
+    }else{
+        extChars = extChars || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+        extChars.file = Type.isString(extChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.file </span>: "";
+        extChars.directory = Type.isString(extChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.directory </span>: "";
+    }
+    // options.preChars：文件或文件夹后面的符号，比如一般文件夹后面的符号是'/'
+    if(Type.isNullOrUndefined(preChars)){
+        preChars = { file: "", directory: "" };
+    }else{
+        preChars = preChars || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+        preChars.file = Type.isString(preChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.file </span>: "";
+        preChars.directory = Type.isString(preChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.directory </span>: "";
+    }
+    let fPre = preChars.file;
+    let dPre = preChars.directory;
+    let fExt = extChars.file;
+    let dExt = extChars.directory;
+&nbsp;
+    // result json
+    let json = {};
+&nbsp;
+    // do main
+    function travel(pathArg,far,curDepth){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(!maxDepth || (<span class="branch-1 cbranch-no" title="branch not covered" >maxDepth </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >curDepth&lt;=maxDepth)</span>){
+            let dirs;
+            try{
+                // todo 目录太多时候崩溃未考虑
+                dirs = fs.readdirSync(pathArg);//第一级子目录（文件|文件夹）
+            }catch(e){
+<span class="cstat-no" title="statement not covered" >                console.log(colorful.error(`Occur error with read dirs from '${pathArg}',${e.toString()}`));</span>
+<span class="cstat-no" title="statement not covered" >                dirs = false;</span>
+            }
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(dirs &amp;&amp; dirs.length){
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(dirs.length&gt;=30){
+<span class="cstat-no" title="statement not covered" >                    console.log(colorful.warn("Too many files|directories was found, type-in an exact target to simplify or reduce result.")</span>
+                        + "\n          "+colorful.yellow("path: ") + colorful.cyan("'"+pathArg.replace(/\\/g,"/")+"'"));
+                }
+                // todo 子项太多未考虑
+                dirs.forEach(function (item) {
+                    let curPath = path.join(pathArg,item);
+                    let stat;// 获取fsStatInfo，用以后面的判断
+                    try{
+                        // todo 读大文件时候情况未考虑
+                        stat = fs.statSync(curPath);// 读取文件信息
+                    }catch(e1){
+<span class="cstat-no" title="statement not covered" >                        console.log(colorful.warn(`Skip to read stat info from '${curPath}'\n${e1.toString()}`));</span>
+<span class="cstat-no" title="statement not covered" >                        stat = false;</span>
+                    }
+                    // 通配检查
+                    <span class="missing-if-branch" title="else path not taken" >E</span>if(!filterGlobal || (<span class="branch-1 cbranch-no" title="branch not covered" >!!filterGlobal </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >!item.match(filterGlobal))</span> ){
+                        // 文件夹类型的值为“其对应的实际对象”，文件类型值为"file",
+                        // 读取stat失败的类型对应值为"unreadableStatType",其他的为"unknownStatType"
+                        <span class="missing-if-branch" title="if path not taken" >I</span>if(!stat){
+<span class="cstat-no" title="statement not covered" >                            far[item] = "unreadableStatType";</span>
+<span class="cstat-no" title="statement not covered" >                            return false;</span>
+                        }
+                        if(stat.isFile()){//文件
+                            <span class="missing-if-branch" title="else path not taken" >E</span>if(!filterFile || (!!filterFile &amp;&amp; !item.match(filterFile)) ){
+                                far[fPre + item + fExt] = "file";
+                            }
+                        }else <span class="missing-if-branch" title="else path not taken" >E</span>if(stat.isDirectory()){//文件夹
+                            let dPropName;
+                            <span class="missing-if-branch" title="else path not taken" >E</span>if(!filterDir || (!!filterDir &amp;&amp; !item.match(filterDir)) ){
+                                dPropName = dPre + item + dExt;
+                                far[dPropName] = {};
+                                travel(curPath, far[dPropName],curDepth+1);
+                            }else{
+<span class="cstat-no" title="statement not covered" >                                if(!!filterDir &amp;&amp; item.match(filterDir) &amp;&amp; outExcludeDir){</span>
+<span class="cstat-no" title="statement not covered" >                                    dPropName = dPre + item + " (ignored)" + dExt;</span>
+<span class="cstat-no" title="statement not covered" >                                    far[dPropName] = {};</span>
+                                }
+                            }
+                        }else{
+                            // console.log("非文件也非目录：",item);//比如文件夹快捷方式，文件快捷方式 unix之下的另外的东西，管道，套接字等等
+                            // 这里不读超链接的原因是，避免有可能出现的死循环
+<span class="cstat-no" title="statement not covered" >                            far[item] = "unknownStatType";</span>
+                        }
+                    }
+                });
+            }
+        }
+    }
+    travel(rootPath,json,1);
+    return {}===json ? <span class="branch-0 cbranch-no" title="branch not covered" >null </span>: json;
+}
+&nbsp;
+module.exports = dir2Json;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Aug 12 2018 23:22:59 GMT+0800 (GMT+08:00)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

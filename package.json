@@ -1,6 +1,6 @@
 {
   "name": "json-toy",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "Get tree string(├└│─), get value by keyPath like 'a.b.c', safe travel, object circular check,browser none dependencies!",
   "dependencies": {
     "clipboardy": "^1.2.3",
@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "istanbul": "^0.4.5",
-    "mocha": "^3.1.2",
+    "mocha": "^5.2.0",
     "rewire": "^2.5.2",
     "should": "^11.1.1"
   },

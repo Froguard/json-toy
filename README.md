@@ -7,16 +7,12 @@ Some simple methods for operating object as json in an easy way!
 
 [![version](https://img.shields.io/npm/v/json-toy.svg "version")](https://www.npmjs.com/package/json-toy)&nbsp;
 [![Build Status](https://img.shields.io/travis/Froguard/json-toy.svg)](https://travis-ci.org/Froguard/json-toy)&nbsp;
+[![Coverage Status](https://coveralls.io/repos/github/Froguard/json-toy/badge.svg?branch=master)](https://coveralls.io/github/Froguard/json-toy?branch=master)&nbsp;
 [![GitHub issues](https://img.shields.io/github/issues/Froguard/json-toy.svg)](https://github.com/Froguard/json-toy/issues?q=is%3Aopen+is%3Aissue)&nbsp;
 [![download](https://img.shields.io/npm/dt/json-toy.svg "download")](https://www.npmjs.com/package/json-toy)&nbsp;
 [![license](https://img.shields.io/github/license/froguard/json-toy.svg)](https://github.com/froguard/json-toy/blob/master/LICENSE)
 
 [![download:25419](https://nodei.co/npm/json-toy.png?downloads=true)](https://www.npmjs.com/package/json-toy)
-
-Online Parser: [https://froguard.github.io/funny/treeString](https://froguard.github.io/funny/treeString)
-
-![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/demo2.gif)
-
 
 ### feature
 
@@ -184,6 +180,11 @@ $ j-tree-str ./package.json
 ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/jsonObj.jpg) =&gt; ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/treeString.jpg)
 
 
+Online Parser: [https://froguard.github.io/funny/treeString](https://froguard.github.io/funny/treeString)
+
+![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/demo2.gif)
+
+
 ### Feature2. get property 's value by key-path
 
 ```js
@@ -338,7 +339,6 @@ function DiyClass(){};
 console.log(Type.getTypeOf(new DiyClass("d1")));// diyclass
 //...
 ````
-
 
 
 ### others: parse stringify stringifySafe stringifyJSON5

@@ -31,6 +31,12 @@
       "type": "number",
       "describe": "set max depth during treeifing a dir",
       "default": 5
+    },
+    "o": {
+      "alias": "outv",
+      "default": 1,
+      "describe": "print value,only use in json,set 0 to close",
+      "choices": [0, 1]
     }
   },
   "example": {
