@@ -359,7 +359,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">4499×</span>
+<span class="cline-any cline-yes">4399×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -373,16 +373,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">4505×</span>
+<span class="cline-any cline-yes">4405×</span>
 <span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4499×</span>
+<span class="cline-any cline-yes">4399×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4498×</span>
-<span class="cline-any cline-yes">4498×</span>
-<span class="cline-any cline-yes">4332×</span>
+<span class="cline-any cline-yes">4399×</span>
+<span class="cline-any cline-yes">4399×</span>
+<span class="cline-any cline-yes">4233×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4498×</span>
+<span class="cline-any cline-yes">4399×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -394,7 +394,7 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">42×</span>
 <span class="cline-any cline-yes">42×</span>
-<span class="cline-any cline-yes">4400×</span>
+<span class="cline-any cline-yes">4300×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -420,7 +420,7 @@
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">4372×</span>
+<span class="cline-any cline-yes">4272×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -452,10 +452,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">3826×</span>
+<span class="cline-any cline-yes">3727×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">3743×</span>
+<span class="cline-any cline-yes">3644×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">17×</span>
@@ -496,12 +496,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">3735×</span>
+<span class="cline-any cline-yes">3635×</span>
 <span class="cline-any cline-yes">23×</span>
-<span class="cline-any cline-yes">3711×</span>
-<span class="cline-any cline-yes">3619×</span>
-<span class="cline-any cline-yes">3616×</span>
-<span class="cline-any cline-yes">3616×</span>
+<span class="cline-any cline-yes">3612×</span>
+<span class="cline-any cline-yes">3520×</span>
+<span class="cline-any cline-yes">3517×</span>
+<span class="cline-any cline-yes">3517×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -671,16 +671,16 @@ function _typeString(obj){
  *   _getType(1);//"number"
  *   _getType([]);//"array"
  *   _getType({});//"object"
- *   var p1 = new Person("petter");//custom type
+ *   let p1 = new Person("petter");//custom type
  *   _getType(p1);//"person"
  */
 function _getType(obj){
     if(obj === null || obj === undefined){
         return obj === undefined ? "undefined" : "null";// String(obj)
     }else{
-        var typeName = _typeString(obj).slice(8,-1).toLowerCase();
+        let typeName = _typeString(obj).slice(8,-1).toLowerCase();
         //将object类型再细化一下,以区分出自定义类型以及细化类型
-        var tpOf = typeof obj;// 这里要用typeof关键字而非typeName这个结果,不然error的子类会不准确
+        let tpOf = typeof obj;// 这里要用typeof关键字而非typeName这个结果,不然error的子类会不准确
         if(typeName!=="arguments" &amp;&amp; (tpOf==="object" || tpOf==="function")){
             typeName = (obj.constructor &amp;&amp; obj.constructor.name) ? obj.constructor.name.toLowerCase() : <span class="branch-1 cbranch-no" title="branch not covered" >typeName;</span>
         }
@@ -705,7 +705,7 @@ function _isTypeOf(type){
  * @param obj
  * @returns {Boolean}
  */
-var _Type_ = {};
+let _Type_ = {};
 [
     "arguments","array","date",
     "error","syntaxError","typeError","rangeError",
@@ -715,12 +715,12 @@ var _Type_ = {};
 ].forEach(function(t){
     _Type_["is" + t[0].toUpperCase() + t.substr(1)] = _isTypeOf(t);
 });
-var isArguments = _Type_.isArguments;
-var isSymbol = _Type_.isSymbol;
-var isSet = _Type_.isSet;
-var isWeakSet = _Type_.isWeakSet;
-var isMap = _Type_.isMap;
-var isWeakMap = _Type_.isWeakMap;
+let isArguments = _Type_.isArguments;
+let isSymbol = _Type_.isSymbol;
+let isSet = _Type_.isSet;
+let isWeakSet = _Type_.isWeakSet;
+let isMap = _Type_.isMap;
+let isWeakMap = _Type_.isWeakMap;
 function isArray(obj){
     return _Type_.isArray(obj) || (typeof Array.isArray !=='undefined' &amp;&amp; Array.isArray(obj));
 }
@@ -747,7 +747,7 @@ function isRangeError(obj){
 // isObject:这里采用原生关键字typeof判定，即：数组，任何自定义类型，都属于Object
 /* eg:
    function Person(){};
-   var p1 = new Person();
+   let p1 = new Person();
    isObject(p1);//true
    isObject(Person);//false, function
    isObject("12aa");//false, string is primitive type
@@ -801,7 +801,7 @@ function isSpreadable(obj){
     if(isArray(obj)){
         return !!obj.length;
     }else if(isObject(obj) || isFunction(obj)){
-        for(var j in obj){
+        for(let j in obj){
             <span class="missing-if-branch" title="else path not taken" >E</span>if(obj.hasOwnProperty(j)){
                 return true
             }
@@ -817,7 +817,7 @@ function _isJSON(value, visited) {
             return _isJSON(element, visited);
         })) ||
         (isObject.isFlat(value) &amp;&amp; Object.keys(value).every(function(key) {
-            var $ = Object.getOwnPropertyDescriptor(value, key);
+            let $ = Object.getOwnPropertyDescriptor(value, key);
             return  ((!isObject($.value) || <span class="branch-1 cbranch-no" title="branch not covered" >!~visited.indexOf($.value))</span>
                     &amp;&amp; !('get' in $) &amp;&amp; !('set' in $)
                     &amp;&amp; _isJSON($.value, visited));
@@ -833,7 +833,7 @@ isObject.isEmpty = function(obj,ownCheck){
         return false;
     }
     ownCheck = ownCheck || false;
-    for(var k in obj){
+    for(let k in obj){
         if(ownCheck){
             <span class="missing-if-branch" title="else path not taken" >E</span>if(obj.hasOwnProperty(k)){
                 return false;
@@ -901,9 +901,9 @@ isNumber.even = function(obj){
 // isInstanceOf
 function _instOf(value, type) {
     // 先用原生instanceof判断
-    var isInstanceOf = value instanceof type;
+    let isInstanceOf = value instanceof type;
     // 对于非undefined和非null的value，需要再用构造器名称判断，以避免原生instanceof的判定
-    var isConstructorNameSame,isConstructorSourceSame;
+    let isConstructorNameSame,isConstructorSourceSame;
     if (!isInstanceOf &amp;&amp; undefined!==value &amp;&amp; null!==value) {
         isConstructorNameSame = (value.constructor &amp;&amp; value.constructor.name === type.name);
         isConstructorSourceSame = (value.constructor &amp;&amp; String(value.constructor) == String(type));
@@ -955,7 +955,7 @@ module.exports = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 17:49:12 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 21:48:27 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

@@ -13,7 +13,7 @@ view package.json,the property name **"_doPackNeedDependencies"**,you can see th
 install those if you did n t install -g
 
 ```bash
-$ npm i webpack@1.13.3 cross-env@3.1.3 babel-core@6.18.2 babel-loader@6.2.7 npm-run-all@3.1.1
+$ npm i webpack@4.17.1 cross-env@5.2.0 @babel/core@7.0.0 babel-loader@8.0.0 npm-run-all@4.1.3 @babel/preset-env@7.0.0 webpack-cli@3.1.0 webpack-common-shake@2.0.1  
 ````
 
 ## pack
@@ -57,8 +57,8 @@ travel:
 ["│ "    , "│   "      , "│   "      , undefined ]
 ["│ "    , "├─ twelve" , ": 12"      ]
 ["│ "    , "│   "      , undefined   ]
+```
 
-````
 fix:
 遍历每个节点型元素，二维向下检测其是否属于末尾节点，如果是，替换节点符号，并向下清空竖型连接符
 
@@ -89,4 +89,4 @@ fix:
 ["  "    , "│   "      , "    "      , undefined]
 ["  "    , "└─ twelve" , ": 12"      ]
 ["  "    , "    "      , undefined   ]
-````
+```

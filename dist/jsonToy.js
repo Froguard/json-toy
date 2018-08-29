@@ -323,7 +323,7 @@ function fixArr(arr) {
       throw new TypeError("arr is not a two-dimensional-array !");
     }
 
-    var j,
+    var j = void 0,
         jLen = row.length;
 
     for (j = 0; j < jLen; j++) {
@@ -334,7 +334,7 @@ function fixArr(arr) {
 
         if (checkNext.isLast) {
           arr[i][j] = o.replace(regNode, _TreeChar_.L);
-          var c,
+          var c = void 0,
               cLen = checkNext.hPos;
 
           for (c = i + 1; c < cLen; c++) {

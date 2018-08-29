@@ -685,7 +685,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">var Type = require("./typeOf"),
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">let Type = require("./typeOf"),
     travelJson = require("./json-travel");
 /**
  * 缩略字符串
@@ -700,7 +700,7 @@ function trimRight(str){
  * 将string进行转义输出
  */
 // https://github.com/douglascrockford/JSON-js/blob/e39db4b7e6249f04a195e7dd0840e610cc9e941e/json2.js#L195
-var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+let escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
     meta = { // table of character substitutions
         '\b': '\\b',
         '\t': '\\t',
@@ -717,7 +717,7 @@ function escapeString(string) {
     // sequences.
     escapable.lastIndex = 0;//复原
     return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
-        var c = meta[a];
+        let c = meta[a];
         return typeof c === 'string' ?
             c :
 <span class="branch-1 cbranch-no" title="branch not covered" >        '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);</span>
@@ -727,7 +727,7 @@ function escapeString(string) {
 &nbsp;
 // 不可用正则中的字符代替，如果需要，请转义
 // _TreeChar_中的字符与后面的正则逻辑强相关，请勿更改，请勿有重复的value
-var _TreeChar_ = {
+let _TreeChar_ = {
     "I":  "│",
     "T":  "├",
     "L":  "└",
@@ -747,31 +747,31 @@ var _TreeChar_ = {
 &nbsp;
 // char里面不要包含特殊正则字符，如果有，请转义
 function _isStartWith(char){
-    var c = "";
+    let c = "";
     <span class="missing-if-branch" title="else path not taken" >E</span>if(Type.isArray(char)){
         c = char.join("|");
     }else{
 <span class="cstat-no" title="statement not covered" >        c = char || c;</span>
     }
-    var reg = new RegExp("^(" + c + ")+");
+    let reg = new RegExp("^(" + c + ")+");
     return function(str){
         return Type.isString(str) &amp;&amp; !!str.match(reg);
     };
 }
 // 是否为节点：父或者子节点
-var isNodeStr = _isStartWith([_TreeChar_.T,_TreeChar_.L,"ROOT"]);
+let isNodeStr = _isStartWith([_TreeChar_.T,_TreeChar_.L,"ROOT"]);
 &nbsp;
 // 检查是否包含连接符号
-var _RegTreeLinkChars = new RegExp("^("+[_TreeChar_.I,_TreeChar_.T,_TreeChar_._,_TreeChar_.L].join("|")+")","g");
+let _RegTreeLinkChars = new RegExp("^("+[_TreeChar_.I,_TreeChar_.T,_TreeChar_._,_TreeChar_.L].join("|")+")","g");
 function _hasTreeLinkChar(str){
     return Type.isString(str) &amp;&amp; str.match(_RegTreeLinkChars);
 }
 // 替换值中包含的连接符号
-var _Reg_I_ = new RegExp("^"+_TreeChar_.I,"g"),
+let _Reg_I_ = new RegExp("^"+_TreeChar_.I,"g"),
     _Reg_T_ = new RegExp("^"+_TreeChar_.T,"g"),
     _Reg_L_ = new RegExp("^"+_TreeChar_.L,"g"),
     _Reg___ = new RegExp("^"+_TreeChar_._,"g");
-var _repl_I_ = "'"+_TreeChar_.I+"'",
+let _repl_I_ = "'"+_TreeChar_.I+"'",
     _repl_T_ = "'"+_TreeChar_.T+"'",
     _repl_L_ = "'"+_TreeChar_.L+"'",
     _repl___ = "'"+_TreeChar_._+"'";
@@ -790,13 +790,13 @@ function checkNextSibling(w,h,arr){
     <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(arr)){
 <span class="cstat-no" title="statement not covered" >        throw new TypeError("arr is not a array!");</span>
     }
-    var i,hasNextSibling = false;
+    let i,hasNextSibling = false;
     for(i=(h+1);i&lt;arr.length;i++){
         <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isUndefined(arr[i]) &amp;&amp; !Type.isArray(arr[i])){
 <span class="cstat-no" title="statement not covered" >            throw new TypeError("arr is not a two-dimensional-array !");</span>
         }
 &nbsp;
-        var ele = arr[i][w];
+        let ele = arr[i][w];
         if(undefined===ele){
             break;
         }else if(isNodeStr(ele+"")){
@@ -815,23 +815,23 @@ function fixArr(arr){
     <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(arr)){
 <span class="cstat-no" title="statement not covered" >        throw new TypeError("arr is not a array!");</span>
     }
-    var regNode = new RegExp("^" + _TreeChar_.T, "g"),
+    let regNode = new RegExp("^" + _TreeChar_.T, "g"),
         regVert = new RegExp("^" + _TreeChar_.I ,"g"),
         S = " ";
-    var i,iLen = arr.length;
+    let i,iLen = arr.length;
     for(i=0;i&lt;iLen;i++){
-        var row = arr[i];
+        let row = arr[i];
         <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(row)){
 <span class="cstat-no" title="statement not covered" >            throw  new TypeError("arr is not a two-dimensional-array !");</span>
         }
-        var j,jLen = row.length;
+        let j,jLen = row.length;
         for(j=0;j&lt;jLen;j++){
-            var o = row[j];
+            let o = row[j];
             if(undefined!==o &amp;&amp; isNodeStr(o)){// 开始检查，且仅检查节点
-                var checkNext = checkNextSibling(j,i,arr);
+                let checkNext = checkNextSibling(j,i,arr);
                 if(checkNext.isLast){
                     arr[i][j] = o.replace(regNode, _TreeChar_.L);// "├" =&gt; "└"
-                    var c,cLen = checkNext.hPos;
+                    let c,cLen = checkNext.hPos;
                     for(c=i+1;c&lt;cLen;c++){
                         <span class="missing-if-branch" title="else path not taken" >E</span>if(arr[c]){
                             if(!!arr[c][j] &amp;&amp; !!arr[c][j].match(regVert)){
@@ -845,7 +845,7 @@ function fixArr(arr){
     }
 &nbsp;
     // 最后修正根节点: "└" =&gt; "", "─" =&gt; " "
-    var regSimRoot1 = new RegExp(_TreeChar_._,"gi"),
+    let regSimRoot1 = new RegExp(_TreeChar_._,"gi"),
         regSimRoot2 = new RegExp(_TreeChar_.T + "|" +  _TreeChar_.L,"g");
     arr[0][0] = arr[0][0].replace(regSimRoot1," ").replace(regSimRoot2,"");
 &nbsp;
@@ -853,7 +853,7 @@ function fixArr(arr){
 }
 // 重复产生n和char并组成字符串返回
 function repeatChar(char,n){
-    var res = "";
+    let res = "";
     char = Type.isChar(char) ? char : <span class="branch-1 cbranch-no" title="branch not covered" >"*";</span>
     n = parseInt(n) || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
     n = n &gt; 0 ? n : <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
@@ -879,7 +879,7 @@ function treeString(json,options){
 &nbsp;
     // config
     options =  options || {};
-    var jsonName,space,vSpace,needValueOut, msRetrunChar;//不做空值保护，后面挨个做
+    let jsonName,space,vSpace,needValueOut, msRetrunChar;//不做空值保护，后面挨个做
     jsonName = options.rootName;
     space = options.space;
     vSpace = options.vSpace;
@@ -896,7 +896,7 @@ function treeString(json,options){
         return jsonName + "'s content is " + (Type.isString(json) ? (escapeString(json)||<span class="branch-1 cbranch-no" title="branch not covered" >String(json))</span> : String(json)) || <span class="branch-1 cbranch-no" title="branch not covered" >"empty!";</span>
     }
     // 间距
-    var _SPACE_ = space;
+    let _SPACE_ = space;
     <span class="missing-if-branch" title="else path not taken" >E</span>if("\t"!==space){
         space = parseInt(space);
         space = Type.isNaN(space) ? 3 : space;
@@ -912,20 +912,20 @@ function treeString(json,options){
     // 是否需要输出值
     needValueOut = Type.isNill(needValueOut) ? true : !!needValueOut;
 &nbsp;
-    var rpN = parseInt((space-1)/2);//为了美观一点，控制节点间距 1-&gt;0 2-&gt;0 3-&gt;1 4-&gt;1 5-&gt;2 6-&gt;2 7-&gt;3 8-&gt;3
-    var _I_ = _TreeChar_.I + _SPACE_,//连接符
+    let rpN = parseInt((space-1)/2);//为了美观一点，控制节点间距 1-&gt;0 2-&gt;0 3-&gt;1 4-&gt;1 5-&gt;2 6-&gt;2 7-&gt;3 8-&gt;3
+    let _I_ = _TreeChar_.I + _SPACE_,//连接符
         _T_ = _TreeChar_.T + repeatChar(_TreeChar_._,rpN) + " ",//叶节点
         SPLIT = _TreeChar_.SPLIT + " ";//尾叶节点
-    var ft = (Math.floor(jsonName.length/2))  % 10;// 左间距 max 10
-    var _rT_ = _TreeChar_.T + " ";//求取根节点的符号
-    var _I1_ = _TreeChar_.I + repeatChar(" ",ft-1);// 最左边的符号和间距
+    let ft = (Math.floor(jsonName.length/2))  % 10;// 左间距 max 10
+    let _rT_ = _TreeChar_.T + " ";//求取根节点的符号
+    let _I1_ = _TreeChar_.I + repeatChar(" ",ft-1);// 最左边的符号和间距
 &nbsp;
     //res:用于存储节点信息的二维数组,末尾显式加上值undefined来区分是否为父节点
-    var res = [
+    let res = [
         [_rT_ + jsonName, undefined]//加上 _T_ 开头是为了表明这是一个节点，为了fixArr做准备
     ];
     <span class="missing-if-branch" title="else path not taken" >E</span>if(vSpace&gt;0){
-        var q;
+        let q;
         for(q=0;q&lt;vSpace;q++){
             res.push([_I1_ , _I_]); //此行元素用以增加根节点之下的连字符的竖直距离
         }
@@ -933,8 +933,8 @@ function treeString(json,options){
 &nbsp;
     // travel
     travelJson(json,function(key,value,curKeyPath,typeStr,isSpreadable,curDepth){
-        var depth = curDepth;
-        var v;
+        let depth = curDepth;
+        let v;
         if(!isSpreadable){
             <span class="missing-if-branch" title="else path not taken" >E</span>if(needValueOut){
                 if(typeStr==="string"){
@@ -961,7 +961,7 @@ function treeString(json,options){
             v = undefined;
         }
         // 一横行：res[n]
-        var lineArr = [],i;
+        let lineArr = [],i;
         for(i=1;i&lt;depth;i++){// 左边缩进用的元素
             lineArr.push(i===1?_I1_:_I_);//首元素加入的是_I1_
         }
@@ -972,11 +972,11 @@ function treeString(json,options){
         res.push(lineArr);
 &nbsp;
         // 竖直方向上的间距
-        var vs;
+        let vs;
         for(vs=0;vs&lt;vSpace;vs++){
             // 增加一行竖直方向上的距离
             res.push(lineArr.map(function(item,index){
-                var isFirst = index===0,//首元素加入的是_I1_
+                let isFirst = index===0,//首元素加入的是_I1_
                     isLast = index===(lineArr.length-1),
                     isSpreadableNodeEndFlag = isLast &amp;&amp; item===undefined;
                 return index&lt;(lineArr.length-1) || isSpreadableNodeEndFlag ? (isFirst?_I1_:_I_) : undefined;
@@ -989,9 +989,9 @@ function treeString(json,options){
     fixArr(res);
 &nbsp;
     // 打印输出
-    // var color = require("./cli/colorful");
+    // let color = require("./cli/colorful");
     // res.forEach(function(item){
-    //     var strOut = "[";
+    //     let strOut = "[";
     //     item.forEach(function(sub,subIndex){
     //         strOut += ((sub===undefined?color.magenta("undefined"):color.yellow("'"+sub+"'"))  + (subIndex===(item.length-1) ? "" : ", "));
     //     });
@@ -1012,7 +1012,7 @@ module.exports = treeString;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 17:49:12 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 21:48:27 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>
