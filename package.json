@@ -1,6 +1,6 @@
 {
   "name": "json-toy",
-  "version": "1.1.0",
+  "version": "1.0.17",
   "description": "Json-treeify: Get tree string(├└│─) via json, support browser|node, browser none dependencies!",
   "dependencies": {
     "@babel/core": "^7.0.0",
