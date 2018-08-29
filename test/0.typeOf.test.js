@@ -300,6 +300,7 @@ describe("Test './lib/typeOf.js' >> exports method:", function() {
     it("Type.isNumber(NaN)", function(done) {
         var calc = Type.isNumber;
         should.equal(true, calc(NaN,false));//第二个参数指代不告警
+        should.equal(true, calc(NaN,true));
 
         done && done.call(this);
     });
@@ -368,6 +369,24 @@ describe("Test './lib/typeOf.js' >> exports method:", function() {
     it("Type.isError", function(done) {
         var calc = Type.isError;
         should.equal(true, calc(new Error()));
+        done && done.call(this);
+    });
+
+    it("Type.isSyntaxError", function(done) {
+        var calc = Type.isSyntaxError;
+        should.equal(true, calc(new SyntaxError()));
+        done && done.call(this);
+    });
+
+    it("Type.isTypeError", function(done) {
+        var calc = Type.isTypeError;
+        should.equal(true, calc(new TypeError()));
+        done && done.call(this);
+    });
+
+    it("Type.isRangeError", function(done) {
+        var calc = Type.isRangeError;
+        should.equal(true, calc(new RangeError()));
         done && done.call(this);
     });
 

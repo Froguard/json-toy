@@ -59,5 +59,11 @@ describe("Test './lib/json-get-val-by-keypath.js':", function() {
         done && done.call(this);
     });
 
+    it("throw error during getVal(nill)", function(done) {
+
+        should.throws(() => getVal(null,"a.b.c.d"));
+
+        done && done.call(this);
+    });
 });
 
