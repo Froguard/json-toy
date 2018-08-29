@@ -347,7 +347,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">let path = require('path');
 let fs = require('fs');
-let Type = require('../typeOf');//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
+let {isNill, isObject, isRegExp, isString} = require('../typeOf');//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
 let fileExistSync = fs.existsSync;// || path.existsSync;//node@0.8.0
 let colorful = require('./colorful');
 &nbsp;
@@ -387,7 +387,7 @@ function dir2Json(rootPath,options) {
         console.log(colorful.warn("Potential long-time-wait: You`d better set a max depth (letter than 5) to access directories,or it will spend a long time!"));
     }
     // options.exclude: 排除某些文件或文件夹
-    if(Type.isNullOrUndefined(exclude)){
+    if(isNill(exclude)){
         exclude = {
             // all:/pom\.xml/g,
             file: REGEXP_IGNORE_FILE,
@@ -395,7 +395,7 @@ function dir2Json(rootPath,options) {
             outExcludeDir: false //是否将exclude的dir进行输出
         }
     }else{
-        exclude = Type.isObject(exclude) ? (exclude||<span class="branch-1 cbranch-no" title="branch not covered" >{})</span> : <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+        exclude = isObject(exclude) ? (exclude||<span class="branch-1 cbranch-no" title="branch not covered" >{})</span> : <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
         exclude.file =  exclude.file || REGEXP_IGNORE_FILE;
         exclude.directory = exclude.directory || REGEXP_IGNORE_DIR;
         exclude.outExcludeDir = exclude.outExcludeDir || false;
@@ -404,24 +404,24 @@ function dir2Json(rootPath,options) {
     let filterFile = exclude.file;
     let filterDir = exclude.directory;
     let outExcludeDir = exclude.outExcludeDir;
-    filterGlobal = Type.isRegExp(filterGlobal) ? filterGlobal : Type.isString(filterGlobal) ? <span class="branch-0 cbranch-no" title="branch not covered" >new RegExp(filterGlobal,"g") </span>: false;
-    filterFile = Type.isRegExp(filterFile) ? filterFile : <span class="branch-1 cbranch-no" title="branch not covered" >Type.isString(filterFile) ? new RegExp(filterFile,"g") : false;</span>
-    filterDir = Type.isRegExp(filterDir) ? filterDir : <span class="branch-1 cbranch-no" title="branch not covered" >Type.isString(filterDir) ? new RegExp(filterDir,"g") : false;</span>
+    filterGlobal = isRegExp(filterGlobal) ? filterGlobal : isString(filterGlobal) ? <span class="branch-0 cbranch-no" title="branch not covered" >new RegExp(filterGlobal,"g") </span>: false;
+    filterFile = isRegExp(filterFile) ? filterFile : <span class="branch-1 cbranch-no" title="branch not covered" >isString(filterFile) ? new RegExp(filterFile,"g") : false;</span>
+    filterDir = isRegExp(filterDir) ? filterDir : <span class="branch-1 cbranch-no" title="branch not covered" >isString(filterDir) ? new RegExp(filterDir,"g") : false;</span>
     // options.extChars：文件或文件夹后面的符号，比如一般文件夹后面的符号是'/'
-    if(Type.isNullOrUndefined(extChars)){
+    if(isNill(extChars)){
         extChars = { file: "", directory: "" };
     }else{
         extChars = extChars || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
-        extChars.file = Type.isString(extChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.file </span>: "";
-        extChars.directory = Type.isString(extChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.directory </span>: "";
+        extChars.file = isString(extChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.file </span>: "";
+        extChars.directory = isString(extChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.directory </span>: "";
     }
     // options.preChars：文件或文件夹后面的符号，比如一般文件夹后面的符号是'/'
-    if(Type.isNullOrUndefined(preChars)){
+    if(isNill(preChars)){
         preChars = { file: "", directory: "" };
     }else{
         preChars = preChars || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
-        preChars.file = Type.isString(preChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.file </span>: "";
-        preChars.directory = Type.isString(preChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.directory </span>: "";
+        preChars.file = isString(preChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.file </span>: "";
+        preChars.directory = isString(preChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.directory </span>: "";
     }
     let fPre = preChars.file;
     let dPre = preChars.directory;
@@ -493,7 +493,7 @@ function dir2Json(rootPath,options) {
         }
     }
     travel(rootPath,json,1);
-    return Type.isObject.isEmptyOwn(json) ? null : json;
+    return isObject.isEmptyOwn(json) ? null : json;
 }
 &nbsp;
 module.exports = dir2Json;</pre></td></tr>
@@ -502,7 +502,7 @@ module.exports = dir2Json;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 21:48:27 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 30 2018 00:59:12 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

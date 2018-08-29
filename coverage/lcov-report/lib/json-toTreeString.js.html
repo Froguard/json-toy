@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.1% </span>
+        <span class="strong">93.15% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>135/145</span>
+        <span class='fraction'>136/146</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">75% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>14/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.01% </span>
+        <span class="strong">93.06% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>133/143</span>
+        <span class='fraction'>134/144</span>
       </div>
     </div>
   </div>
@@ -364,7 +364,9 @@
 319
 320
 321
-322</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+322
+323</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -685,8 +687,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">let Type = require("./typeOf"),
-    travelJson = require("./json-travel");
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">let {isArray, isString, isUndefined, isNill, isNaN, isChar, isObject, isSpreadable} = require("./typeOf");
+let travelJson = require("./json-travel");
+&nbsp;
 /**
  * 缩略字符串
  * @param str
@@ -748,14 +751,14 @@ let _TreeChar_ = {
 // char里面不要包含特殊正则字符，如果有，请转义
 function _isStartWith(char){
     let c = "";
-    <span class="missing-if-branch" title="else path not taken" >E</span>if(Type.isArray(char)){
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(isArray(char)){
         c = char.join("|");
     }else{
 <span class="cstat-no" title="statement not covered" >        c = char || c;</span>
     }
     let reg = new RegExp("^(" + c + ")+");
     return function(str){
-        return Type.isString(str) &amp;&amp; !!str.match(reg);
+        return isString(str) &amp;&amp; !!str.match(reg);
     };
 }
 // 是否为节点：父或者子节点
@@ -764,7 +767,7 @@ let isNodeStr = _isStartWith([_TreeChar_.T,_TreeChar_.L,"ROOT"]);
 // 检查是否包含连接符号
 let _RegTreeLinkChars = new RegExp("^("+[_TreeChar_.I,_TreeChar_.T,_TreeChar_._,_TreeChar_.L].join("|")+")","g");
 function _hasTreeLinkChar(str){
-    return Type.isString(str) &amp;&amp; str.match(_RegTreeLinkChars);
+    return isString(str) &amp;&amp; str.match(_RegTreeLinkChars);
 }
 // 替换值中包含的连接符号
 let _Reg_I_ = new RegExp("^"+_TreeChar_.I,"g"),
@@ -787,12 +790,12 @@ function replaceTreeLinkChar(str){
 &nbsp;
 //通过二维数组检查兄弟节点情况
 function checkNextSibling(w,h,arr){
-    <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(arr)){
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!isArray(arr)){
 <span class="cstat-no" title="statement not covered" >        throw new TypeError("arr is not a array!");</span>
     }
     let i,hasNextSibling = false;
     for(i=(h+1);i&lt;arr.length;i++){
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isUndefined(arr[i]) &amp;&amp; !Type.isArray(arr[i])){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!isUndefined(arr[i]) &amp;&amp; !isArray(arr[i])){
 <span class="cstat-no" title="statement not covered" >            throw new TypeError("arr is not a two-dimensional-array !");</span>
         }
 &nbsp;
@@ -812,7 +815,7 @@ function checkNextSibling(w,h,arr){
 }
 //修复简单粗暴生成的二位数字，以便生成正确的节点连接符
 function fixArr(arr){
-    <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(arr)){
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!isArray(arr)){
 <span class="cstat-no" title="statement not covered" >        throw new TypeError("arr is not a array!");</span>
     }
     let regNode = new RegExp("^" + _TreeChar_.T, "g"),
@@ -821,7 +824,7 @@ function fixArr(arr){
     let i,iLen = arr.length;
     for(i=0;i&lt;iLen;i++){
         let row = arr[i];
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Type.isArray(row)){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!isArray(row)){
 <span class="cstat-no" title="statement not covered" >            throw  new TypeError("arr is not a two-dimensional-array !");</span>
         }
         let j,jLen = row.length;
@@ -854,7 +857,7 @@ function fixArr(arr){
 // 重复产生n和char并组成字符串返回
 function repeatChar(char,n){
     let res = "";
-    char = Type.isChar(char) ? char : <span class="branch-1 cbranch-no" title="branch not covered" >"*";</span>
+    char = isChar(char) ? char : <span class="branch-1 cbranch-no" title="branch not covered" >"*";</span>
     n = parseInt(n) || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
     n = n &gt; 0 ? n : <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
     <span class="missing-if-branch" title="else path not taken" >E</span>if(n&gt;0) while(n--) res += char;
@@ -887,19 +890,19 @@ function treeString(json,options){
     msRetrunChar = options.msRetrunChar || false;
 &nbsp;
     // 根节点名称
-    jsonName = (Type.isString(jsonName) ? jsonName : 0) || "ROOT";
-    if(Type.isNill(json)){
+    jsonName = (isString(jsonName) ? jsonName : 0) || "ROOT";
+    if(isNill(json)){
         return jsonName + "'s content is " + String(json);
-    }else if(Type.isObject.isEmptyOwn(json)){
+    }else if(isObject.isEmptyOwn(json)){
         return jsonName + "'s content is empty!";
-    }else if(!Type.isSpreadable(json)){
-        return jsonName + "'s content is " + (Type.isString(json) ? (escapeString(json)||<span class="branch-1 cbranch-no" title="branch not covered" >String(json))</span> : String(json)) || <span class="branch-1 cbranch-no" title="branch not covered" >"empty!";</span>
+    }else if(!isSpreadable(json)){
+        return jsonName + "'s content is " + (isString(json) ? (escapeString(json)||<span class="branch-1 cbranch-no" title="branch not covered" >String(json))</span> : String(json)) || <span class="branch-1 cbranch-no" title="branch not covered" >"empty!";</span>
     }
     // 间距
     let _SPACE_ = space;
     <span class="missing-if-branch" title="else path not taken" >E</span>if("\t"!==space){
         space = parseInt(space);
-        space = Type.isNaN(space) ? 3 : space;
+        space = isNaN(space) ? 3 : space;
         space = space &lt;= 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >1 </span>: space &gt; 8 ? <span class="branch-0 cbranch-no" title="branch not covered" >8 </span>: space;//1 &lt;= space &lt;= 8
         _SPACE_ = _TreeChar_[space];
     }else{
@@ -907,10 +910,10 @@ function treeString(json,options){
 <span class="cstat-no" title="statement not covered" >        space = 1;</span>
     }
     vSpace = parseInt(vSpace);
-    vSpace = Type.isNaN(vSpace) ? (space &gt; 5 ? <span class="branch-0 cbranch-no" title="branch not covered" >2 </span>: 1) : vSpace;
+    vSpace = isNaN(vSpace) ? (space &gt; 5 ? <span class="branch-0 cbranch-no" title="branch not covered" >2 </span>: 1) : vSpace;
     vSpace = vSpace&lt; 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >0 </span>: vSpace &gt; 2 ? <span class="branch-0 cbranch-no" title="branch not covered" >2 </span>: vSpace;//0 &lt;= vSpace &lt;= 2
     // 是否需要输出值
-    needValueOut = Type.isNill(needValueOut) ? true : !!needValueOut;
+    needValueOut = isNill(needValueOut) ? true : !!needValueOut;
 &nbsp;
     let rpN = parseInt((space-1)/2);//为了美观一点，控制节点间距 1-&gt;0 2-&gt;0 3-&gt;1 4-&gt;1 5-&gt;2 6-&gt;2 7-&gt;3 8-&gt;3
     let _I_ = _TreeChar_.I + _SPACE_,//连接符
@@ -1012,7 +1015,7 @@ module.exports = treeString;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 21:48:27 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 30 2018 00:59:12 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

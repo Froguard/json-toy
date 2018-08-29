@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.33% </span>
+        <span class="strong">93.75% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>42/45</span>
+        <span class='fraction'>45/48</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">86.67% </span>
+        <span class="strong">89.29% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>26/30</span>
+        <span class='fraction'>25/28</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.18% </span>
+        <span class="strong">93.62% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>41/44</span>
+        <span class='fraction'>44/47</span>
       </div>
     </div>
   </div>
@@ -127,7 +127,11 @@
 82
 83
 84
-85</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+85
+86
+87
+88
+89</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,9 +152,9 @@
 <span class="cline-any cline-yes">16×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">3545×</span>
+<span class="cline-any cline-yes">1692×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3545×</span>
+<span class="cline-any cline-yes">1692×</span>
 <span class="cline-any cline-yes">66×</span>
 <span class="cline-any cline-yes">66×</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -161,19 +165,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3545×</span>
-<span class="cline-any cline-yes">3619×</span>
+<span class="cline-any cline-yes">1692×</span>
+<span class="cline-any cline-yes">1692×</span>
+<span class="cline-any cline-yes">1692×</span>
+<span class="cline-any cline-yes">1766×</span>
+<span class="cline-any cline-yes">1766×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3619×</span>
-<span class="cline-any cline-yes">3619×</span>
+<span class="cline-any cline-yes">1766×</span>
+<span class="cline-any cline-yes">1766×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3618×</span>
+<span class="cline-any cline-yes">1766×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3618×</span>
-<span class="cline-any cline-yes">3618×</span>
+<span class="cline-any cline-yes">1766×</span>
+<span class="cline-any cline-yes">1766×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3618×</span>
+<span class="cline-any cline-yes">1766×</span>
 <span class="cline-any cline-yes">140×</span>
 <span class="cline-any cline-yes">140×</span>
 <span class="cline-any cline-yes">14×</span>
@@ -184,12 +191,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3618×</span>
+<span class="cline-any cline-yes">1766×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3618×</span>
+<span class="cline-any cline-yes">1765×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3618×</span>
-<span class="cline-any cline-yes">3529×</span>
+<span class="cline-any cline-yes">1765×</span>
+<span class="cline-any cline-yes">1676×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,7 +219,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">let Type = require("./typeOf");
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">let {getTypeOf, isObject, isFunction, isString, isSpreadable} = require("./typeOf");
 /**
  * 递归遍历一个json
  * @param {Object} json
@@ -221,15 +229,15 @@
  * @returns {Array} keysArr
  */
 function travelJson(json,cb,rootAlias,safeMode){
-    if(!Type.isObject(json)){ throw new TypeError("The first param should be an Object instance!"); }
+    if(!isObject(json)){ throw new TypeError("The first param should be an Object instance!"); }
     // 安全模式
     safeMode = safeMode===undefined ? true : !!safeMode;
     let safeStack = [];//记录safe检查时候的对象
     let safeKeys = []; //记录safe检查时候的key值
     // res
     let keysArr = [];
-    let needCb = Type.isFunction(cb);
-    rootAlias = (Type.isString(rootAlias) ? rootAlias : "") || "ROOT";
+    let needCb = isFunction(cb);
+    rootAlias = (isString(rootAlias) ? rootAlias : "") || "ROOT";
     // loop
     function travel(obj,curKeyPath,depth,cb){
         <span class="missing-if-branch" title="else path not taken" >E</span>if(obj!==null &amp;&amp; obj!==undefined){
@@ -245,39 +253,43 @@ function travelJson(json,cb,rootAlias,safeMode){
                 }
             }
             // loop
-            for(let k in obj){
-                <span class="missing-if-branch" title="else path not taken" >E</span>if(obj.hasOwnProperty(k)){
-                    // --- begin --
-                    //这里即使curKeyPath为空字符串""也请加上".",这样做是为了统一的循环次数，不管rootAlias是否为空字符串""
-                    let newKeyPath = curKeyPath + "." + k;
-                    keysArr.push(newKeyPath+"");//push a new string
-                    // 记录下层级
-                    let curDepth = depth + 1;
-                    // 值
-                    let v = obj[k];
-                    let isCircular = false;
-                    // safeMode
-                    if(safeMode){
-                        let kIndex = safeStack.indexOf(v);
-                        if(~kIndex){// Circular
-                            isCircular = true;
-                            v = "[Circular-&gt;" + safeKeys[kIndex] + "]";
-                        }else{
-                            isCircular = false;
-                            v = obj[k];
-                        }
+            let keys = Object.keys(obj);
+            const lastIndex = keys.length - 1;
+            keys.forEach(function(k, i){
+                let isFirstChild = i === 0;
+                let isLastChild = i === lastIndex;
+                // --- begin --
+                //这里即使curKeyPath为空字符串""也请加上".",这样做是为了统一的循环次数，不管rootAlias是否为空字符串""
+                let newKeyPath = curKeyPath + "." + k;
+                keysArr.push(newKeyPath+"");//push a new string
+                // 记录下层级
+                let curDepth = depth + 1;
+                // 值
+                let v = obj[k];
+                let isCircular = false;
+                // safeMode
+                if(safeMode){
+                    let kIndex = safeStack.indexOf(v);
+                    if(~kIndex){// Circular
+                        isCircular = true;
+                        v = "[Circular-&gt;" + safeKeys[kIndex] + "]";
+                    }else{
+                        isCircular = false;
+                        v = obj[k];
                     }
-                    // 是否可以再展开，这里，函数被视为不可再展开
-                    let spreadable  = Type.isSpreadable(v) &amp;&amp; !Type.isFunction(v);
-                    // do sth in callback...
-                    needCb &amp;&amp; cb.call(obj,k,v,newKeyPath+"",Type.getTypeOf(v),spreadable,curDepth,isCircular);
-                    // then travel in deep
-                    if(spreadable){
-                        travel(v,newKeyPath,curDepth,cb);
-                    }
-                    // --- end --
                 }
-            }
+                // 是否可以再展开，这里，函数被视为不可再展开
+                let spreadable  = isSpreadable(v) &amp;&amp; !isFunction(v);
+                // do sth in callback...
+                needCb &amp;&amp; cb.call(obj,k,v,newKeyPath+"",getTypeOf(v),spreadable,curDepth,isCircular,isFirstChild,isLastChild);
+                // then travel in deep
+                if(spreadable){
+                    travel(v,newKeyPath,curDepth,cb);
+                }
+                // --- end --
+            });
+&nbsp;
+&nbsp;
         }
     }
     // do on catch mode
@@ -301,7 +313,7 @@ module.exports = travelJson;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 21:48:27 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 30 2018 00:59:12 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

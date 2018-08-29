@@ -157,18 +157,21 @@ module.exports = checkCircular;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Type = __webpack_require__(/*! ./typeOf */ 0);
+var _require = __webpack_require__(/*! ./typeOf */ 0),
+    isObject = _require.isObject,
+    isString = _require.isString,
+    isNill = _require.isNill;
 
 function getValByKey(json, keyPath, ownKeyCheck) {
-  if (!Type.isObject(json) || !Type.isString(keyPath)) {
+  if (!isObject(json) || !isString(keyPath)) {
     throw new TypeError("Error type-in,check plz! (jsonObj,stringKeyPath)");
   }
 
-  ownKeyCheck = Type.isNullOrUndefined(ownKeyCheck) ? true : !!ownKeyCheck;
+  ownKeyCheck = isNill(ownKeyCheck) ? true : !!ownKeyCheck;
   var v = json;
   var propsArr = keyPath.split(".");
   propsArr.forEach(function (k) {
-    if (!Type.isNullOrUndefined(v)) {
+    if (!isNill(v)) {
       k = k.replace(/&bull;/g, ".");
       k = k.replace(/&amp;/g, "&");
       v = !ownKeyCheck ? v[k] : v.hasOwnProperty(k) ? v[k] : undefined;
@@ -190,8 +193,17 @@ module.exports = getValByKey;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Type = __webpack_require__(/*! ./typeOf */ 0),
-    travelJson = __webpack_require__(/*! ./json-travel */ "./lib/json-travel.js");
+var _require = __webpack_require__(/*! ./typeOf */ 0),
+    isArray = _require.isArray,
+    isString = _require.isString,
+    isUndefined = _require.isUndefined,
+    isNill = _require.isNill,
+    isNaN = _require.isNaN,
+    isChar = _require.isChar,
+    isObject = _require.isObject,
+    isSpreadable = _require.isSpreadable;
+
+var travelJson = __webpack_require__(/*! ./json-travel */ "./lib/json-travel.js");
 
 function trimRight(str) {
   return str.replace(/(\s|\u00A0)+$/, "");
@@ -237,7 +249,7 @@ var _TreeChar_ = {
 function _isStartWith(char) {
   var c = "";
 
-  if (Type.isArray(char)) {
+  if (isArray(char)) {
     c = char.join("|");
   } else {
     c = char || c;
@@ -245,7 +257,7 @@ function _isStartWith(char) {
 
   var reg = new RegExp("^(" + c + ")+");
   return function (str) {
-    return Type.isString(str) && !!str.match(reg);
+    return isString(str) && !!str.match(reg);
   };
 }
 
@@ -254,7 +266,7 @@ var isNodeStr = _isStartWith([_TreeChar_.T, _TreeChar_.L, "ROOT"]);
 var _RegTreeLinkChars = new RegExp("^(" + [_TreeChar_.I, _TreeChar_.T, _TreeChar_._, _TreeChar_.L].join("|") + ")", "g");
 
 function _hasTreeLinkChar(str) {
-  return Type.isString(str) && str.match(_RegTreeLinkChars);
+  return isString(str) && str.match(_RegTreeLinkChars);
 }
 
 var _Reg_I_ = new RegExp("^" + _TreeChar_.I, "g"),
@@ -276,7 +288,7 @@ function replaceTreeLinkChar(str) {
 }
 
 function checkNextSibling(w, h, arr) {
-  if (!Type.isArray(arr)) {
+  if (!isArray(arr)) {
     throw new TypeError("arr is not a array!");
   }
 
@@ -284,7 +296,7 @@ function checkNextSibling(w, h, arr) {
       hasNextSibling = false;
 
   for (i = h + 1; i < arr.length; i++) {
-    if (!Type.isUndefined(arr[i]) && !Type.isArray(arr[i])) {
+    if (!isUndefined(arr[i]) && !isArray(arr[i])) {
       throw new TypeError("arr is not a two-dimensional-array !");
     }
 
@@ -306,7 +318,7 @@ function checkNextSibling(w, h, arr) {
 }
 
 function fixArr(arr) {
-  if (!Type.isArray(arr)) {
+  if (!isArray(arr)) {
     throw new TypeError("arr is not a array!");
   }
 
@@ -319,7 +331,7 @@ function fixArr(arr) {
   for (i = 0; i < iLen; i++) {
     var row = arr[i];
 
-    if (!Type.isArray(row)) {
+    if (!isArray(row)) {
       throw new TypeError("arr is not a two-dimensional-array !");
     }
 
@@ -357,7 +369,7 @@ function fixArr(arr) {
 
 function repeatChar(char, n) {
   var res = "";
-  char = Type.isChar(char) ? char : "*";
+  char = isChar(char) ? char : "*";
   n = parseInt(n) || 0;
   n = n > 0 ? n : 0;
   if (n > 0) while (n--) {
@@ -374,21 +386,21 @@ function treeString(json, options) {
   vSpace = options.vSpace;
   needValueOut = options.valueOut;
   msRetrunChar = options.msRetrunChar || false;
-  jsonName = (Type.isString(jsonName) ? jsonName : 0) || "ROOT";
+  jsonName = (isString(jsonName) ? jsonName : 0) || "ROOT";
 
-  if (Type.isNill(json)) {
+  if (isNill(json)) {
     return jsonName + "'s content is " + String(json);
-  } else if (Type.isObject.isEmptyOwn(json)) {
+  } else if (isObject.isEmptyOwn(json)) {
     return jsonName + "'s content is empty!";
-  } else if (!Type.isSpreadable(json)) {
-    return jsonName + "'s content is " + (Type.isString(json) ? escapeString(json) || String(json) : String(json)) || "empty!";
+  } else if (!isSpreadable(json)) {
+    return jsonName + "'s content is " + (isString(json) ? escapeString(json) || String(json) : String(json)) || "empty!";
   }
 
   var _SPACE_ = space;
 
   if ("\t" !== space) {
     space = parseInt(space);
-    space = Type.isNaN(space) ? 3 : space;
+    space = isNaN(space) ? 3 : space;
     space = space <= 0 ? 1 : space > 8 ? 8 : space;
     _SPACE_ = _TreeChar_[space];
   } else {
@@ -397,9 +409,9 @@ function treeString(json, options) {
   }
 
   vSpace = parseInt(vSpace);
-  vSpace = Type.isNaN(vSpace) ? space > 5 ? 2 : 1 : vSpace;
+  vSpace = isNaN(vSpace) ? space > 5 ? 2 : 1 : vSpace;
   vSpace = vSpace < 0 ? 0 : vSpace > 2 ? 2 : vSpace;
-  needValueOut = Type.isNill(needValueOut) ? true : !!needValueOut;
+  needValueOut = isNill(needValueOut) ? true : !!needValueOut;
   var rpN = parseInt((space - 1) / 2);
 
   var _I_ = _TreeChar_.I + _SPACE_,
@@ -487,10 +499,15 @@ module.exports = treeString;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Type = __webpack_require__(/*! ./typeOf */ 0);
+var _require = __webpack_require__(/*! ./typeOf */ 0),
+    getTypeOf = _require.getTypeOf,
+    isObject = _require.isObject,
+    isFunction = _require.isFunction,
+    isString = _require.isString,
+    isSpreadable = _require.isSpreadable;
 
 function travelJson(json, cb, rootAlias, safeMode) {
-  if (!Type.isObject(json)) {
+  if (!isObject(json)) {
     throw new TypeError("The first param should be an Object instance!");
   }
 
@@ -498,8 +515,8 @@ function travelJson(json, cb, rootAlias, safeMode) {
   var safeStack = [];
   var safeKeys = [];
   var keysArr = [];
-  var needCb = Type.isFunction(cb);
-  rootAlias = (Type.isString(rootAlias) ? rootAlias : "") || "ROOT";
+  var needCb = isFunction(cb);
+  rootAlias = (isString(rootAlias) ? rootAlias : "") || "ROOT";
 
   function travel(obj, curKeyPath, depth, cb) {
     if (obj !== null && obj !== undefined) {
@@ -515,34 +532,36 @@ function travelJson(json, cb, rootAlias, safeMode) {
         }
       }
 
-      for (var k in obj) {
-        if (obj.hasOwnProperty(k)) {
-          var newKeyPath = curKeyPath + "." + k;
-          keysArr.push(newKeyPath + "");
-          var curDepth = depth + 1;
-          var v = obj[k];
-          var isCircular = false;
+      var keys = Object.keys(obj);
+      var lastIndex = keys.length - 1;
+      keys.forEach(function (k, i) {
+        var isFirstChild = i === 0;
+        var isLastChild = i === lastIndex;
+        var newKeyPath = curKeyPath + "." + k;
+        keysArr.push(newKeyPath + "");
+        var curDepth = depth + 1;
+        var v = obj[k];
+        var isCircular = false;
 
-          if (safeMode) {
-            var kIndex = safeStack.indexOf(v);
+        if (safeMode) {
+          var kIndex = safeStack.indexOf(v);
 
-            if (~kIndex) {
-              isCircular = true;
-              v = "[Circular->" + safeKeys[kIndex] + "]";
-            } else {
-              isCircular = false;
-              v = obj[k];
-            }
-          }
-
-          var spreadable = Type.isSpreadable(v) && !Type.isFunction(v);
-          needCb && cb.call(obj, k, v, newKeyPath + "", Type.getTypeOf(v), spreadable, curDepth, isCircular);
-
-          if (spreadable) {
-            travel(v, newKeyPath, curDepth, cb);
+          if (~kIndex) {
+            isCircular = true;
+            v = "[Circular->" + safeKeys[kIndex] + "]";
+          } else {
+            isCircular = false;
+            v = obj[k];
           }
         }
-      }
+
+        var spreadable = isSpreadable(v) && !isFunction(v);
+        needCb && cb.call(obj, k, v, newKeyPath + "", getTypeOf(v), spreadable, curDepth, isCircular, isFirstChild, isLastChild);
+
+        if (spreadable) {
+          travel(v, newKeyPath, curDepth, cb);
+        }
+      });
     }
   }
 
@@ -807,7 +826,7 @@ module.exports = {
   "isNull": ((isNull),null),
   isUndefined: isUndefined,
   isNill: isNill,
-  isNullOrUndefined: isNill,
+  "isNullOrUndefined": ((isNill),null),
   "isUndefinedOrNull": ((isNill),null),
   "isBoolean": ((isBoolean),null),
   isString: isString,
