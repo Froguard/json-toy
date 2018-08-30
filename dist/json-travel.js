@@ -1,12 +1,17 @@
+/*!
+ * Froguard(figure_wf@163.com)
+ * https://github.com/Froguard/json-toy
+ * license MIT
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["jsonToy"] = factory();
+		exports["jsonTravel"] = factory();
 	else
-		root["jsonToy"] = factory();
+		root["jsonTravel"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -91,406 +96,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./lib/json-travel.js");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./index.js":
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var travelJson = __webpack_require__(/*! ./lib/json-travel */ "./lib/json-travel.js"),
-    checkCircular = __webpack_require__(/*! ./lib/json-check-circular */ "./lib/json-check-circular.js"),
-    getValByKeyPath = __webpack_require__(/*! ./lib/json-get-val-by-keypath */ "./lib/json-get-val-by-keypath.js"),
-    treeString = __webpack_require__(/*! ./lib/json-toTreeString */ "./lib/json-toTreeString.js");
-
-module.exports = {
-  getValByKeyPath: getValByKeyPath,
-  travelJson: travelJson,
-  treeString: treeString,
-  checkCircular: checkCircular
-};
-
-/***/ }),
-
-/***/ "./lib/json-check-circular.js":
-/*!************************************!*\
-  !*** ./lib/json-check-circular.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var travelJson = __webpack_require__(/*! ./json-travel */ "./lib/json-travel.js");
-
-function checkCircular(obj) {
-  var isCcl = false;
-  var cclKeysArr = [];
-  travelJson(obj, function (k, v, kp, ts, cpl, cd, isCircular) {
-    if (isCircular) {
-      isCcl = true;
-      cclKeysArr.push({
-        keyPath: kp,
-        circularTo: v.slice(11, -1),
-        key: k,
-        value: v
-      });
-    }
-  }, "ROOT", true);
-  return {
-    isCircular: isCcl,
-    circularProps: cclKeysArr
-  };
-}
-
-module.exports = checkCircular;
-
-/***/ }),
-
-/***/ "./lib/json-get-val-by-keypath.js":
-/*!****************************************!*\
-  !*** ./lib/json-get-val-by-keypath.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ./typeOf */ 0),
-    isObject = _require.isObject,
-    isString = _require.isString,
-    isNill = _require.isNill;
-
-function getValByKey(json, keyPath, ownKeyCheck) {
-  if (!isObject(json) || !isString(keyPath)) {
-    throw new TypeError("Error type-in,check plz! (jsonObj,stringKeyPath)");
-  }
-
-  ownKeyCheck = isNill(ownKeyCheck) ? true : !!ownKeyCheck;
-  var v = json;
-  var propsArr = keyPath.split(".");
-  propsArr.forEach(function (k) {
-    if (!isNill(v)) {
-      k = k.replace(/&bull;/g, ".");
-      k = k.replace(/&amp;/g, "&");
-      v = !ownKeyCheck ? v[k] : v.hasOwnProperty(k) ? v[k] : undefined;
-    } else {
-      return v;
-    }
-  });
-  return v;
-}
-
-module.exports = getValByKey;
-
-/***/ }),
-
-/***/ "./lib/json-toTreeString.js":
-/*!**********************************!*\
-  !*** ./lib/json-toTreeString.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ./typeOf */ 0),
-    isArray = _require.isArray,
-    isString = _require.isString,
-    isUndefined = _require.isUndefined,
-    isNill = _require.isNill,
-    isNaN = _require.isNaN,
-    isChar = _require.isChar,
-    isObject = _require.isObject,
-    isSpreadable = _require.isSpreadable;
-
-var travelJson = __webpack_require__(/*! ./json-travel */ "./lib/json-travel.js");
-
-function trimRight(str) {
-  return str.replace(/(\s|\u00A0)+$/, "");
-}
-
-var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
-    meta = {
-  '\b': '\\b',
-  '\t': '\\t',
-  '\n': '\\n',
-  '\f': '\\f',
-  '\r': '\\r',
-  '"': '\\"',
-  '\\': '\\\\'
-};
-
-function escapeString(string) {
-  escapable.lastIndex = 0;
-  return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
-    var c = meta[a];
-    return typeof c === 'string' ? c : "\\u" + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
-  }) + '"' : '"' + string + '"';
-}
-
-var _TreeChar_ = {
-  "I": "│",
-  "T": "├",
-  "L": "└",
-  "_": "─",
-  "SPLIT": ":",
-  "1": " ",
-  "2": "  ",
-  "3": "   ",
-  "4": "    ",
-  "5": "     ",
-  "6": "      ",
-  "7": "       ",
-  "8": "        ",
-  "9": "         ",
-  "10": "          "
-};
-
-function _isStartWith(char) {
-  var c = "";
-
-  if (isArray(char)) {
-    c = char.join("|");
-  } else {
-    c = char || c;
-  }
-
-  var reg = new RegExp("^(" + c + ")+");
-  return function (str) {
-    return isString(str) && !!str.match(reg);
-  };
-}
-
-var isNodeStr = _isStartWith([_TreeChar_.T, _TreeChar_.L, "ROOT"]);
-
-var _RegTreeLinkChars = new RegExp("^(" + [_TreeChar_.I, _TreeChar_.T, _TreeChar_._, _TreeChar_.L].join("|") + ")", "g");
-
-function _hasTreeLinkChar(str) {
-  return isString(str) && str.match(_RegTreeLinkChars);
-}
-
-var _Reg_I_ = new RegExp("^" + _TreeChar_.I, "g"),
-    _Reg_T_ = new RegExp("^" + _TreeChar_.T, "g"),
-    _Reg_L_ = new RegExp("^" + _TreeChar_.L, "g"),
-    _Reg___ = new RegExp("^" + _TreeChar_._, "g");
-
-var _repl_I_ = "'" + _TreeChar_.I + "'",
-    _repl_T_ = "'" + _TreeChar_.T + "'",
-    _repl_L_ = "'" + _TreeChar_.L + "'",
-    _repl___ = "'" + _TreeChar_._ + "'";
-
-function replaceTreeLinkChar(str) {
-  if (!!_hasTreeLinkChar(str)) {
-    return str.replace(_Reg_I_, _repl_I_).replace(_Reg_T_, _repl_T_).replace(_Reg_L_, _repl_L_).replace(_Reg___, _repl___);
-  }
-
-  return str;
-}
-
-function checkNextSibling(w, h, arr) {
-  if (!isArray(arr)) {
-    throw new TypeError("arr is not a array!");
-  }
-
-  var i,
-      hasNextSibling = false;
-
-  for (i = h + 1; i < arr.length; i++) {
-    if (!isUndefined(arr[i]) && !isArray(arr[i])) {
-      throw new TypeError("arr is not a two-dimensional-array !");
-    }
-
-    var ele = arr[i][w];
-
-    if (undefined === ele) {
-      break;
-    } else if (isNodeStr(ele + "")) {
-      hasNextSibling = true;
-      break;
-    }
-  }
-
-  return {
-    "wPos": w,
-    "hPos": i,
-    "isLast": !hasNextSibling
-  };
-}
-
-function fixArr(arr) {
-  if (!isArray(arr)) {
-    throw new TypeError("arr is not a array!");
-  }
-
-  var regNode = new RegExp("^" + _TreeChar_.T, "g"),
-      regVert = new RegExp("^" + _TreeChar_.I, "g"),
-      S = " ";
-  var i,
-      iLen = arr.length;
-
-  for (i = 0; i < iLen; i++) {
-    var row = arr[i];
-
-    if (!isArray(row)) {
-      throw new TypeError("arr is not a two-dimensional-array !");
-    }
-
-    var j = void 0,
-        jLen = row.length;
-
-    for (j = 0; j < jLen; j++) {
-      var o = row[j];
-
-      if (undefined !== o && isNodeStr(o)) {
-        var checkNext = checkNextSibling(j, i, arr);
-
-        if (checkNext.isLast) {
-          arr[i][j] = o.replace(regNode, _TreeChar_.L);
-          var c = void 0,
-              cLen = checkNext.hPos;
-
-          for (c = i + 1; c < cLen; c++) {
-            if (arr[c]) {
-              if (!!arr[c][j] && !!arr[c][j].match(regVert)) {
-                arr[c][j] = arr[c][j].replace(regVert, S);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  var regSimRoot1 = new RegExp(_TreeChar_._, "gi"),
-      regSimRoot2 = new RegExp(_TreeChar_.T + "|" + _TreeChar_.L, "g");
-  arr[0][0] = arr[0][0].replace(regSimRoot1, " ").replace(regSimRoot2, "");
-  return arr;
-}
-
-function repeatChar(char, n) {
-  var res = "";
-  char = isChar(char) ? char : "*";
-  n = parseInt(n) || 0;
-  n = n > 0 ? n : 0;
-  if (n > 0) while (n--) {
-    res += char;
-  }
-  return res;
-}
-
-function treeString(json, options) {
-  options = options || {};
-  var jsonName, space, vSpace, needValueOut, msRetrunChar;
-  jsonName = options.rootName;
-  space = options.space;
-  vSpace = options.vSpace;
-  needValueOut = options.valueOut;
-  msRetrunChar = options.msRetrunChar || false;
-  jsonName = (isString(jsonName) ? jsonName : 0) || "ROOT";
-
-  if (isNill(json)) {
-    return jsonName + "'s content is " + String(json);
-  } else if (isObject.isEmptyOwn(json)) {
-    return jsonName + "'s content is empty!";
-  } else if (!isSpreadable(json)) {
-    return jsonName + "'s content is " + (isString(json) ? escapeString(json) || String(json) : String(json)) || "empty!";
-  }
-
-  var _SPACE_ = space;
-
-  if ("\t" !== space) {
-    space = parseInt(space);
-    space = isNaN(space) ? 3 : space;
-    space = space <= 0 ? 1 : space > 8 ? 8 : space;
-    _SPACE_ = _TreeChar_[space];
-  } else {
-    _SPACE_ = "" + (space || " ");
-    space = 1;
-  }
-
-  vSpace = parseInt(vSpace);
-  vSpace = isNaN(vSpace) ? space > 5 ? 2 : 1 : vSpace;
-  vSpace = vSpace < 0 ? 0 : vSpace > 2 ? 2 : vSpace;
-  needValueOut = isNill(needValueOut) ? true : !!needValueOut;
-  var rpN = parseInt((space - 1) / 2);
-
-  var _I_ = _TreeChar_.I + _SPACE_,
-      _T_ = _TreeChar_.T + repeatChar(_TreeChar_._, rpN) + " ",
-      SPLIT = _TreeChar_.SPLIT + " ";
-
-  var ft = Math.floor(jsonName.length / 2) % 10;
-
-  var _rT_ = _TreeChar_.T + " ";
-
-  var _I1_ = _TreeChar_.I + repeatChar(" ", ft - 1);
-
-  var res = [[_rT_ + jsonName, undefined]];
-
-  if (vSpace > 0) {
-    var q;
-
-    for (q = 0; q < vSpace; q++) {
-      res.push([_I1_, _I_]);
-    }
-  }
-
-  travelJson(json, function (key, value, curKeyPath, typeStr, isSpreadable, curDepth) {
-    var depth = curDepth;
-    var v;
-
-    if (!isSpreadable) {
-      if (needValueOut) {
-        if (typeStr === "string") {
-          v = replaceTreeLinkChar(value);
-          v = escapeString(v) || String(v);
-        } else if (typeStr === "array") {
-          v = "[]";
-        } else if (typeStr === "object") {
-          v = "{}";
-        } else if (typeStr === "function") {
-          v = "[function code]";
-        } else {
-          v = String(value);
-        }
-
-        v = SPLIT + v;
-      } else {
-        v = "";
-      }
-    } else {
-      v = undefined;
-    }
-
-    var lineArr = [],
-        i;
-
-    for (i = 1; i < depth; i++) {
-      lineArr.push(i === 1 ? _I1_ : _I_);
-    }
-
-    lineArr.push(_T_ + escapeString(key).slice(1, -1));
-    lineArr.push(v);
-    res.push(lineArr);
-    var vs;
-
-    for (vs = 0; vs < vSpace; vs++) {
-      res.push(lineArr.map(function (item, index) {
-        var isFirst = index === 0,
-            isLast = index === lineArr.length - 1,
-            isSpreadableNodeEndFlag = isLast && item === undefined;
-        return index < lineArr.length - 1 || isSpreadableNodeEndFlag ? isFirst ? _I1_ : _I_ : undefined;
-      }));
-    }
-  }, "obj");
-  fixArr(res);
-  return res.map(function (item) {
-    return trimRight(item.join(""));
-  }).join(msRetrunChar ? "\r\n" : "\n");
-}
-
-module.exports = treeString;
-
-/***/ }),
 
 /***/ "./lib/json-travel.js":
 /*!****************************!*\
@@ -499,7 +108,7 @@ module.exports = treeString;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ./typeOf */ 0),
+var _require = __webpack_require__(/*! ./type-of */ 0),
     getTypeOf = _require.getTypeOf,
     isObject = _require.isObject,
     isFunction = _require.isFunction,
@@ -585,9 +194,9 @@ module.exports = travelJson;
 /***/ }),
 
 /***/ 0:
-/*!***********************!*\
-  !*** ./lib/typeOf.js ***!
-  \***********************/
+/*!************************!*\
+  !*** ./lib/type-of.js ***!
+  \************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -814,7 +423,7 @@ module.exports = {
   "isWeakSet": ((isWeakSet),null),
   "isMap": ((isMap),null),
   "isWeakMap": ((isWeakMap),null),
-  isArray: isArray,
+  "isArray": ((isArray),null),
   "isDate": ((isDate),null),
   "isRegExp": ((isRegExp),null),
   "isError": ((isError),null),
@@ -824,15 +433,15 @@ module.exports = {
   isObject: isObject,
   isFunction: isFunction,
   "isNull": ((isNull),null),
-  isUndefined: isUndefined,
-  isNill: isNill,
+  "isUndefined": ((isUndefined),null),
+  "isNill": ((isNill),null),
   "isNullOrUndefined": ((isNill),null),
   "isUndefinedOrNull": ((isNill),null),
   "isBoolean": ((isBoolean),null),
   isString: isString,
-  isChar: isChar,
+  "isChar": ((isChar),null),
   "isNumber": ((isNumber),null),
-  isNaN: isNaN,
+  "isNaN": ((isNaN),null),
   "isRealNumber": ((isRealNumber),null),
   "isPrimitive": ((isPrimitive),null),
   isSpreadable: isSpreadable,

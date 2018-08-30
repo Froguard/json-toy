@@ -1,12 +1,35 @@
-var path = require('path');
-var should = require('should');
-var colorful = require('../../lib/cli/colorful');
+let path = require('path');
+let should = require('should');
+let colorful = require('../../lib/cli/colorful');
+let rewire = require('rewire');
 
 describe("Test './lib/cli/colorful'", function() {
-    
+
+    it("inner function 'genFn','colorify' execute incorrectly", function(done) {
+        let colorful = rewire('../../lib/cli/colorful');
+        let genFn = colorful.__get__('genFn');
+        let colorify = colorful.__get__('colorify');
+        let noop = colorful.__get__('noop');
+
+        should.equal(true, !!genFn());
+        should.equal(true, !!genFn('black', 'bgWhite', 'normal')(1,2,3));
+        should.equal(true, !genFn()());
+        should.equal(true, !!genFn()(1));
+        should.equal(true, !!genFn()(1,2,3,4));
+        should.equal(true, !!genFn()(1,2,3,4,{a: 1}));
+
+        should.equal('string', typeof colorify(''));
+        should.equal('string', typeof colorify('', {}));
+
+        should.equal('string', typeof noop(''));
+
+        done && done.call(this);
+    });
+
     it("create incorrectly", function(done) {
         should.equal(true, !!colorful.create(1));
         should.equal(true, !!colorful.create(0));
+        should.equal(true, !!colorful.create());
 
         done && done.call(this);
     });

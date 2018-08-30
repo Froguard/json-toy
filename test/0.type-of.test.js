@@ -21,11 +21,11 @@ var p = new Person();
 
 // test target
 // use rewire instead of require for testing inner private members(functions & var)
-var Type = rewire('../lib/typeOf.js');
+var Type = rewire('../lib/type-of.js');
 
 
 // private method: unexposed members
-describe("Test './lib/typeOf.js' >> private method:", function() {
+describe("Test './lib/type-of.js' >> private method:", function() {
 
 
     it("_instOf", function(done) {
@@ -159,7 +159,7 @@ describe("Test './lib/typeOf.js' >> private method:", function() {
 });
 
 // exposed members
-describe("Test './lib/typeOf.js' >> exports method:", function() {
+describe("Test './lib/type-of.js' >> exports method:", function() {
 
     it("Type.isBoolean", function(done) {
         var calc = Type.isBoolean;

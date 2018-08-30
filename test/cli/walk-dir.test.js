@@ -8,9 +8,9 @@ var libDirExceptJson = {
     },
     'json-check-circular.js': 'file',
     'json-get-val-by-keypath.js': 'file',
-    'json-toTreeString.js': 'file',
+    'json-treeify.js': 'file',
     'json-travel.js': 'file',
-    'typeOf.js': 'file'
+    'type-of.js': 'file'
 };
 
 // console.log(dir2Json(path.join(__dirname,"../../lib")));

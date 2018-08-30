@@ -2,7 +2,7 @@
 var travelJson = require("./lib/json-travel"),
     checkCircular = require('./lib/json-check-circular'),
     getValByKeyPath = require("./lib/json-get-val-by-keypath"),
-    treeString = require("./lib/json-toTreeString");
+    treeify = require("./lib/json-treeify");
 
 // exports
 module.exports = {
@@ -36,7 +36,8 @@ module.exports = {
      *        {Boolean} options.valueOut
      * @returns {string|*} a tree-like string
      */
-    treeString: treeString,
+    treeify: treeify,
+    treeString: treeify,
 
     /**
      * check circular obj

@@ -1,5 +1,5 @@
 var should = require('should');
-var treeStr = require('../lib/json-toTreeString');
+var treeStr = require('../lib/json-treeify');
 // correct
 var testJson = {
     "x":{
@@ -26,7 +26,7 @@ circularObj.list = [ circularObj, circularObj ];
 circularObj.a = {b:circularObj};
 
 
-describe("Test './lib/json-toTreeString.js':", function() {
+describe("Test './lib/json-treeify.js':", function() {
 
     it("convert json to tree-string without throwing error, and return a string", function(done) {
         should.doesNotThrow(function(){

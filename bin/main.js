@@ -8,7 +8,7 @@ let os = require('os'),
     existsSync = fs.existsSync || path.existsSync,
     jsonToy = require('../index'),
     dir2Json = require('../lib/cli/walk-dir'),
-    Type = require('../lib/typeOf'),
+    Type = require('../lib/type-of'),
     argHelp = require('./args-help'),
     colorful = require('../lib/cli/colorful');
 

@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var should = require('should');
-var treeStr = require('../lib/json-toTreeString');
+var treeStr = require('../lib/json-treeify');
 var tcPath = path.join(__dirname,"./test-cases");
 var testCaseDir = fs.readdirSync(tcPath);
 var opts = {
@@ -36,7 +36,7 @@ testCaseDir.forEach(function(item){
     }
 });
 
-describe("Test './lib/json-toTreeString.js result values':", function() {
+describe("Test './lib/json-treeify.js result values':", function() {
     ioMap.forEach(function(item){
         if(!!item.resExpect && !!item.resActual){
             it(`return correct string after converting json to treeString: '${item.key+".json"} <=> ${item.key+".txt"}'`, function(done) {

@@ -129,9 +129,9 @@ $ j-tree-str ./package.json
    │  │  │  ├─ index.html
    │  │  │  ├─ json-check-circular.js.html
    │  │  │  ├─ json-get-val-by-keypath.js.html
-   │  │  │  ├─ json-toTreeString.js.html
+   │  │  │  ├─ json-treeify.js.html
    │  │  │  ├─ json-travel.js.html
-   │  │  │  └─ typeOf.js.html
+   │  │  │  └─ type-of.js.html
    │  │  ├─ prettify.css
    │  │  ├─ prettify.js
    │  │  ├─ sort-arrow-sprite.png
@@ -156,18 +156,17 @@ $ j-tree-str ./package.json
    │  │  └─ walk-dir.js
    │  ├─ json-check-circular.js
    │  ├─ json-get-val-by-keypath.js
-   │  ├─ json-toTreeString.js
+   │  ├─ json-treeify.js
    │  ├─ json-travel.js
-   │  ├─ json5-require.js
-   │  └─ typeOf.js
+   │  └─ type-of.js
    ├─ LICENSE
    ├─ package.json
    ├─ README.md
    ├─ test /
-   │  ├─ 0.typeOf.test.js
+   │  ├─ 0.type-of.test.js
    │  ├─ 1.json-travel.test.js
    │  ├─ 2.json-check-circular.test.js
-   │  ├─ 3.json-toTreeString.test.js
+   │  ├─ 3.json-treeify.test.js
    │  ├─ 4.json-get-val-by-keypath.test.js
    │  ├─ cli /
    │  │  └─ walk-dir.test.js
