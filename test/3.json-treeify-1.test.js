@@ -7,7 +7,7 @@ var testJson = {
             0,
             1,
             {
-                "z": "helloZ"
+                "z": "helloZ中文中文中文中文中文中文"
             },
             [
                 0,
@@ -15,7 +15,8 @@ var testJson = {
                 2,
                 3
             ]
-        ]
+        ],
+        "z": function(a){}
     }
 };
 
@@ -30,10 +31,31 @@ describe("Test './lib/json-treeify.js':", function() {
 
     it("convert json to tree-string without throwing error, and return a string", function(done) {
         should.doesNotThrow(function(){
-            treeStr(testJson);
+            treeStr('');
+            treeStr();
+            treeStr(null);
+            treeStr(undefined);
         });
 
-        should.equal("string",typeof treeStr(testJson));
+        should.doesNotThrow(function(){
+            treeStr(testJson, {space: '\t'});
+        });
+
+        should.doesNotThrow(function(){
+            treeStr(testJson, {needValueOut: false, vSpace: -1, space: -1, jsonName: ''});
+        });
+
+        should.doesNotThrow(function(){
+            treeStr(testJson, {needValueOut: false, vSpace: 4, space: 9, jsonName: ''});
+        });
+
+        should.doesNotThrow(function(){
+            treeStr(testJson, {needValueOut: false, vSpace: NaN, space: 9, jsonName: ''});
+        });
+
+        should.equal("string", typeof treeStr(testJson, null));
+
+        should.equal(true, treeStr(testJson, {msReturnChar: true}).includes('\r'));
         
         done && done.call(this);
     });

@@ -50,6 +50,10 @@ describe("Test './lib/json-travel.js':", function() {
         should.throws(function(){
             travel(1);
         });
+        should.throws(function(){
+            travel();
+            travel(null);
+        });
         done && done.call(this);
     });
 

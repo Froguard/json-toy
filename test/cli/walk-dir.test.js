@@ -19,6 +19,14 @@ describe("Test './lib/cli/walk-dir.js'", function() {
     
     it("check json value form walk dir", function(done) {
 
+        should.throws(function(){
+            dir2Json();
+        });
+
+        should.doesNotThrow(function(){
+            dir2Json(path.join(__dirname,"../../lib"));
+        });
+
         should.deepEqual(libDirExceptJson, dir2Json(path.join(__dirname,"../../lib"),{
             exclude: {},
             preChars: {},

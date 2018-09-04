@@ -1,8 +1,8 @@
-var rewire = require('rewire'),
+let rewire = require('rewire'),
     should = require('should');
 
 // test data
-var obj = new Object("obj1"),//string instance actually,but 'typeof' is not string
+let obj = new Object("obj1"),//string instance actually,but 'typeof' is not string
     date = new Date(),
     error = new Error("e1"),
     typeError = new TypeError("te1"),
@@ -16,12 +16,12 @@ var obj = new Object("obj1"),//string instance actually,but 'typeof' is not stri
  */
 
 function Person(){}
-var p = new Person();
+let p = new Person();
 
 
 // test target
 // use rewire instead of require for testing inner private members(functions & var)
-var Type = rewire('../lib/type-of.js');
+let Type = rewire('../lib/type-of.js');
 
 
 // private method: unexposed members
@@ -29,7 +29,7 @@ describe("Test './lib/type-of.js' >> private method:", function() {
 
 
     it("_instOf", function(done) {
-        var _instOf = Type.__get__('_instOf');
+        let _instOf = Type.__get__('_instOf');
 
         // primitive type:
         // number
@@ -110,7 +110,7 @@ describe("Test './lib/type-of.js' >> private method:", function() {
     });
 
     it("_getType", function(done) {
-        var _getType = Type.__get__('_getType');
+        let _getType = Type.__get__('_getType');
         // all result is lower case
         should.equal("undefined", _getType(undefined));
         should.equal("null", _getType(null));
@@ -135,7 +135,7 @@ describe("Test './lib/type-of.js' >> private method:", function() {
 
     it("_isTypeOf", function(done) {
         // ignore upper or lower case
-        var _isTypeOf = Type.__get__('_isTypeOf');
+        let _isTypeOf = Type.__get__('_isTypeOf');
         should.equal(true, _isTypeOf("number")(1));
         should.equal(true, _isTypeOf("Number")(0));
         should.equal(true, _isTypeOf("Boolean")(true));
@@ -153,6 +153,9 @@ describe("Test './lib/type-of.js' >> private method:", function() {
         should.equal(true, _isTypeOf("function")(Person));
         should.equal(true, _isTypeOf("regexp")(regex1));
 
+        should.notEqual(true, _isTypeOf("")(regex1));
+        should.notEqual(true, _isTypeOf(1)(regex1));
+
         done && done.call(this);
     });
 
@@ -162,7 +165,7 @@ describe("Test './lib/type-of.js' >> private method:", function() {
 describe("Test './lib/type-of.js' >> exports method:", function() {
 
     it("Type.isBoolean", function(done) {
-        var calc = Type.isBoolean;
+        let calc = Type.isBoolean;
         // is
         should.equal(true, calc(true));
         should.equal(true, calc(false));
@@ -183,7 +186,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isString", function(done) {
-        var calc = Type.isString;
+        let calc = Type.isString;
         // is
         should.equal(true, calc("a"));
         should.equal(true, calc(new String("a")));
@@ -192,7 +195,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isChar", function(done) {
-        var calc = Type.isChar;
+        let calc = Type.isChar;
         // is
         should.equal(true, calc("a"));
         // not
@@ -203,7 +206,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isObject", function(done) {
-        var calc = Type.isObject;
+        let calc = Type.isObject;
         // is
         should.equal(true, calc([]));
         should.equal(true, calc([1,2,3]));
@@ -232,7 +235,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isObject.isFlat", function(done) {
-        var isFlat = Type.isObject.isFlat;
+        let isFlat = Type.isObject.isFlat;
 
         // is
         should.equal(true, isFlat({}));
@@ -256,19 +259,19 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isObject.isEmpty", function(done) {
-        var calc = Type.isObject.isEmpty;
+        let calc = Type.isObject.isEmpty;
         // is
         should.equal(true, calc([]));
         should.equal(true, calc({}));
 
         function A(){}
         A.commonFoo = 1;
-        var a = new A();
+        let a = new A();
         should.equal(true, calc(a));
 
         // not
         function B(){this.foo = 1;}
-        var b = new B("cccc");
+        let b = new B("cccc");
         should.notEqual(true, calc(b));// b.foo
 
         should.notEqual(true, calc(1));
@@ -276,29 +279,29 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isObject.isEmptyOwn", function(done) {
-        var calc = Type.isObject.isEmptyOwn;
+        let calc = Type.isObject.isEmptyOwn;
         // is
         should.equal(true, calc([]));
         should.equal(true, calc({}));
         function A(){}
-        var a = new A();
+        let a = new A();
         should.equal(true, calc(a));
 
         function A2(){}
         A2.commonFoo = 1;
-        var a2 = new A2();
+        let a2 = new A2();
         should.equal(true, calc(a2));
 
         // not
         function C(){this.foo = 1;}
-        var c = new C("cccc");
+        let c = new C("cccc");
         should.notEqual(true, calc(c));
 
         done && done.call(this);
     });
 
     it("Type.isNumber(NaN)", function(done) {
-        var calc = Type.isNumber;
+        let calc = Type.isNumber;
         should.equal(true, calc(NaN,false));//第二个参数指代不告警
         should.equal(true, calc(NaN,true));
 
@@ -306,7 +309,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isRealNumber", function(done) {
-        var calc = Type.isRealNumber;
+        let calc = Type.isRealNumber;
         should.equal(true, calc(1));
         should.equal(true, calc(new Number(1)));
 
@@ -315,35 +318,35 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isNumber.decimal", function(done) {
-        var calc = Type.isNumber.decimal;
+        let calc = Type.isNumber.decimal;
         should.equal(true, calc(1.23));
         should.notEqual(true, calc(1));
         done && done.call(this);
     });
 
     it("Type.isNumber.integer", function(done) {
-        var calc = Type.isNumber.integer;
+        let calc = Type.isNumber.integer;
         should.equal(true, calc(1));
         should.notEqual(true, calc(1.1));
         done && done.call(this);
     });
 
     it("Type.isNumber.odd", function(done) {
-        var calc = Type.isNumber.odd;
+        let calc = Type.isNumber.odd;
         should.equal(true, calc(1));
         should.notEqual(true, calc(2));
         done && done.call(this);
     });
 
     it("Type.isNumber.even", function(done) {
-        var calc = Type.isNumber.even;
+        let calc = Type.isNumber.even;
         should.equal(true, calc(2));
         should.notEqual(true, calc(1));
         done && done.call(this);
     });
 
     it("Type.isArray", function(done) {
-        var calc = Type.isArray;
+        let calc = Type.isArray;
         should.equal(true, calc([]));
         should.equal(true, calc([1,2]));
         should.notEqual(true, calc("a"));
@@ -351,7 +354,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isArguments", function(done) {
-        var calc = Type.isArguments;
+        let calc = Type.isArguments;
         // cant test
         (function(){
             should.equal(true, calc(arguments));
@@ -361,56 +364,63 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isDate", function(done) {
-        var calc = Type.isDate;
+        let calc = Type.isDate;
         should.equal(true, calc(new Date()));
+        should.notEqual(true, calc(1));
         done && done.call(this);
     });
 
     it("Type.isError", function(done) {
-        var calc = Type.isError;
+        let calc = Type.isError;
         should.equal(true, calc(new Error()));
-        done && done.call(this);
-    });
-
-    it("Type.isSyntaxError", function(done) {
-        var calc = Type.isSyntaxError;
         should.equal(true, calc(new SyntaxError()));
-        done && done.call(this);
-    });
-
-    it("Type.isTypeError", function(done) {
-        var calc = Type.isTypeError;
         should.equal(true, calc(new TypeError()));
-        done && done.call(this);
-    });
-
-    it("Type.isRangeError", function(done) {
-        var calc = Type.isRangeError;
         should.equal(true, calc(new RangeError()));
         done && done.call(this);
     });
 
+    it("Type.isSyntaxError", function(done) {
+        let calc = Type.isSyntaxError;
+        should.equal(true, calc(new SyntaxError()));
+        should.notEqual(true, calc(new Error()));
+        done && done.call(this);
+    });
+
+    it("Type.isTypeError", function(done) {
+        let calc = Type.isTypeError;
+        should.equal(true, calc(new TypeError()));
+        should.notEqual(true, calc(new Error()));
+        done && done.call(this);
+    });
+
+    it("Type.isRangeError", function(done) {
+        let calc = Type.isRangeError;
+        should.equal(true, calc(new RangeError()));
+        should.notEqual(true, calc(new Error()));
+        done && done.call(this);
+    });
+
     it("Type.isRegExp", function(done) {
-        var calc = Type.isRegExp;
-        should.equal(true, calc(/a|b|c/gi));
+        let calc = Type.isRegExp;
+        should.equal(true, calc(/^[abc]/gi));
         done && done.call(this);
     });
 
     it("Type.isSymbol", function(done) {
-        var calc = Type.isSymbol;
+        let calc = Type.isSymbol;
         should.equal(true, calc(Symbol("sb1")));
         done && done.call(this);
     });
 
     it("Type.isPrimitive", function(done) {
-        var calc = Type.isPrimitive;
+        let calc = Type.isPrimitive;
         should.equal(true, calc("a"));
         should.notEqual(true, calc({}));
         done && done.call(this);
     });
 
     it("Type.isSpreadable", function(done) {
-        var calc = Type.isSpreadable;
+        let calc = Type.isSpreadable;
         // is
         should.equal(true, calc({"a":1}));
         should.equal(true, calc([1,2,3]));
@@ -433,7 +443,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isJSON", function(done) {
-        var calc = Type.isJSON;
+        let calc = Type.isJSON;
         // is
         should.equal(true, calc(undefined));
         should.equal(true, calc(null));
@@ -443,6 +453,28 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
         should.equal(true, calc([1,2,3]));
         // not
         should.notEqual(true, calc(function(){}));// function is not json
+        done && done.call(this);
+    });
+
+    it("Type.isNill, isUndefined, isNull, isNaN", function(done) {
+        // is
+        should.equal(true, Type.isUndefined(undefined));
+        should.equal(true, Type.isNull(null));
+        should.equal(true, Type.isNill(undefined));
+        should.equal(true, Type.isNill(null));
+        should.equal(true, Type.isNaN(NaN));
+        // not
+        should.notEqual(true, Type.isNull(NaN));
+        should.notEqual(true, Type.isNull(undefined));
+        should.notEqual(true, Type.isNull(0));
+        should.notEqual(true, Type.isUndefined(NaN));
+        should.notEqual(true, Type.isUndefined(null));
+        should.notEqual(true, Type.isUndefined(0));
+        should.notEqual(true, Type.isNill(NaN));
+        should.notEqual(true, Type.isNill(0));
+        should.notEqual(true, Type.isNaN(null));
+        should.notEqual(true, Type.isNaN(undefined));
+        should.notEqual(true, Type.isNaN(0));
         done && done.call(this);
     });
 
