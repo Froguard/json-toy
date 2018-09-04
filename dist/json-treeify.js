@@ -113,14 +113,15 @@ var _require = __webpack_require__(/*! ./type-of */ 0),
     isObject = _require.isObject,
     isFunction = _require.isFunction,
     isString = _require.isString,
-    isSpreadable = _require.isSpreadable;
+    isSpreadable = _require.isSpreadable,
+    isNill = _require.isNill;
 
 function travelJson(json, cb, rootAlias, safeMode) {
   if (!isObject(json)) {
     throw new TypeError("The first param should be an Object instance!");
   }
 
-  safeMode = safeMode === undefined ? true : !!safeMode;
+  safeMode = safeMode === undefined ? true : safeMode;
   var safeStack = [];
   var safeKeys = [];
   var keysArr = [];
@@ -128,7 +129,7 @@ function travelJson(json, cb, rootAlias, safeMode) {
   rootAlias = (isString(rootAlias) ? rootAlias : "") || "ROOT";
 
   function travel(obj, curKeyPath, depth, cb) {
-    if (obj !== null && obj !== undefined) {
+    if (!isNill(obj)) {
       if (safeMode) {
         var objIndex = safeStack.indexOf(obj);
 
@@ -175,7 +176,7 @@ function travelJson(json, cb, rootAlias, safeMode) {
   }
 
   try {
-    travel(json, rootAlias || "", 1, cb);
+    travel(json, rootAlias, 1, cb);
   } catch (eTravel) {
     try {
       JSON.stringify(json);
@@ -201,12 +202,10 @@ module.exports = travelJson;
 /***/ (function(module, exports, __webpack_require__) {
 
 var _require = __webpack_require__(/*! ./type-of */ 0),
-    isArray = _require.isArray,
     isString = _require.isString,
     isUndefined = _require.isUndefined,
     isNill = _require.isNill,
     isNaN = _require.isNaN,
-    isChar = _require.isChar,
     isObject = _require.isObject,
     isSpreadable = _require.isSpreadable;
 
@@ -253,15 +252,8 @@ var _TreeChar_ = {
   "10": "          "
 };
 
-function _isStartWith(char) {
-  var c = "";
-
-  if (isArray(char)) {
-    c = char.join("|");
-  } else {
-    c = char || c;
-  }
-
+function _isStartWith(chars) {
+  var c = chars.join("|");
   var reg = new RegExp("^(" + c + ")+");
   return function (str) {
     return isString(str) && !!str.match(reg);
@@ -270,43 +262,18 @@ function _isStartWith(char) {
 
 var isNodeStr = _isStartWith([_TreeChar_.T, _TreeChar_.L, "ROOT"]);
 
-var _RegTreeLinkChars = new RegExp("^(" + [_TreeChar_.I, _TreeChar_.T, _TreeChar_._, _TreeChar_.L].join("|") + ")", "g");
-
-function _hasTreeLinkChar(str) {
-  return isString(str) && str.match(_RegTreeLinkChars);
-}
-
-var _Reg_I_ = new RegExp("^" + _TreeChar_.I, "g"),
-    _Reg_T_ = new RegExp("^" + _TreeChar_.T, "g"),
-    _Reg_L_ = new RegExp("^" + _TreeChar_.L, "g"),
-    _Reg___ = new RegExp("^" + _TreeChar_._, "g");
-
-var _repl_I_ = "'" + _TreeChar_.I + "'",
-    _repl_T_ = "'" + _TreeChar_.T + "'",
-    _repl_L_ = "'" + _TreeChar_.L + "'",
-    _repl___ = "'" + _TreeChar_._ + "'";
+var _RegTreeLinkChars = new RegExp("^(" + [_TreeChar_.I, _TreeChar_.T, _TreeChar_._, _TreeChar_.L].join("|") + ")");
 
 function replaceTreeLinkChar(str) {
-  if (!!_hasTreeLinkChar(str)) {
-    return str.replace(_Reg_I_, _repl_I_).replace(_Reg_T_, _repl_T_).replace(_Reg_L_, _repl_L_).replace(_Reg___, _repl___);
-  }
-
-  return str;
+  var check = isString(str) && str.match(_RegTreeLinkChars);
+  return check && check.length ? "'" + check[1] + "'" + str.substr(1) : str;
 }
 
 function checkNextSibling(w, h, arr) {
-  if (!isArray(arr)) {
-    throw new TypeError("arr is not a array!");
-  }
-
   var i,
       hasNextSibling = false;
 
   for (i = h + 1; i < arr.length; i++) {
-    if (!isUndefined(arr[i]) && !isArray(arr[i])) {
-      throw new TypeError("arr is not a two-dimensional-array !");
-    }
-
     var ele = arr[i][w];
 
     if (undefined === ele) {
@@ -325,10 +292,6 @@ function checkNextSibling(w, h, arr) {
 }
 
 function fixArr(arr) {
-  if (!isArray(arr)) {
-    throw new TypeError("arr is not a array!");
-  }
-
   var regNode = new RegExp("^" + _TreeChar_.T, "g"),
       regVert = new RegExp("^" + _TreeChar_.I, "g"),
       S = " ";
@@ -337,11 +300,6 @@ function fixArr(arr) {
 
   for (i = 0; i < iLen; i++) {
     var row = arr[i];
-
-    if (!isArray(row)) {
-      throw new TypeError("arr is not a two-dimensional-array !");
-    }
-
     var j = void 0,
         jLen = row.length;
 
@@ -376,42 +334,36 @@ function fixArr(arr) {
 
 function repeatChar(char, n) {
   var res = "";
-  char = isChar(char) ? char : "*";
+  char = char.charAt(0);
   n = parseInt(n) || 0;
   n = n > 0 ? n : 0;
-  if (n > 0) while (n--) {
+
+  while (n--) {
     res += char;
   }
+
   return res;
 }
 
-function treeString(json, options) {
-  options = options || {};
-  var jsonName, space, vSpace, needValueOut, msRetrunChar;
-  jsonName = options.rootName;
-  space = options.space;
-  vSpace = options.vSpace;
-  needValueOut = options.valueOut;
-  msRetrunChar = options.msRetrunChar || false;
-  jsonName = (isString(jsonName) ? jsonName : 0) || "ROOT";
-
-  if (isNill(json)) {
-    return jsonName + "'s content is " + String(json);
-  } else if (isObject.isEmptyOwn(json)) {
-    return jsonName + "'s content is empty!";
-  } else if (!isSpreadable(json)) {
-    return jsonName + "'s content is " + (isString(json) ? escapeString(json) || String(json) : String(json)) || "empty!";
+function formatOption(options) {
+  if (options === void 0) {
+    options = {};
   }
 
-  var _SPACE_ = space;
+  var _ref = options || {},
+      jsonName = _ref.jsonName,
+      space = _ref.space,
+      vSpace = _ref.vSpace,
+      needValueOut = _ref.needValueOut,
+      msReturnChar = _ref.msReturnChar;
+
+  jsonName = (isString(jsonName) ? jsonName : 0) || "ROOT";
 
   if ("\t" !== space) {
     space = parseInt(space);
     space = isNaN(space) ? 3 : space;
     space = space <= 0 ? 1 : space > 8 ? 8 : space;
-    _SPACE_ = _TreeChar_[space];
   } else {
-    _SPACE_ = "" + (space || " ");
     space = 1;
   }
 
@@ -419,10 +371,33 @@ function treeString(json, options) {
   vSpace = isNaN(vSpace) ? space > 5 ? 2 : 1 : vSpace;
   vSpace = vSpace < 0 ? 0 : vSpace > 2 ? 2 : vSpace;
   needValueOut = isNill(needValueOut) ? true : !!needValueOut;
-  var rpN = parseInt((space - 1) / 2);
+  return {
+    jsonName: jsonName,
+    space: space,
+    vSpace: vSpace,
+    needValueOut: needValueOut,
+    msReturnChar: msReturnChar
+  };
+}
 
-  var _I_ = _TreeChar_.I + _SPACE_,
-      _T_ = _TreeChar_.T + repeatChar(_TreeChar_._, rpN) + " ",
+function treeString(json, options) {
+  var _formatOption = formatOption(options),
+      jsonName = _formatOption.jsonName,
+      space = _formatOption.space,
+      vSpace = _formatOption.vSpace,
+      needValueOut = _formatOption.needValueOut,
+      msReturnChar = _formatOption.msReturnChar;
+
+  if (isNill(json)) {
+    return jsonName + "'s content is " + String(json);
+  } else if (isObject.isEmptyOwn(json)) {
+    return jsonName + "'s content is empty!";
+  } else if (!isSpreadable(json)) {
+    return jsonName + "'s content is " + (isString(json) ? escapeString(json) : String(json));
+  }
+
+  var _I_ = _TreeChar_.I + _TreeChar_[space],
+      _T_ = _TreeChar_.T + repeatChar(_TreeChar_._, parseInt((space - 1) / 2)) + " ",
       SPLIT = _TreeChar_.SPLIT + " ";
 
   var ft = Math.floor(jsonName.length / 2) % 10;
@@ -433,12 +408,8 @@ function treeString(json, options) {
 
   var res = [[_rT_ + jsonName, undefined]];
 
-  if (vSpace > 0) {
-    var q;
-
-    for (q = 0; q < vSpace; q++) {
-      res.push([_I1_, _I_]);
-    }
+  for (var q = 0; q < vSpace; q++) {
+    res.push([_I1_, _I_]);
   }
 
   travelJson(json, function (key, value, curKeyPath, typeStr, isSpreadable, curDepth) {
@@ -449,7 +420,7 @@ function treeString(json, options) {
       if (needValueOut) {
         if (typeStr === "string") {
           v = replaceTreeLinkChar(value);
-          v = escapeString(v) || String(v);
+          v = escapeString(v);
         } else if (typeStr === "array") {
           v = "[]";
         } else if (typeStr === "object") {
@@ -492,7 +463,7 @@ function treeString(json, options) {
   fixArr(res);
   return res.map(function (item) {
     return trimRight(item.join(""));
-  }).join(msRetrunChar ? "\r\n" : "\n");
+  }).join(msReturnChar ? "\r\n" : "\n");
 }
 
 module.exports = treeString;
@@ -729,7 +700,7 @@ module.exports = {
   "isWeakSet": ((isWeakSet),null),
   "isMap": ((isMap),null),
   "isWeakMap": ((isWeakMap),null),
-  isArray: isArray,
+  "isArray": ((isArray),null),
   "isDate": ((isDate),null),
   "isRegExp": ((isRegExp),null),
   "isError": ((isError),null),
@@ -745,7 +716,7 @@ module.exports = {
   "isUndefinedOrNull": ((isNill),null),
   "isBoolean": ((isBoolean),null),
   isString: isString,
-  isChar: isChar,
+  "isChar": ((isChar),null),
   "isNumber": ((isNumber),null),
   isNaN: isNaN,
   "isRealNumber": ((isRealNumber),null),

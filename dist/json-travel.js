@@ -113,14 +113,15 @@ var _require = __webpack_require__(/*! ./type-of */ 0),
     isObject = _require.isObject,
     isFunction = _require.isFunction,
     isString = _require.isString,
-    isSpreadable = _require.isSpreadable;
+    isSpreadable = _require.isSpreadable,
+    isNill = _require.isNill;
 
 function travelJson(json, cb, rootAlias, safeMode) {
   if (!isObject(json)) {
     throw new TypeError("The first param should be an Object instance!");
   }
 
-  safeMode = safeMode === undefined ? true : !!safeMode;
+  safeMode = safeMode === undefined ? true : safeMode;
   var safeStack = [];
   var safeKeys = [];
   var keysArr = [];
@@ -128,7 +129,7 @@ function travelJson(json, cb, rootAlias, safeMode) {
   rootAlias = (isString(rootAlias) ? rootAlias : "") || "ROOT";
 
   function travel(obj, curKeyPath, depth, cb) {
-    if (obj !== null && obj !== undefined) {
+    if (!isNill(obj)) {
       if (safeMode) {
         var objIndex = safeStack.indexOf(obj);
 
@@ -175,7 +176,7 @@ function travelJson(json, cb, rootAlias, safeMode) {
   }
 
   try {
-    travel(json, rootAlias || "", 1, cb);
+    travel(json, rootAlias, 1, cb);
   } catch (eTravel) {
     try {
       JSON.stringify(json);
@@ -434,7 +435,7 @@ module.exports = {
   isFunction: isFunction,
   "isNull": ((isNull),null),
   "isUndefined": ((isUndefined),null),
-  "isNill": ((isNill),null),
+  isNill: isNill,
   "isNullOrUndefined": ((isNill),null),
   "isUndefinedOrNull": ((isNill),null),
   "isBoolean": ((isBoolean),null),
