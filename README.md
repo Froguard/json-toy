@@ -12,7 +12,7 @@ Some simple methods for operating object as json in an easy way!
 [![download](https://img.shields.io/npm/dt/json-toy.svg "download")](https://www.npmjs.com/package/json-toy)&nbsp;
 [![license](https://img.shields.io/github/license/froguard/json-toy.svg)](https://github.com/froguard/json-toy/blob/master/LICENSE)
 
-[![download:25419](https://nodei.co/npm/json-toy.png?downloads=true)](https://www.npmjs.com/package/json-toy)
+[![download](https://nodei.co/npm/json-toy.png?downloads=true)](https://www.npmjs.com/package/json-toy)
 
 ### feature
 
@@ -24,19 +24,20 @@ Some simple methods for operating object as json in an easy way!
 
    ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/dirTree.jpg) &nbsp; ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/issuesTree.jpg)
 
-- 2.**jt.travelJson(jsonObj,cb)** &nbsp; **Safe** recursive walk of a jsonObj,even though obj is circular!
 
-- 3.**jt.getValByKeyPath(jsonObj,'x.y.z.1.2')** &lt;=&gt; **jsonObj.x.y.z\[1]\[2]**
+- 2.**convert directory to json obj and tree-structure-string**
 
-- 4.**jt.checkCircular(obj)** check the obj,and return some useful info
+- 3.**jtls** show directories like cmd **ls**, but in a tree string like
 
-- 5.**convert directory to json obj and tree-structure-string**
+- 4.**Simple** none dependencies, except use cli (need copy-paste, yargs)
 
-- 6.**jtls** show directories like cmd **ls**, but in a tree string like
+- 5.**Cross platform** nix(linx,mac-Osx) and windows, support for **multiple browsers(IE9+)**
 
-- 7.**Simple** none dependencies, except use cli (need copy-paste, minimist)
+- 6.**jt.travelJson(jsonObj,cb)** &nbsp; **Safe** recursive walk of a jsonObj,even though obj is circular!
 
-- 8.**Cross platform** nix(linx,mac-Osx) and windows, support for **multiple browsers(IE9+)**
+- 7.**jt.getValByKeyPath(jsonObj,'x.y.z.1.2')** &lt;=&gt; **jsonObj.x.y.z\[1]\[2]**
+
+- 8.**jt.checkCircular(obj)** check the obj,and return some useful info
 
 
 
@@ -51,16 +52,16 @@ Or if you haven't use the npm,you can do like this ,add [jsonToy.min.js](https:/
 or [jsonToy.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/jsonToy.min.js) **just 8kb**
 
 ```html
-<script src="https://unpkg.com/json-toy/dist/jsonToy.min.js"></script>
+<script src="https://unpkg.com/json-toy/dist/json-treeify.min.js"></script>
 <script>
-    var jt = window.jsonToy;
+    var treeify = window.jsonTreeify;
     var testData = {
         a: 1,
         b: {
             c: "hello world"
         }
     };
-    console.log( jt.treeString(testData) );
+    console.log(treeify(testData));
     //...
 </script>
 ```
@@ -121,56 +122,9 @@ $ j-tree-str ./package.json
    │  ├─ coverage.json
    │  ├─ lcov-report /
    │  │  ├─ base.css
-   │  │  ├─ index.html
-   │  │  ├─ lib /
-   │  │  │  ├─ cli /
-   │  │  │  │  ├─ colorful.js.html
-   │  │  │  │  └─ index.html
-   │  │  │  ├─ index.html
-   │  │  │  ├─ json-check-circular.js.html
-   │  │  │  ├─ json-get-val-by-keypath.js.html
-   │  │  │  ├─ json-treeify.js.html
-   │  │  │  ├─ json-travel.js.html
-   │  │  │  └─ type-of.js.html
-   │  │  ├─ prettify.css
-   │  │  ├─ prettify.js
-   │  │  ├─ sort-arrow-sprite.png
-   │  │  └─ sorter.js
-   │  └─ lcov.info
-   ├─ develop.md
-   ├─ dist /
-   │  ├─ jsonToy.js
-   │  └─ jsonToy.min.js
-   ├─ example /
-   │  └─ img /
-   │     ├─ convert.jpg
-   │     ├─ dirTree.jpg
-   │     ├─ issuesTree.jpg
-   │     ├─ jsonObj.jpg
-   │     ├─ question.jpg
-   │     └─ treeString.jpg
-   ├─ index.js
-   ├─ lib /
-   │  ├─ cli /
-   │  │  ├─ colorful.js
-   │  │  └─ walk-dir.js
-   │  ├─ json-check-circular.js
-   │  ├─ json-get-val-by-keypath.js
-   │  ├─ json-treeify.js
-   │  ├─ json-travel.js
-   │  └─ type-of.js
-   ├─ LICENSE
-   ├─ package.json
-   ├─ README.md
-   ├─ test /
-   │  ├─ 0.type-of.test.js
-   │  ├─ 1.json-travel.test.js
-   │  ├─ 2.json-check-circular.test.js
-   │  ├─ 3.json-treeify.test.js
-   │  ├─ 4.json-get-val-by-keypath.test.js
-   │  ├─ cli /
-   │  │  └─ walk-dir.test.js
-   │  └─ mocha.opts
+
+...
+
    └─ webpack.config.js
 ````
 
@@ -321,43 +275,9 @@ console.log(JSON.stringify(dirJson,null,2));
 }
 ````
 
-### Feature6. Simple type check tool
-```js
-var Type = require('json-toy/lib/typeOf');
-console.log(Type.isPrimitive(1));//true
-console.log(Type.isSpreadable({}));//false
-console.log(Type.isChar("c"));//true
-console.log(Type.isArray([1,2]));//true
-console.log(Type.isRealNumber(NaN));//false
-console.log(Type.isNumber.decimal(10));//false
-console.log(Type.isNumber.integer(10.1));//false
-console.log(Type.isNumber.odd(2));//false
-console.log(Type.isNumber.even(1));//false
-console.log(Type.getTypeOf(new SyntaxError("s1")));// syntaxerror
-function DiyClass(){};
-console.log(Type.getTypeOf(new DiyClass("d1")));// diyclass
-//...
-````
-
-
-### others: parse stringify stringifySafe stringifyJSON5
-These is no method about parse stringify in this tool,If you need,I Recommend
-[json5](https://www.npmjs.com/package/json5) and [stringifySafe](https://www.npmjs.com/package/json-stringify-safe)
-
 ### cli-help
 ```bash
 $ jts help
-````
-
-### js-coverage-test
-
-````
-=============================== Coverage summary ===============================
-Statements   : 94.5% ( 292/309 )
-Branches     : 81.75% ( 206/252 )
-Functions    : 97.92% ( 47/48 )
-Lines        : 94.44% ( 289/306 )
-================================================================================
 ````
 
 ### question
