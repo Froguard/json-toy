@@ -16,7 +16,7 @@ Some simple methods for operating object as json in an easy way!
 
 ### feature
 
-- 1.**jt.treeString(jsonObj1)** &nbsp; or &nbsp;&nbsp; ````$ jts ./path/1.json```` (cmd line)&nbsp;&nbsp; convert a jsonObj to a tree-like string to print out
+- 1.**jt.treeify(jsonObj1)** &nbsp; or &nbsp;&nbsp; ````$ jts ./path/1.json```` (cmd line)&nbsp;&nbsp; convert a jsonObj to a tree-like string to print out
     
    ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/convert.jpg)
 
@@ -70,13 +70,13 @@ The core file has no dependencies,and just **8kb** size;
 
 ## Usage
 
-### Feature1. json treeString
+### Feature1. json treeify
 
 convert a json to tree string,you can set options like space(hoz and vert),need output val,root name,max depth in convert directory.
 
 and there is two ways to use:
 
-1. use ````jt.treeString(jsonObj,options)```` to convert json to tree-string
+1. use ````jt.treeify(jsonObj,options)```` to convert json to tree-string
 
 2. use cmd line **$ jts (or j-tree-str) your/json/file.json** (Recommend)
 
@@ -128,7 +128,7 @@ $ j-tree-str ./package.json
    └─ webpack.config.js
 ````
 
-````jsonToy.treeString(jsonObj)````，support multiple primitive type
+````jsonToy.treeify(jsonObj)````，support multiple primitive type
 
 ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/jsonObj.jpg) =&gt; ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/treeString.jpg)
 
