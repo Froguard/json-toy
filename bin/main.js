@@ -76,7 +76,7 @@ function _doMain(jsonObj,isDir2TreeStr){
                 rootName: jsonName,
                 space: s,
                 vSpace: v,
-                valueOut: outputVal,
+                needValueOut: outputVal,
                 msReturnChar: needMsEol
             });
             // console.timeEnd(colorful.green("\nConvert takes"));
