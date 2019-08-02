@@ -16,6 +16,7 @@ Some simple methods for operating object as json in an easy way!
 
 ### feature
 
+
 - 1.**jt.treeify(jsonObj1)** &nbsp; or &nbsp;&nbsp; ````$ jts ./path/1.json```` (cmd line)&nbsp;&nbsp; convert a jsonObj to a tree-like string to print out
     
    ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/convert.jpg)
