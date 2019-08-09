@@ -16,20 +16,18 @@ let EOL = os.EOL;
 let needMsEol = EOL === '\r\n';
 
 // parse argv
-Object.keys(argHelp).forEach((key) => {
-    let v = argHelp[key];
-    let fn = yargs[key];
+for (let [k, v] of Object.entries(argHelp)){
+    let fn = yargs[k];
     if(fn){
         if(Type.isSpreadable(v)){
-            Object.keys(v).forEach((sk) => {
-                let sv = v[sk];
+            for(let [sk, sv] of Object.entries(v)){
                 fn(sk, sv);
-            });
+            }
         }else{
             fn(v);
         }
     }
-});
+}
 const args = yargs.argv;
 let argJ = args.j || args.json || (Type.isArray(args._) ? args._[0] : args._);
 let argD = args.d || args.dir;

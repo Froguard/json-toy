@@ -1,3 +1,5 @@
+.idea/
+bin/
 coverage/
 node_modules/
 dist/
