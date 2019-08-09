@@ -55,8 +55,8 @@ or [jsonToy.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/jsonToy.min.
 ```html
 <script src="https://unpkg.com/json-toy/dist/json-treeify.min.js"></script>
 <script>
-    var treeify = window.jsonTreeify;
-    var testData = {
+    let treeify = window.jsonTreeify;
+    let testData = {
         a: 1,
         b: {
             c: "hello world"
@@ -142,8 +142,8 @@ Online Parser: [https://froguard.github.io/funny/treeString](https://froguard.gi
 ### Feature2. get property 's value by key-path
 
 ```js
-var jt = require("json-toy");
-var jsonObj = {
+let jt = require("json-toy");
+let jsonObj = {
     "x":{
       "y":{
         "z":"hello,world!"
@@ -192,19 +192,19 @@ A safe travel method to recursive walk of a obj,even though a circular obj.
 
 ```js
 function doTravel(key,value,curKeyPath,typeStr,isSpreadable,depth){
-    //var parentPropObj = this;
+    //let parentPropObj = this;
     console.log(`keyPath = '${curKeyPath}'\
       ,\nkey = '${key}'\
       ,\ntype = ${typeStr}\
       ,\nisSpreadable = ${isSpreadable}\
       ,\nvalue = ${(JSON.stringify(value,null,2)||String(value))}`);
 }
-var keyPathsArr = jt.travelJson(jsonObj,doTravel,"jsonObj");
+let keyPathsArr = jt.travelJson(jsonObj,doTravel,"jsonObj");
 ````
 
 ### Feature4. check the circular obj
 ```js
-var json = {
+let json = {
     "a":{
         "b":{
             "c":1
@@ -218,7 +218,7 @@ var json = {
 };
 json.d.e.g = json.d.e;
 json.d.e.h = json;
-var res = jt.checkCircular(json);
+let res = jt.checkCircular(json);
 // console.log(res);
 ````
 you can get some useful information from **res**:
@@ -246,8 +246,8 @@ you can get some useful information from **res**:
 
 ```js
 // use just only in node
-var travelDir = require('json-toy/lib/cli/walk-dir');
-var dirJson = travelDir("./",{
+let travelDir = require('json-toy/lib/cli/walk-dir');
+let dirJson = travelDir("./",{
     exclude: {
         file: /(Thumbs\.db|\.DS_store)/g,
         directory: /(\.git|\.svn|\.idea|node_modules|bower_components)/g,

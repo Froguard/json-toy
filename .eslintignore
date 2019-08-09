@@ -1,0 +1,8 @@
+build
+node_modules
+temp
+dist
+__tests__/**/*.js
+coverage/**/*
+package.json
+.eslintrc.*
