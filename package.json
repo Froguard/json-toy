@@ -34,7 +34,7 @@
     "test": "npm run test:cover",
     "test:cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --harmony",
     "test:nocover": "mocha --harmony",
-    "test:one": "mocha --harmony ./test/cli/walk-dir.test.js",
+    "test:one": "mocha --harmony ./test/4.json-treeify-2.test.js",
     "pack": "webpack --progress --colors --display-error-details --config ./build/webpack.config.js",
     "lint": "eslint --fix"
   },

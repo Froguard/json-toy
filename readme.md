@@ -52,7 +52,7 @@ $ jtls
 ````
 
 Or if you haven't use the npm,you can do like this ,add [json-treeify.min.js](https://github.com/Froguard/json-toy/blob/master/dist/json-treeify.min.js)
-or [json-treeify.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/json-treeify.min.js) **just 8kb**
+or [json-treeify.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/json-treeify.min.js) **just 3.6kb**
 
 ```html
 <script src="https://unpkg.com/json-toy/dist/json-treeify.min.js"></script>
@@ -193,12 +193,13 @@ jt.getValByKeyPath(jsonObj,"&amp;");// ←→ jsonObj["&"]
 A safe travel method to recursive walk of a obj,even though a circular obj.
 
 ```js
-function doTravel(key,value,curKeyPath,typeStr,isSpreadable,depth){
+function doTravel(key, value, {keyPath, type, isSpreadable, depth}){
     //let parentPropObj = this;
-    console.log(`keyPath = '${curKeyPath}'\
+    console.log(`keyPath = '${keyPath}'\
       ,\nkey = '${key}'\
-      ,\ntype = ${typeStr}\
+      ,\ntype = ${type}\
       ,\nisSpreadable = ${isSpreadable}\
+      ,\ndepth = ${depth}\
       ,\nvalue = ${(JSON.stringify(value,null,2)||String(value))}`);
 }
 let keyPathsArr = jt.travelJson(jsonObj,doTravel,"jsonObj");

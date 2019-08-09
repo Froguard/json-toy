@@ -1,4 +1,4 @@
-## 2.0.1 (2019-8-11)
+## 2.0.1 (2019-8-9)
 
 - Change args in travelJson callback, shorten it into option
     - travelJson(json, `cb`, rootAlias, safeMode),  
