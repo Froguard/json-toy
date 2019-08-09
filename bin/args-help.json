@@ -21,10 +21,10 @@
       "describe": "tree horizon-space",
       "default": 2
     },
-    "Y": {
-      "alias": "Yspace",
+    "y": {
+      "alias": "yspace",
       "describe": "tree vertical-space",
-      "default": 2
+      "default": 0
     },
     "m": {
       "alias": "max",
@@ -43,7 +43,7 @@
     "jts ./package.json": "treeify a json file",
     "jts ./ -c 0": "treeify current directory",
     "jts '{a:1,b:{c:2},d:3}'": "treeify a json string (need 'or \" warpped)",
-    "jtls": "short for jts ./ --copy=0"
+    "jtls": "short for jts ./ --copy=0 --max=1"
   },
   "epilog": "About more: https://github.com/Froguard/json-toy"
 }

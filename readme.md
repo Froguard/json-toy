@@ -69,7 +69,7 @@ or [json-treeify.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/json-tr
 </script>
 ```
 
-The core file has no dependencies,and just **8kb** size;
+The core file has no dependencies,and just **3.6kb** size;
 
 ## Usage
 
