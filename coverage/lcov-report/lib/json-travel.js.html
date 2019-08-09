@@ -129,7 +129,16 @@
 84
 85
 86
-87</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,9 +161,9 @@
 <span class="cline-any cline-yes">21×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1719×</span>
+<span class="cline-any cline-yes">1832×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1719×</span>
+<span class="cline-any cline-yes">1832×</span>
 <span class="cline-any cline-yes">93×</span>
 <span class="cline-any cline-yes">93×</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -165,21 +174,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1719×</span>
-<span class="cline-any cline-yes">1719×</span>
-<span class="cline-any cline-yes">1719×</span>
-<span class="cline-any cline-yes">1828×</span>
-<span class="cline-any cline-yes">1828×</span>
+<span class="cline-any cline-yes">1832×</span>
+<span class="cline-any cline-yes">1832×</span>
+<span class="cline-any cline-yes">1832×</span>
+<span class="cline-any cline-yes">1941×</span>
+<span class="cline-any cline-yes">1941×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1828×</span>
-<span class="cline-any cline-yes">1828×</span>
+<span class="cline-any cline-yes">1941×</span>
+<span class="cline-any cline-yes">1941×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1828×</span>
+<span class="cline-any cline-yes">1941×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1828×</span>
-<span class="cline-any cline-yes">1828×</span>
+<span class="cline-any cline-yes">1941×</span>
+<span class="cline-any cline-yes">1941×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1828×</span>
+<span class="cline-any cline-yes">1941×</span>
 <span class="cline-any cline-yes">202×</span>
 <span class="cline-any cline-yes">202×</span>
 <span class="cline-any cline-yes">14×</span>
@@ -190,12 +199,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1828×</span>
+<span class="cline-any cline-yes">1941×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1827×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1827×</span>
-<span class="cline-any cline-yes">1698×</span>
+<span class="cline-any cline-yes">1940×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1940×</span>
+<span class="cline-any cline-yes">1811×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,7 +296,16 @@ function travelJson(json, cb, rootAlias, safeMode){
                 // 是否可以再展开，这里，函数被视为不可再展开
                 let spreadable = isSpreadable(v) &amp;&amp; !isFunction(v);
                 // do sth in callback...
-                needCb &amp;&amp; cb.call(obj, k, v, `${newKeyPath}`, getTypeOf(v), spreadable, curDepth, isCircular, isFirstChild, isLastChild);
+                // needCb &amp;&amp; cb.call(obj, k, v, `${newKeyPath}`, getTypeOf(v), spreadable, curDepth, isCircular, isFirstChild, isLastChild);
+                needCb &amp;&amp; cb.call(obj, k, v, {
+                    keyPath: `${newKeyPath}`,
+                    depth: curDepth,
+                    type: getTypeOf(v),
+                    isCircular,
+                    isSpreadable: spreadable,
+                    isFirst: isFirstChild,
+                    isLast: isLastChild
+                });
                 // then travel in deep
                 if(spreadable){
                     travel(v, newKeyPath, curDepth, cb);
@@ -307,7 +334,7 @@ module.exports = travelJson;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 09 2019 13:21:47 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 09 2019 15:51:45 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

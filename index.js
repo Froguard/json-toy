@@ -1,8 +1,8 @@
 
-var travelJson = require("./lib/json-travel"),
+let travelJson = require('./lib/json-travel'),
     checkCircular = require('./lib/json-check-circular'),
-    getValByKeyPath = require("./lib/json-get-val-by-keypath"),
-    treeify = require("./lib/json-treeify");
+    getValByKeyPath = require('./lib/json-get-val-by-keypath'),
+    treeify = require('./lib/json-treeify');
 
 // exports
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
      * @param ownKeyCheck
      * @returns {Array|*}
      */
-    getValByKeyPath: getValByKeyPath, // 通过keyPath获取json的属性值
+    getValByKeyPath, // 通过keyPath获取json的属性值
 
     /**
      * Recursive traversal of json obj
@@ -24,7 +24,7 @@ module.exports = {
      * @param {Boolean}  safeMode   default is true
      * @returns {Array}  keysArr
      */
-    travelJson: travelJson,
+    travelJson,
 
     /**
      * convert a json obj to tree-like string
@@ -36,7 +36,7 @@ module.exports = {
      *        {Boolean} options.valueOut
      * @returns {string|*} a tree-like string
      */
-    treeify: treeify,
+    treeify,
     treeString: treeify,
 
     /**
@@ -44,5 +44,5 @@ module.exports = {
      * @param obj
      * @returns {Object} {{isCircular: boolean, circularProps: Array}}
      */
-    checkCircular: checkCircular
+    checkCircular
 };
