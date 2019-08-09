@@ -1,8 +1,5 @@
-build
-node_modules
-temp
-dist
-__tests__/**/*.js
-coverage/**/*
-package.json
+coverage/
+node_modules/
+dist/
 .eslintrc.*
+package.json

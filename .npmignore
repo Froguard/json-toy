@@ -1,9 +1,10 @@
-example/img/
-# test/
-# coverage/
 .idea/
+build/
+coverage/lcov-report
+example/img/
 node_modules/
 *.log
-webpack.config.js
 develop.md
 .travis.yml
+
+# test/
