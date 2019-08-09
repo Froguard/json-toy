@@ -1,6 +1,6 @@
 # json-toy (json-treeify)
 
-## Stable version(>=1.0.0)
+> Stable version(>=1.0.0); Recommended version (>=2.0.0)
 
 Some simple methods for operating object as json in an easy way!
 
