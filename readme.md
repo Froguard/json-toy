@@ -124,7 +124,7 @@ $ j-tree-str ./package.json
    │  ├─ lcov-report /
    │  │  ├─ base.css
 
-...
+   ...
 
    └─ webpack.config.js
 ````
