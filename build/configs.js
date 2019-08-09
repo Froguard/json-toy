@@ -2,6 +2,7 @@ module.exports = {
     'index': { // eslint-disable-line
         codeTreeShaking: false, // false-禁止babel将es6的module转化成commonjs
         outLibrary: 'jsonToy', // 挂在到global上的对象名，eg：window.jsonToy
+        // outFilename: 'json-toy', // 打包输出时候的文件名，默认会和entry名一样，比如此处为 index
         entryPath: './index.js'
     },
     'json-check-circular': {

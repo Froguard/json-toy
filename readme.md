@@ -1,4 +1,4 @@
-# json-toy
+# json-toy (json-treeify)
 
 ## Stable version(>=1.0.0)
 
@@ -49,8 +49,8 @@ $ npm install json-toy -g
 $ jtls
 ````
 
-Or if you haven't use the npm,you can do like this ,add [jsonToy.min.js](https://github.com/Froguard/json-toy/blob/master/dist/jsonToy.min.js)
-or [jsonToy.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/jsonToy.min.js) **just 8kb**
+Or if you haven't use the npm,you can do like this ,add [json-treeify.min.js](https://github.com/Froguard/json-toy/blob/master/dist/json-treeify.min.js)
+or [json-treeify.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/json-treeify.min.js) **just 8kb**
 
 ```html
 <script src="https://unpkg.com/json-toy/dist/json-treeify.min.js"></script>

@@ -9,6 +9,9 @@ let configs = require('./configs');
 let optionArr = [];
 for (let [k, cfg] of Object.entries(configs)){
     let {codeTreeShaking, entryPath, outLibrary, outFilename = k} = cfg || {};
+
+    console.log({[k]: `${outFilename}.js, ${outFilename}.min.js`});
+
     // normal
     optionArr.push(createConfig({
         entry: {[k]: entryPath},
@@ -25,4 +28,5 @@ for (let [k, cfg] of Object.entries(configs)){
         mode: 'production'
     }));
 }
+
 module.exports = optionArr;
