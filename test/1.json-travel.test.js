@@ -1,12 +1,12 @@
-var should = require('should');
-var travel = require('../lib/json-travel');
+let should = require('should');
+let travel = require('../lib/json-travel');
 
 function typeOf(obj){
     return Object.prototype.toString.call(obj).slice(8,-1).toLowerCase();
 }
 
 // correct
-var testJson = {
+let testJson = {
     "x":{
         "y":[
             0,
@@ -23,7 +23,7 @@ var testJson = {
         ]
     }
 };
-var keysFortestJson = [
+let keysFortestJson = [
     'ROOT.x',
     'ROOT.x.y',
     'ROOT.x.y.0',
@@ -38,7 +38,7 @@ var keysFortestJson = [
 ];
 
 // circularObj 循环自引用
-var circularObj = {};
+let circularObj = {};
 circularObj.circularRef = circularObj;
 circularObj.list = [ circularObj, circularObj ];
 circularObj.a = {b:circularObj,c:circularObj};
@@ -69,10 +69,10 @@ describe("Test './lib/json-travel.js':", function() {
     });
 
     it("travel a correct json without throwing error, and return correct values", function(done) {
-        var res = travel(testJson),
+        let res = travel(testJson),
             isEqual = true;
         should.doesNotThrow(function() {
-            var i, iLen = keysFortestJson.length;
+            let i, iLen = keysFortestJson.length;
             for (i = 0; i < iLen; i++) {
                 if(keysFortestJson[i] !== res[i]){
                     isEqual = false;
@@ -92,7 +92,7 @@ describe("Test './lib/json-travel.js':", function() {
     });
 
     it("travel a circular obj without throwing error. obj is changed from a correct json by incorrect-operate-code(like change value of json prop in callback)", function(done) {
-        var testJson2 = {
+        let testJson2 = {
             "x":{
                 "y": 1,
                 "z": 2

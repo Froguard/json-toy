@@ -1,12 +1,12 @@
-var should = require('should');
-var check = require('../lib/json-check-circular');
+let should = require('should');
+let check = require('../lib/json-check-circular');
 
 function typeOf(obj){
     return Object.prototype.toString.call(obj).slice(8,-1).toLowerCase();
 }
 
 // correct
-var testJson = {
+let testJson = {
     "x":{
         "y":[
             0,
@@ -25,7 +25,7 @@ var testJson = {
 };
 
 // circularObj 循环自引用
-var circularObj = {};
+let circularObj = {};
 circularObj.circularRef = circularObj;
 circularObj.list = [ circularObj, circularObj ];
 circularObj.a = {b:circularObj};
@@ -50,13 +50,13 @@ describe("Test './lib/json-check-circular.js':", function() {
 
     it("return 'result.isCircular=true' when check a circular obj", function(done) {
 
-        var checkRes = check(circularObj);
-        var isCircular = checkRes.isCircular;
-        var circularProps = checkRes.circularProps;
+        let checkRes = check(circularObj);
+        let isCircular = checkRes.isCircular;
+        let circularProps = checkRes.circularProps;
 
         should.equal(true,isCircular);
 
-        var isCheckResultCorrect = true;
+        let isCheckResultCorrect = true;
         [
             {
                 keyPath: 'ROOT.circularRef',
@@ -84,7 +84,7 @@ describe("Test './lib/json-check-circular.js':", function() {
             }
         ].forEach(function(item){
             // check include in circularProps
-            var hasInclude = false;
+            let hasInclude = false;
             circularProps.forEach(function(cp){
                 if(cp.key === item.key
                     && cp.keyPath === item.keyPath

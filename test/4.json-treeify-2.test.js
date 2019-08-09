@@ -1,22 +1,22 @@
-var fs = require('fs');
-var path = require('path');
-var should = require('should');
-var treeStr = require('../lib/json-treeify');
-var tcPath = path.join(__dirname,"./test-cases");
-var testCaseDir = fs.readdirSync(tcPath);
-var opts = {
+let fs = require('fs');
+let path = require('path');
+let should = require('should');
+let treeStr = require('../lib/json-treeify');
+let tcPath = path.join(__dirname,"./test-cases");
+let testCaseDir = fs.readdirSync(tcPath);
+let opts = {
     "rootName": "ROOT",
     "space": 3,
     "vSpace": 1,
     "valueOut": true
 };
-var ioMap = [];//输入输出检查
+let ioMap = [];//输入输出检查
 testCaseDir.forEach(function(item){
     if(path.extname(item).match(/(\.json)$/i)){
-        var key = path.basename(item);
+        let key = path.basename(item);
         key = key.substring(0,key.lastIndexOf("."));
         delete require.cache[require.resolve(path.join(tcPath,item))];
-        var json,aTxt,eTxt;
+        let json,aTxt,eTxt;
         try{
             json = require(path.join(tcPath,item));
             aTxt = treeStr(json,opts);

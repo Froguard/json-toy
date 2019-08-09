@@ -1,7 +1,7 @@
-var path = require('path');
-var should = require('should');
-var dir2Json = require('../../lib/cli/walk-dir');
-var libDirExceptJson = {
+let path = require('path');
+let should = require('should');
+let dir2Json = require('../../lib/cli/walk-dir');
+let libDirExceptJson = {
     'cli': {
         'colorful.js': 'file',
         'walk-dir.js': 'file'

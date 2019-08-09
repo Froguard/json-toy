@@ -1,7 +1,7 @@
-var should = require('should');
-var getVal = require('../lib/json-get-val-by-keypath');
+let should = require('should');
+let getVal = require('../lib/json-get-val-by-keypath');
 
-var testJson = {
+let testJson = {
     "x":{
         "y":[
             0,
