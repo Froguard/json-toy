@@ -27,14 +27,14 @@ module.exports = function createConfig(option) {
     }
 
     return {
-        entry: entry,
+        entry,
         mode: mode || 'development',
-        devtool: devtool,
+        devtool,
         output: {
             path: path.join(__dirname, '../dist'),
             filename: outFilename,
-            library: outLibrary || '[name]',//['__api__','pages','[name]'] 方案二：''
-            libraryTarget: 'umd',// 方案二：'var'
+            library: outLibrary || '[name]', //['__api__','pages','[name]'] 方案二：''
+            libraryTarget: 'umd', // 方案二：'var'
             globalObject: 'this'
         },
         module: {
@@ -43,11 +43,11 @@ module.exports = function createConfig(option) {
                     test: /\.js$/,
                     use: [
                         {
-                            loader: 'babel-loader',//need：babel-loader @babel/core @babel/preset-es2015
+                            loader: 'babel-loader', //need：babel-loader @babel/core @babel/preset-es2015
                             options: {
                                 presets: [
                                     [
-                                        "@babel/preset-env",
+                                        '@babel/preset-env',
                                         {
                                             loose: true, // 转es5
                                             modules: codeTreeShaking ? false : 'commonjs' // true-转换module, false-禁止babel将es6的module转化成commonjs
@@ -70,6 +70,6 @@ module.exports = function createConfig(option) {
         //     sideEffects: true,
         //     // usedExports: false
         // },
-        plugins: plugins
+        plugins
     };
 };

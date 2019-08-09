@@ -317,10 +317,6 @@ var _require = __webpack_require__(/*! ./type-of */ "./lib/type-of.js"),
 
 var travelJson = __webpack_require__(/*! ./json-travel */ "./lib/json-travel.js");
 
-function trimRight(str) {
-  return str.replace(/(\s|\u00A0)+$/, "");
-}
-
 var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
     meta = {
   '\b': '\\b',
@@ -406,21 +402,17 @@ function fixArr(arr) {
 
   for (i = 0; i < iLen; i++) {
     var row = arr[i];
-    var j = void 0,
-        jLen = row.length;
 
-    for (j = 0; j < jLen; j++) {
+    for (var j = 0; j < row.length; j++) {
       var o = row[j];
 
-      if (undefined !== o && isNodeStr(o)) {
+      if (isNodeStr(o)) {
         var checkNext = checkNextSibling(j, i, arr);
 
         if (checkNext.isLast) {
           arr[i][j] = o.replace(regNode, _TreeChar_.L);
-          var c = void 0,
-              cLen = checkNext.hPos;
 
-          for (c = i + 1; c < cLen; c++) {
+          for (var c = i + 1; c < checkNext.hPos; c++) {
             if (arr[c]) {
               if (!!arr[c][j] && !!arr[c][j].match(regVert)) {
                 arr[c][j] = arr[c][j].replace(regVert, S);
@@ -438,14 +430,14 @@ function fixArr(arr) {
   return arr;
 }
 
-function repeatChar(char, n) {
+function repeatChar(_char, n) {
   var res = "";
-  char = char.charAt(0);
+  _char = _char.charAt(0);
   n = parseInt(n) || 0;
   n = n > 0 ? n : 0;
 
   while (n--) {
-    res += char;
+    res += _char;
   }
 
   return res;
@@ -486,7 +478,7 @@ function formatOption(options) {
   };
 }
 
-function treeString(json, options) {
+function treeify(json, options) {
   var _formatOption = formatOption(options),
       jsonName = _formatOption.jsonName,
       space = _formatOption.space,
@@ -555,9 +547,8 @@ function treeString(json, options) {
     lineArr.push(_T_ + escapeString(key).slice(1, -1));
     lineArr.push(v);
     res.push(lineArr);
-    var vs;
 
-    for (vs = 0; vs < vSpace; vs++) {
+    for (var vs = 0; vs < vSpace; vs++) {
       res.push(lineArr.map(function (item, index) {
         var isFirst = index === 0,
             isLast = index === lineArr.length - 1,
@@ -568,11 +559,11 @@ function treeString(json, options) {
   }, "obj");
   fixArr(res);
   return res.map(function (item) {
-    return trimRight(item.join(""));
+    return item.join("").replace(/(\s|\u00A0)+$/, "");
   }).join(msReturnChar ? "\r\n" : "\n");
 }
 
-module.exports = treeString;
+module.exports = treeify;
 
 /***/ }),
 
