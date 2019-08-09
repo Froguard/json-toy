@@ -3,7 +3,8 @@
 - Change args in travelJson callback, shorten it into option
     - travelJson(json, `cb`, rootAlias, safeMode),  
         - `function cb(key, val, ...args)` --> `function cb(key, val, options)`
-
+- optimize bin main program
+- optimize way to calculate split char of last childnode
 
 ## 2.0.0 (2019-8-9)
 
