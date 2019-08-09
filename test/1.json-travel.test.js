@@ -2,17 +2,17 @@ let should = require('should');
 let travel = require('../lib/json-travel');
 
 function typeOf(obj){
-    return Object.prototype.toString.call(obj).slice(8,-1).toLowerCase();
+    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 }
 
 // correct
 let testJson = {
-    "x":{
-        "y":[
+    x: {
+        y: [
             0,
             1,
             {
-                "z": "helloZ"
+                z: 'helloZ'
             },
             [
                 0,
@@ -40,38 +40,38 @@ let keysFortestJson = [
 // circularObj 循环自引用
 let circularObj = {};
 circularObj.circularRef = circularObj;
-circularObj.list = [ circularObj, circularObj ];
-circularObj.a = {b:circularObj,c:circularObj};
+circularObj.list = [circularObj, circularObj];
+circularObj.a = {b: circularObj, c: circularObj};
 
 
-describe("Test './lib/json-travel.js':", function() {
+describe('Test \'./lib/json-travel.js\':', () => {
 
-    it("throwing error when travel a primitive type", function(done) {
-        should.throws(function(){
+    it('throwing error when travel a primitive type', function(done) {
+        should.throws(() => {
             travel(1);
         });
-        should.throws(function(){
+        should.throws(() => {
             travel();
             travel(null);
         });
         done && done.call(this);
     });
 
-    it("travel a correct json without throwing error, and return a array", function(done) {
-        should.doesNotThrow(function(){
+    it('travel a correct json without throwing error, and return a array', function(done) {
+        should.doesNotThrow(() => {
             travel(testJson);
         });
-        should.doesNotThrow(function(){
-            travel(testJson,1);
+        should.doesNotThrow(() => {
+            travel(testJson, 1);
         });
-        should.equal("array",typeOf(travel(testJson)));
+        should.equal('array', typeOf(travel(testJson)));
         done && done.call(this);
     });
 
-    it("travel a correct json without throwing error, and return correct values", function(done) {
+    it('travel a correct json without throwing error, and return correct values', function(done) {
         let res = travel(testJson),
             isEqual = true;
-        should.doesNotThrow(function() {
+        should.doesNotThrow(() => {
             let i, iLen = keysFortestJson.length;
             for (i = 0; i < iLen; i++) {
                 if(keysFortestJson[i] !== res[i]){
@@ -80,35 +80,35 @@ describe("Test './lib/json-travel.js':", function() {
                 }
             }
         });
-        should.equal(true,isEqual);
+        should.equal(true, isEqual);
         done && done.call(this);
     });
 
-    it("travel a circular obj without throwing error", function(done) {
-        should.doesNotThrow(function(){
+    it('travel a circular obj without throwing error', function(done) {
+        should.doesNotThrow(() => {
             travel(circularObj);
         });
         done && done.call(this);
     });
 
-    it("travel a circular obj without throwing error. obj is changed from a correct json by incorrect-operate-code(like change value of json prop in callback)", function(done) {
+    it('travel a circular obj without throwing error. obj is changed from a correct json by incorrect-operate-code(like change value of json prop in callback)', function(done) {
         let testJson2 = {
-            "x":{
-                "y": 1,
-                "z": 2
+            x: {
+                y: 1,
+                z: 2
             }
         };
-        should.doesNotThrow(function(){
-            travel(testJson2,function(){
+        should.doesNotThrow(() => {
+            travel(testJson2, () => {
                 testJson2.x.y = testJson2;//change the json prop value
             });
         });
         done && done.call(this);
     });
 
-    it("travel a circular obj with throwing error on 'unsafe mode'", function(done) {
-        should.throws(function(){
-            travel(circularObj,null,null,false);
+    it('travel a circular obj with throwing error on \'unsafe mode\'', function(done) {
+        should.throws(() => {
+            travel(circularObj, null, null, false);
         });
         done && done.call(this);
     });
