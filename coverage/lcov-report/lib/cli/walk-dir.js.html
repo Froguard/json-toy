@@ -32,7 +32,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">90.8% </span>
@@ -364,15 +364,15 @@ let REGEXP_IGNORE_FILE = /(Thumbs\.db|\.DS_store)/g;
  *        {String} options.extChars.file,directory 文件节点，文件夹节点的末尾字符
  * @returns {JSON|String}
  */
-function dir2Json(rootPath,options) {
+function dir2Json(rootPath, options) { // eslint-disable-line
     // root
-    rootPath = path.normalize(rootPath) || <span class="branch-1 cbranch-no" title="branch not covered" >"./";</span>
+    rootPath = path.normalize(rootPath) || <span class="branch-1 cbranch-no" title="branch not covered" >'./';</span>
     if(!fileExistSync(rootPath)){
-        throw new Error("The path '"+rootPath+"' is not existed!");
+        throw new Error(`The path '${rootPath}' is not existed!`);
     }
     let statRootPath = fs.statSync(rootPath);
     if(!statRootPath.isDirectory()){
-        return "not a directory";
+        return 'not a directory';
     }
 &nbsp;
     // options
@@ -384,7 +384,7 @@ function dir2Json(rootPath,options) {
     maxDepth = maxDepth || 0;
     if(!maxDepth || maxDepth&gt;5){
         // “潜在的长时等待”提示
-        console.log(colorful.warn("Potential long-time-wait: You`d better set a max depth (letter than 5) to access directories,or it will spend a long time!"));
+        console.log(colorful.warn('Potential long-time-wait: You`d better set a max depth (less than 5) to access directories,or it will spend a long time!'));
     }
     // options.exclude: 排除某些文件或文件夹
     if(isNill(exclude)){
@@ -393,10 +393,10 @@ function dir2Json(rootPath,options) {
             file: REGEXP_IGNORE_FILE,
             directory: REGEXP_IGNORE_DIR,
             outExcludeDir: false //是否将exclude的dir进行输出
-        }
+        };
     }else{
         exclude = isObject(exclude) ? exclude : <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
-        exclude.file =  exclude.file || REGEXP_IGNORE_FILE;
+        exclude.file = exclude.file || REGEXP_IGNORE_FILE;
         exclude.directory = exclude.directory || REGEXP_IGNORE_DIR;
         exclude.outExcludeDir = exclude.outExcludeDir || false;
     }
@@ -404,24 +404,24 @@ function dir2Json(rootPath,options) {
     let filterFile = exclude.file;
     let filterDir = exclude.directory;
     let outExcludeDir = exclude.outExcludeDir;
-    filterGlobal = isRegExp(filterGlobal) ? filterGlobal : isString(filterGlobal) ? <span class="branch-0 cbranch-no" title="branch not covered" >new RegExp(filterGlobal,"g") </span>: false;
-    filterFile = isRegExp(filterFile) ? filterFile : <span class="branch-1 cbranch-no" title="branch not covered" >isString(filterFile) ? new RegExp(filterFile,"g") : false;</span>
-    filterDir = isRegExp(filterDir) ? filterDir : <span class="branch-1 cbranch-no" title="branch not covered" >isString(filterDir) ? new RegExp(filterDir,"g") : false;</span>
+    filterGlobal = isRegExp(filterGlobal) ? filterGlobal : isString(filterGlobal) ? <span class="branch-0 cbranch-no" title="branch not covered" >new RegExp(filterGlobal, 'g') </span>: false;
+    filterFile = isRegExp(filterFile) ? filterFile : <span class="branch-1 cbranch-no" title="branch not covered" >isString(filterFile) ? new RegExp(filterFile, 'g') : false;</span>
+    filterDir = isRegExp(filterDir) ? filterDir : <span class="branch-1 cbranch-no" title="branch not covered" >isString(filterDir) ? new RegExp(filterDir, 'g') : false;</span>
     // options.extChars：文件或文件夹后面的符号，比如一般文件夹后面的符号是'/'
     if(isNill(extChars)){
-        extChars = { file: "", directory: "" };
+        extChars = { file: '', directory: '' };
     }else{
         extChars = extChars || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
-        extChars.file = isString(extChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.file </span>: "";
-        extChars.directory = isString(extChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.directory </span>: "";
+        extChars.file = isString(extChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.file </span>: '';
+        extChars.directory = isString(extChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >extChars.directory </span>: '';
     }
     // options.preChars：文件或文件夹后面的符号，比如一般文件夹后面的符号是'/'
     if(isNill(preChars)){
-        preChars = { file: "", directory: "" };
+        preChars = { file: '', directory: '' };
     }else{
         preChars = preChars || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
-        preChars.file = isString(preChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.file </span>: "";
-        preChars.directory = isString(preChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.directory </span>: "";
+        preChars.file = isString(preChars.file) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.file </span>: '';
+        preChars.directory = isString(preChars.directory) ? <span class="branch-0 cbranch-no" title="branch not covered" >preChars.directory </span>: '';
     }
     let fPre = preChars.file;
     let dPre = preChars.directory;
@@ -432,7 +432,7 @@ function dir2Json(rootPath,options) {
     let json = {};
 &nbsp;
     // do main
-    function travel(pathArg,far,curDepth){
+    function travel(pathArg, far, curDepth){
         <span class="missing-if-branch" title="else path not taken" >E</span>if(!maxDepth || (maxDepth &amp;&amp; curDepth&lt;=maxDepth)){
             let dirs;
             try{
@@ -444,12 +444,12 @@ function dir2Json(rootPath,options) {
             }
             <span class="missing-if-branch" title="else path not taken" >E</span>if(dirs &amp;&amp; dirs.length){
                 <span class="missing-if-branch" title="if path not taken" >I</span>if(dirs.length&gt;=30){
-<span class="cstat-no" title="statement not covered" >                    console.log(colorful.warn("Too many files|directories was found, type-in an exact target to simplify or reduce result.")</span>
-                        + "\n          "+colorful.yellow("path: ") + colorful.cyan("'"+pathArg.replace(/\\/g,"/")+"'"));
+<span class="cstat-no" title="statement not covered" >                    console.log(`${colorful.warn('Too many files|directories was found, type-in an exact target to simplify or reduce result.')</span>
+                    }\n          ${colorful.yellow('path: ')}${colorful.cyan(`'${pathArg.replace(/\\/g, '/')}'`)}`);
                 }
                 // todo 子项太多未考虑
-                dirs.forEach(function (item) {
-                    let curPath = path.join(pathArg,item);
+                dirs.forEach((item) =&gt; {
+                    let curPath = path.join(pathArg, item);
                     let stat;// 获取fsStatInfo，用以后面的判断
                     try{
                         // todo 读大文件时候情况未考虑
@@ -459,40 +459,40 @@ function dir2Json(rootPath,options) {
 <span class="cstat-no" title="statement not covered" >                        stat = false;</span>
                     }
                     // 通配检查
-                    if(!filterGlobal || (!!filterGlobal &amp;&amp; !item.match(filterGlobal)) ){
+                    if(!filterGlobal || (!!filterGlobal &amp;&amp; !item.match(filterGlobal))){
                         // 文件夹类型的值为“其对应的实际对象”，文件类型值为"file",
                         // 读取stat失败的类型对应值为"unreadableStatType",其他的为"unknownStatType"
                         <span class="missing-if-branch" title="if path not taken" >I</span>if(!stat){
-<span class="cstat-no" title="statement not covered" >                            far[item] = "unreadableStatType";</span>
+<span class="cstat-no" title="statement not covered" >                            far[item] = 'unreadableStatType';</span>
 <span class="cstat-no" title="statement not covered" >                            return false;</span>
                         }
                         if(stat.isFile()){//文件
-                            if(!filterFile || (!!filterFile &amp;&amp; !item.match(filterFile)) ){
-                                far[fPre + item + fExt] = "file";
+                            if(!filterFile || (!!filterFile &amp;&amp; !item.match(filterFile))){
+                                far[fPre + item + fExt] = 'file';
                             }
                         }else <span class="missing-if-branch" title="else path not taken" >E</span>if(stat.isDirectory()){//文件夹
                             let dPropName;
-                            if(!filterDir || (!!filterDir &amp;&amp; !item.match(filterDir)) ){
+                            if(!filterDir || (!!filterDir &amp;&amp; !item.match(filterDir))){
                                 dPropName = dPre + item + dExt;
                                 far[dPropName] = {};
-                                travel(curPath, far[dPropName],curDepth+1);
+                                travel(curPath, far[dPropName], curDepth+1);
                             }else{
                                 if(!!filterDir &amp;&amp; item.match(filterDir) &amp;&amp; outExcludeDir){
-                                    dPropName = dPre + item + " (ignored)" + dExt;
+                                    dPropName = `${dPre + item} (ignored)${dExt}`;
                                     far[dPropName] = {};
                                 }
                             }
                         }else{
                             // console.log("非文件也非目录：",item);//比如文件夹快捷方式，文件快捷方式 unix之下的另外的东西，管道，套接字等等
                             // 这里不读超链接的原因是，避免有可能出现的死循环
-<span class="cstat-no" title="statement not covered" >                            far[item] = "unknownStatType";</span>
+<span class="cstat-no" title="statement not covered" >                            far[item] = 'unknownStatType';</span>
                         }
                     }
                 });
             }
         }
     }
-    travel(rootPath,json,1);
+    travel(rootPath, json, 1);
     return isObject.isEmptyOwn(json) ? null : json;
 }
 &nbsp;
@@ -502,7 +502,7 @@ module.exports = dir2Json;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 09 2019 10:48:03 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 09 2019 13:21:47 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

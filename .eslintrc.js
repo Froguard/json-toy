@@ -8,5 +8,8 @@ module.exports = {
     ],
     "parserOptions": {
         "ecmaVersion": 6
+    },
+    "rules": {
+        "max-depth": 1
     }
 };

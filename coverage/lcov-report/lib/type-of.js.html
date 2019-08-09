@@ -32,7 +32,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>37/37</span>
+        <span class='fraction'>34/34</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -344,8 +344,7 @@
 299
 300
 301
-302
-303</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+302</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -479,6 +478,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -511,9 +511,7 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">11×</span>
 <span class="cline-any cline-yes">11×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -676,16 +674,16 @@ function _typeString(obj){
  */
 function _getType(obj){
     if(obj === null || obj === undefined){
-        return obj === undefined ? "undefined" : "null";// String(obj)
-    }else{
-        let typeName = _typeString(obj).slice(8,-1).toLowerCase();
-        //将object类型再细化一下,以区分出自定义类型以及细化类型
-        let tpOf = typeof obj;// 这里要用typeof关键字而非typeName这个结果,不然error的子类会不准确
-        if(typeName!=="arguments" &amp;&amp; (tpOf==="object" || tpOf==="function")){
-            typeName = (obj.constructor &amp;&amp; obj.constructor.name) ? obj.constructor.name.toLowerCase() : <span class="branch-1 cbranch-no" title="branch not covered" >typeName;</span>
-        }
-        return typeName;
+        return obj === undefined ? 'undefined' : 'null';// String(obj)
     }
+    let typeName = _typeString(obj).slice(8, -1).toLowerCase();
+    //将object类型再细化一下,以区分出自定义类型以及细化类型
+    let tpOf = typeof obj;// 这里要用typeof关键字而非typeName这个结果,不然error的子类会不准确
+    if(typeName!=='arguments' &amp;&amp; (tpOf==='object' || tpOf==='function')){
+        typeName = (obj.constructor &amp;&amp; obj.constructor.name) ? obj.constructor.name.toLowerCase() : <span class="branch-1 cbranch-no" title="branch not covered" >typeName;</span>
+    }
+    return typeName;
+    
 }
 &nbsp;
 /*
@@ -694,10 +692,10 @@ function _getType(obj){
  * @returns {Function}
  */
 function _isTypeOf(type){
-    type = ( (typeof type === "string" || type instanceof String) ? type : "" ).toLowerCase();
+    type = ((typeof type === 'string' || type instanceof String) ? type : '').toLowerCase();
     return function(obj){
         return type === _getType(obj);
-    }
+    };
 }
 &nbsp;
 /*
@@ -707,13 +705,13 @@ function _isTypeOf(type){
  */
 let _Type_ = {};
 [
-    "arguments","array","date",
-    "error","syntaxError","typeError","rangeError",
-    "regExp","symbol",
-    "set","weakSet",
-    "map","weakMap"
-].forEach(function(t){
-    _Type_["is" + t[0].toUpperCase() + t.substr(1)] = _isTypeOf(t);
+    'arguments', 'array', 'date',
+    'error', 'syntaxError', 'typeError', 'rangeError',
+    'regExp', 'symbol',
+    'set', 'weakSet',
+    'map', 'weakMap'
+].forEach((t) =&gt; {
+    _Type_[`is${t[0].toUpperCase()}${t.substr(1)}`] = _isTypeOf(t);
 });
 let isArguments = _Type_.isArguments;
 let isSymbol = _Type_.isSymbol;
@@ -754,10 +752,10 @@ function isRangeError(obj){
    isObject([1,2,3]);//true, array is object via 'typeof'
 */
 function isObject(obj) {
-    return (typeof obj === "object" || obj instanceof Object) &amp;&amp; obj !==null;
+    return (typeof obj === 'object' || obj instanceof Object) &amp;&amp; obj !==null;
 }
 function isFunction(obj) {
-    return typeof obj === "function" || obj instanceof Function;
+    return typeof obj === 'function' || obj instanceof Function;
 }
 function isNull(obj){
     return obj === null;
@@ -774,23 +772,24 @@ function isBoolean(obj){
     return obj === true || obj === false || obj instanceof Boolean;
 }
 function isString(obj) {
-    return typeof obj === "string" || obj instanceof String;
+    return typeof obj === 'string' || obj instanceof String;
 }
 function isChar(obj){
     return isString(obj) &amp;&amp; obj.length === 1;
 }
-function isNumber(obj,warn) {
+function isNumber(obj, warn) {
     warn = warn===undefined ? true : !!warn;//default true
-    if(warn &amp;&amp; obj !== obj){// warning when NaN
-        console.warn("obj is NaN. Using 'isRealNumber(obj)' instead of 'isNumber(obj)'\nOr using 'isNumber(obj,false)' to stop warning out\n");
+    // warning when NaN
+    if(warn &amp;&amp; obj !== obj){ // eslint-disable-line
+        console.warn('obj is NaN. Using \'isRealNumber(obj)\' instead of \'isNumber(obj)\'\nOr using \'isNumber(obj,false)\' to stop warning out\n');
     }
-    return typeof obj === "number" || obj instanceof Number;
+    return typeof obj === 'number' || obj instanceof Number;
 }
 function isNaN(obj){
-    return obj !== obj;
+    return obj !== obj; // eslint-disable-line
 }
 function isRealNumber(obj){
-    return !isNaN(obj) &amp;&amp; isNumber(obj) ;
+    return !isNaN(obj) &amp;&amp; isNumber(obj);
 }
 // 检查是否为简单类型：除开function和object之外的所有类型均为简单类型
 function isPrimitive(obj){
@@ -803,7 +802,7 @@ function isSpreadable(obj){
     }else if(isObject(obj) || isFunction(obj)){
         for(let j in obj){
             <span class="missing-if-branch" title="else path not taken" >E</span>if(obj.hasOwnProperty(j)){
-                return true
+                return true;
             }
         }
     }
@@ -812,13 +811,11 @@ function isSpreadable(obj){
 // 递归函数判断是否为json
 function _isJSON(value, visited) {
     (visited || (visited = [])).push(value);
-    return  isPrimitive(value) ||
-        (isArray(value) &amp;&amp;  value.every(function(element) {
-            return _isJSON(element, visited);
-        })) ||
-        (isObject.isFlat(value) &amp;&amp; Object.keys(value).every(function(key) {
+    return isPrimitive(value) ||
+        (isArray(value) &amp;&amp; value.every(element =&gt; _isJSON(element, visited))) ||
+        (isObject.isFlat(value) &amp;&amp; Object.keys(value).every((key) =&gt; {
             let $ = Object.getOwnPropertyDescriptor(value, key);
-            return  ((!isObject($.value) || <span class="branch-1 cbranch-no" title="branch not covered" >!~visited.indexOf($.value))</span>
+            return ((!isObject($.value) || <span class="branch-1 cbranch-no" title="branch not covered" >!~visited.indexOf($.value))</span>
                     &amp;&amp; !('get' in $) &amp;&amp; !('set' in $)
                     &amp;&amp; _isJSON($.value, visited));
         }));
@@ -828,7 +825,7 @@ function isJSON(obj){
     return _isJSON(obj);
 }
 // isObject.isEmpty
-isObject.isEmpty = function(obj,ownCheck){
+isObject.isEmpty = function(obj, ownCheck){
     if(!isObject(obj) &amp;&amp; !isArray(obj)){
         return false;
     }
@@ -846,7 +843,7 @@ isObject.isEmpty = function(obj,ownCheck){
 };
 // isObject.isEmptyOwn: return true if has none own property
 isObject.isEmptyOwn = function(obj){
-    return isObject.isEmpty(obj,true);
+    return isObject.isEmpty(obj, true);
 };
 /*
  flat (对象的直接来源 `Object.prototype` or `null`).
@@ -860,9 +857,9 @@ isObject.isFlat = function(obj) {
     }else if(isObject(obj)){
         return null===Object.getPrototypeOf(obj)
             || (null===Object.getPrototypeOf(Object.getPrototypeOf(obj)));
-    }else{
-        return false;
     }
+    return false;
+    
 };
 // decimal 浮点
 isNumber.decimal = function(obj){
@@ -903,7 +900,7 @@ function _instOf(value, type) {
     // 先用原生instanceof判断
     let isInstanceOf = value instanceof type;
     // 对于非undefined和非null的value，需要再用构造器名称判断，以避免原生instanceof的判定
-    let isConstructorNameSame,isConstructorSourceSame;
+    let isConstructorNameSame, isConstructorSourceSame;
     if (!isInstanceOf &amp;&amp; undefined!==value &amp;&amp; null!==value) {
         isConstructorNameSame = (value.constructor &amp;&amp; value.constructor.name === type.name);
         isConstructorSourceSame = (value.constructor &amp;&amp; String(value.constructor) == String(type));
@@ -955,7 +952,7 @@ module.exports = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 09 2019 10:48:03 GMT+0800 (China Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 09 2019 13:21:47 GMT+0800 (China Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

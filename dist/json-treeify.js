@@ -118,7 +118,7 @@ var _require = __webpack_require__(/*! ./type-of */ 0),
 
 function travelJson(json, cb, rootAlias, safeMode) {
   if (!isObject(json)) {
-    throw new TypeError("The first param should be an Object instance!");
+    throw new TypeError('The first param should be an Object instance!');
   }
 
   safeMode = safeMode === undefined ? true : safeMode;
@@ -126,7 +126,7 @@ function travelJson(json, cb, rootAlias, safeMode) {
   var safeKeys = [];
   var keysArr = [];
   var needCb = isFunction(cb);
-  rootAlias = (isString(rootAlias) ? rootAlias : "") || "ROOT";
+  rootAlias = (isString(rootAlias) ? rootAlias : '') || 'ROOT';
 
   function travel(obj, curKeyPath, depth, cb) {
     if (!isNill(obj)) {
@@ -148,7 +148,7 @@ function travelJson(json, cb, rootAlias, safeMode) {
         var isFirstChild = i === 0;
         var isLastChild = i === lastIndex;
         var newKeyPath = curKeyPath + "." + k;
-        keysArr.push(newKeyPath + "");
+        keysArr.push("" + newKeyPath);
         var curDepth = depth + 1;
         var v = obj[k];
         var isCircular = false;
@@ -166,7 +166,7 @@ function travelJson(json, cb, rootAlias, safeMode) {
         }
 
         var spreadable = isSpreadable(v) && !isFunction(v);
-        needCb && cb.call(obj, k, v, newKeyPath + "", getTypeOf(v), spreadable, curDepth, isCircular, isFirstChild, isLastChild);
+        needCb && cb.call(obj, k, v, "" + newKeyPath, getTypeOf(v), spreadable, curDepth, isCircular, isFirstChild, isLastChild);
 
         if (spreadable) {
           travel(v, newKeyPath, curDepth, cb);
@@ -203,7 +203,6 @@ module.exports = travelJson;
 
 var _require = __webpack_require__(/*! ./type-of */ 0),
     isString = _require.isString,
-    isUndefined = _require.isUndefined,
     isNill = _require.isNill,
     isNaN = _require.isNaN,
     isObject = _require.isObject,
@@ -224,41 +223,41 @@ var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u2
 
 function escapeString(string) {
   escapable.lastIndex = 0;
-  return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+  return escapable.test(string) ? "\"" + string.replace(escapable, function (a) {
     var c = meta[a];
-    return typeof c === 'string' ? c : "\\u" + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
-  }) + '"' : '"' + string + '"';
+    return typeof c === 'string' ? c : "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4);
+  }) + "\"" : "\"" + string + "\"";
 }
 
 var _TreeChar_ = {
-  "I": "│",
-  "T": "├",
-  "L": "└",
-  "_": "─",
-  "SPLIT": ":",
-  "1": " ",
-  "2": "  ",
-  "3": "   ",
-  "4": "    ",
-  "5": "     ",
-  "6": "      ",
-  "7": "       ",
-  "8": "        ",
-  "9": "         ",
-  "10": "          "
+  I: '│',
+  T: '├',
+  L: '└',
+  _: '─',
+  SPLIT: ':',
+  1: ' ',
+  2: '  ',
+  3: '   ',
+  4: '    ',
+  5: '     ',
+  6: '      ',
+  7: '       ',
+  8: '        ',
+  9: '         ',
+  10: '          '
 };
 
 function _isStartWith(chars) {
-  var c = chars.join("|");
+  var c = chars.join('|');
   var reg = new RegExp("^(" + c + ")+");
   return function (str) {
     return isString(str) && !!str.match(reg);
   };
 }
 
-var isNodeStr = _isStartWith([_TreeChar_.T, _TreeChar_.L, "ROOT"]);
+var isNodeStr = _isStartWith([_TreeChar_.T, _TreeChar_.L, 'ROOT']);
 
-var _RegTreeLinkChars = new RegExp("^(" + [_TreeChar_.I, _TreeChar_.T, _TreeChar_._, _TreeChar_.L].join("|") + ")");
+var _RegTreeLinkChars = new RegExp("^(" + [_TreeChar_.I, _TreeChar_.T, _TreeChar_._, _TreeChar_.L].join('|') + ")");
 
 function replaceTreeLinkChar(str) {
   var check = isString(str) && str.match(_RegTreeLinkChars);
@@ -274,23 +273,23 @@ function checkNextSibling(w, h, arr) {
 
     if (undefined === ele) {
       break;
-    } else if (isNodeStr(ele + "")) {
+    } else if (isNodeStr("" + ele)) {
       hasNextSibling = true;
       break;
     }
   }
 
   return {
-    "wPos": w,
-    "hPos": i,
-    "isLast": !hasNextSibling
+    wPos: w,
+    hPos: i,
+    isLast: !hasNextSibling
   };
 }
 
 function fixArr(arr) {
-  var regNode = new RegExp("^" + _TreeChar_.T, "g"),
-      regVert = new RegExp("^" + _TreeChar_.I, "g"),
-      S = " ";
+  var regNode = new RegExp("^" + _TreeChar_.T, 'g'),
+      regVert = new RegExp("^" + _TreeChar_.I, 'g'),
+      S = ' ';
   var i,
       iLen = arr.length;
 
@@ -318,14 +317,14 @@ function fixArr(arr) {
     }
   }
 
-  var regSimRoot1 = new RegExp(_TreeChar_._, "gi"),
-      regSimRoot2 = new RegExp(_TreeChar_.T + "|" + _TreeChar_.L, "g");
-  arr[0][0] = arr[0][0].replace(regSimRoot1, " ").replace(regSimRoot2, "");
+  var regSimRoot1 = new RegExp(_TreeChar_._, 'gi'),
+      regSimRoot2 = new RegExp(_TreeChar_.T + "|" + _TreeChar_.L, 'g');
+  arr[0][0] = arr[0][0].replace(regSimRoot1, ' ').replace(regSimRoot2, '');
   return arr;
 }
 
 function repeatChar(_char, n) {
-  var res = "";
+  var res = '';
   _char = _char.charAt(0);
   n = parseInt(n) || 0;
   n = n > 0 ? n : 0;
@@ -349,9 +348,9 @@ function formatOption(options) {
       needValueOut = _ref.needValueOut,
       msReturnChar = _ref.msReturnChar;
 
-  jsonName = (isString(jsonName) ? jsonName : 0) || "ROOT";
+  jsonName = (isString(jsonName) ? jsonName : 0) || 'ROOT';
 
-  if ("\t" !== space) {
+  if ('\t' !== space) {
     space = parseInt(space);
     space = isNaN(space) ? 3 : space;
     space = space <= 0 ? 1 : space > 8 ? 8 : space;
@@ -396,7 +395,7 @@ function treeify(json, options) {
 
   var _rT_ = _TreeChar_.T + " ";
 
-  var _I1_ = _TreeChar_.I + repeatChar(" ", ft - 1);
+  var _I1_ = _TreeChar_.I + repeatChar(' ', ft - 1);
 
   var res = [[_rT_ + jsonName, undefined]];
 
@@ -410,22 +409,22 @@ function treeify(json, options) {
 
     if (!isSpreadable) {
       if (needValueOut) {
-        if (typeStr === "string") {
+        if (typeStr === 'string') {
           v = replaceTreeLinkChar(value);
           v = escapeString(v);
-        } else if (typeStr === "array") {
-          v = "[]";
-        } else if (typeStr === "object") {
-          v = "{}";
-        } else if (typeStr === "function") {
-          v = "[function code]";
+        } else if (typeStr === 'array') {
+          v = '[]';
+        } else if (typeStr === 'object') {
+          v = '{}';
+        } else if (typeStr === 'function') {
+          v = '[function code]';
         } else {
           v = String(value);
         }
 
         v = SPLIT + v;
       } else {
-        v = "";
+        v = '';
       }
     } else {
       v = undefined;
@@ -450,11 +449,11 @@ function treeify(json, options) {
         return index < lineArr.length - 1 || isSpreadableNodeEndFlag ? isFirst ? _I1_ : _I_ : undefined;
       }));
     }
-  }, "obj");
+  }, 'obj');
   fixArr(res);
   return res.map(function (item) {
-    return item.join("").replace(/(\s|\u00A0)+$/, "");
-  }).join(msReturnChar ? "\r\n" : "\n");
+    return item.join('').replace(/(\s|\u00A0)+$/, '');
+  }).join(msReturnChar ? '\r\n' : '\n');
 }
 
 module.exports = treeify;
@@ -474,29 +473,29 @@ function _typeString(obj) {
 
 function _getType(obj) {
   if (obj === null || obj === undefined) {
-    return obj === undefined ? "undefined" : "null";
-  } else {
-    var typeName = _typeString(obj).slice(8, -1).toLowerCase();
-
-    var tpOf = typeof obj;
-
-    if (typeName !== "arguments" && (tpOf === "object" || tpOf === "function")) {
-      typeName = obj.constructor && obj.constructor.name ? obj.constructor.name.toLowerCase() : typeName;
-    }
-
-    return typeName;
+    return obj === undefined ? 'undefined' : 'null';
   }
+
+  var typeName = _typeString(obj).slice(8, -1).toLowerCase();
+
+  var tpOf = typeof obj;
+
+  if (typeName !== 'arguments' && (tpOf === 'object' || tpOf === 'function')) {
+    typeName = obj.constructor && obj.constructor.name ? obj.constructor.name.toLowerCase() : typeName;
+  }
+
+  return typeName;
 }
 
 function _isTypeOf(type) {
-  type = (typeof type === "string" || type instanceof String ? type : "").toLowerCase();
+  type = (typeof type === 'string' || type instanceof String ? type : '').toLowerCase();
   return function (obj) {
     return type === _getType(obj);
   };
 }
 
 var _Type_ = {};
-["arguments", "array", "date", "error", "syntaxError", "typeError", "rangeError", "regExp", "symbol", "set", "weakSet", "map", "weakMap"].forEach(function (t) {
+['arguments', 'array', 'date', 'error', 'syntaxError', 'typeError', 'rangeError', 'regExp', 'symbol', 'set', 'weakSet', 'map', 'weakMap'].forEach(function (t) {
   _Type_["is" + t[0].toUpperCase() + t.substr(1)] = _isTypeOf(t);
 });
 var isArguments = _Type_.isArguments;
@@ -535,11 +534,11 @@ function isRangeError(obj) {
 }
 
 function isObject(obj) {
-  return (typeof obj === "object" || obj instanceof Object) && obj !== null;
+  return (typeof obj === 'object' || obj instanceof Object) && obj !== null;
 }
 
 function isFunction(obj) {
-  return typeof obj === "function" || obj instanceof Function;
+  return typeof obj === 'function' || obj instanceof Function;
 }
 
 function isNull(obj) {
@@ -559,7 +558,7 @@ function isBoolean(obj) {
 }
 
 function isString(obj) {
-  return typeof obj === "string" || obj instanceof String;
+  return typeof obj === 'string' || obj instanceof String;
 }
 
 function isChar(obj) {
@@ -570,10 +569,10 @@ function isNumber(obj, warn) {
   warn = warn === undefined ? true : !!warn;
 
   if (warn && obj !== obj) {
-    console.warn("obj is NaN. Using 'isRealNumber(obj)' instead of 'isNumber(obj)'\nOr using 'isNumber(obj,false)' to stop warning out\n");
+    console.warn('obj is NaN. Using \'isRealNumber(obj)\' instead of \'isNumber(obj)\'\nOr using \'isNumber(obj,false)\' to stop warning out\n');
   }
 
-  return typeof obj === "number" || obj instanceof Number;
+  return typeof obj === 'number' || obj instanceof Number;
 }
 
 function isNaN(obj) {
@@ -645,9 +644,9 @@ isObject.isFlat = function (obj) {
     return true;
   } else if (isObject(obj)) {
     return null === Object.getPrototypeOf(obj) || null === Object.getPrototypeOf(Object.getPrototypeOf(obj));
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 isNumber.decimal = function (obj) {
@@ -701,7 +700,7 @@ module.exports = {
   isObject: isObject,
   isFunction: isFunction,
   "isNull": ((isNull),null),
-  isUndefined: isUndefined,
+  "isUndefined": ((isUndefined),null),
   isNill: isNill,
   "isNullOrUndefined": ((isNill),null),
   "isUndefinedOrNull": ((isNill),null),

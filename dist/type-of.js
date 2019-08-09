@@ -114,29 +114,29 @@ function _typeString(obj) {
 
 function _getType(obj) {
   if (obj === null || obj === undefined) {
-    return obj === undefined ? "undefined" : "null";
-  } else {
-    var typeName = _typeString(obj).slice(8, -1).toLowerCase();
-
-    var tpOf = typeof obj;
-
-    if (typeName !== "arguments" && (tpOf === "object" || tpOf === "function")) {
-      typeName = obj.constructor && obj.constructor.name ? obj.constructor.name.toLowerCase() : typeName;
-    }
-
-    return typeName;
+    return obj === undefined ? 'undefined' : 'null';
   }
+
+  var typeName = _typeString(obj).slice(8, -1).toLowerCase();
+
+  var tpOf = typeof obj;
+
+  if (typeName !== 'arguments' && (tpOf === 'object' || tpOf === 'function')) {
+    typeName = obj.constructor && obj.constructor.name ? obj.constructor.name.toLowerCase() : typeName;
+  }
+
+  return typeName;
 }
 
 function _isTypeOf(type) {
-  type = (typeof type === "string" || type instanceof String ? type : "").toLowerCase();
+  type = (typeof type === 'string' || type instanceof String ? type : '').toLowerCase();
   return function (obj) {
     return type === _getType(obj);
   };
 }
 
 var _Type_ = {};
-["arguments", "array", "date", "error", "syntaxError", "typeError", "rangeError", "regExp", "symbol", "set", "weakSet", "map", "weakMap"].forEach(function (t) {
+['arguments', 'array', 'date', 'error', 'syntaxError', 'typeError', 'rangeError', 'regExp', 'symbol', 'set', 'weakSet', 'map', 'weakMap'].forEach(function (t) {
   _Type_["is" + t[0].toUpperCase() + t.substr(1)] = _isTypeOf(t);
 });
 var isArguments = _Type_.isArguments;
@@ -175,11 +175,11 @@ function isRangeError(obj) {
 }
 
 function isObject(obj) {
-  return (typeof obj === "object" || obj instanceof Object) && obj !== null;
+  return (typeof obj === 'object' || obj instanceof Object) && obj !== null;
 }
 
 function isFunction(obj) {
-  return typeof obj === "function" || obj instanceof Function;
+  return typeof obj === 'function' || obj instanceof Function;
 }
 
 function isNull(obj) {
@@ -199,7 +199,7 @@ function isBoolean(obj) {
 }
 
 function isString(obj) {
-  return typeof obj === "string" || obj instanceof String;
+  return typeof obj === 'string' || obj instanceof String;
 }
 
 function isChar(obj) {
@@ -210,10 +210,10 @@ function isNumber(obj, warn) {
   warn = warn === undefined ? true : !!warn;
 
   if (warn && obj !== obj) {
-    console.warn("obj is NaN. Using 'isRealNumber(obj)' instead of 'isNumber(obj)'\nOr using 'isNumber(obj,false)' to stop warning out\n");
+    console.warn('obj is NaN. Using \'isRealNumber(obj)\' instead of \'isNumber(obj)\'\nOr using \'isNumber(obj,false)\' to stop warning out\n');
   }
 
-  return typeof obj === "number" || obj instanceof Number;
+  return typeof obj === 'number' || obj instanceof Number;
 }
 
 function isNaN(obj) {
@@ -285,9 +285,9 @@ isObject.isFlat = function (obj) {
     return true;
   } else if (isObject(obj)) {
     return null === Object.getPrototypeOf(obj) || null === Object.getPrototypeOf(Object.getPrototypeOf(obj));
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 isNumber.decimal = function (obj) {
