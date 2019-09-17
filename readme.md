@@ -2,7 +2,7 @@
 
 > Stable version(>=1.0.0); Recommended version (>=2.0.0)
 
-Some simple methods for operating object as json in an easy way.
+Some simple methods for operating object as json in an easy way
 
 
 [![version](https://img.shields.io/npm/v/json-toy.svg "version")](https://www.npmjs.com/package/json-toy)&nbsp;
