@@ -25,9 +25,9 @@ interface ExcludeOptions {
 }
 
 export interface Dir2JsonOptions {
-    exclude?: ExcludeOptions;
-    extChars?: ExtChars;
-    preChars?: PreChars;
+    exclude?: ExcludeOptions | null;
+    extChars?: ExtChars | null;
+    preChars?: PreChars | null;
     maxDepth?: number | string | boolean;
     [k: string]: any;
 }

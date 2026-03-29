@@ -26,7 +26,7 @@ circularObj.list = [circularObj, circularObj];
 circularObj.a = {b: circularObj};
 
 
-describe('Test \'./lib/json-treeify.js\':', () => {
+describe('Test \'./lib/json-treeify.ts\':', () => {
 
     it('convert json to tree-string without throwing error, and return a string', function(done) {
         expect(() => {

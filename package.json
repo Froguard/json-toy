@@ -53,6 +53,7 @@
     "pretest:cover": "rm -rf ./__coverage__",
     "test:cover": "jest --coverage",
     "test": "jest",
+    "test:one": "jest ./__tests__/lib/2.json-check-circular.test.ts",
     "lint:fix": "eslint --fix 'src/**/*.ts'",
     "-------------------publish-----------------": "echo '------------------- publish -----------------'",
     "prerelease": "npm rum build",

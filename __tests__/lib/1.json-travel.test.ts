@@ -43,7 +43,7 @@ circularObj.list = [circularObj, circularObj];
 circularObj.a = {b: circularObj, c: circularObj};
 
 
-describe('Test \'./lib/json-travel.js\':', () => {
+describe('Test \'./lib/json-travel.ts\':', () => {
 
     it('throwing error when travel a primitive type', function(done) {
         expect(() => {

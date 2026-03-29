@@ -26,7 +26,7 @@ circularObj.list = [circularObj, circularObj];
 circularObj.a = {b: circularObj};
 
 
-describe('Test \'./lib/json-check-circular.js\':', () => {
+describe('Test \'./lib/json-check-circular.ts\':', () => {
 
     it('check a obj, without error throwing', function(done) {
         expect(() => check(testJson)).not.toThrow();
@@ -47,34 +47,36 @@ describe('Test \'./lib/json-check-circular.js\':', () => {
         let isCircular = checkRes.isCircular;
         let circularProps = checkRes.circularProps;
 
+        console.log('WF:\n', circularProps);
+
         expect(isCircular).toBe(true);
 
         let isCheckResultCorrect = true;
         [
-            {
-                keyPath: 'ROOT.circularRef',
-                circularTo: 'ROOT',
-                key: 'circularRef',
-                value: '[Circular->ROOT]'
-            },
-            {
-                keyPath: 'ROOT.list.0',
-                circularTo: 'ROOT',
-                key: '0',
-                value: '[Circular->ROOT]'
-            },
-            {
-                keyPath: 'ROOT.list.1',
-                circularTo: 'ROOT',
-                key: '1',
-                value: '[Circular->ROOT]'
-            },
-            {
-                keyPath: 'ROOT.a.b',
-                circularTo: 'ROOT',
-                key: 'b',
-                value: '[Circular->ROOT]'
-            }
+          {
+            keyPath: 'ROOT.circularRef',
+            circularTo: 'ROOT',
+            key: 'circularRef',
+            value: '[Circular->ROOT]'
+          },
+          {
+            keyPath: 'ROOT.list.0',
+            circularTo: 'ROOT',
+            key: '0',
+            value: '[Circular->ROOT]'
+          },
+          {
+            keyPath: 'ROOT.list.1',
+            circularTo: 'ROOT',
+            key: '1',
+            value: '[Circular->ROOT]'
+          },
+          {
+            keyPath: 'ROOT.a.b',
+            circularTo: 'ROOT',
+            key: 'b',
+            value: '[Circular->ROOT]'
+          }
         ].forEach((item) => {
             // check include in circularProps
             let hasInclude = false;
@@ -82,7 +84,7 @@ describe('Test \'./lib/json-check-circular.js\':', () => {
                 if(cp.key === item.key
                     && cp.keyPath === item.keyPath
                       && cp.circularTo === item.circularTo
-                        && cp.v === item.value
+                        && cp.value === item.value
                 ){
                     hasInclude = true;
                 }

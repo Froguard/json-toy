@@ -29,7 +29,7 @@ let testJson = {
 
 };
 
-describe('Test \'./lib/json-get-val-by-keypath.js\':', () => {
+describe('Test \'./lib/json-get-val-by-keypath.ts\':', () => {
 
     it('get correct value of existed prop by keyPath', function(done) {
         expect(getVal(testJson, 'x.y.1')).toBe(1);

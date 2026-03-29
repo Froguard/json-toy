@@ -37,7 +37,7 @@ testCaseDir.forEach((item) => {
     }
 });
 
-describe('Test \'./lib/json-treeify.js result values\':', () => {
+describe('Test \'./lib/json-treeify.ts result values\':', () => {
     ioMap.forEach((item) => {
         if(!!item.resExpect && !!item.resActual){
             it(`return correct string after converting json to treeString: '${`${item.key}.json`} <=> ${`${item.key}.txt`}'`, function(done) {

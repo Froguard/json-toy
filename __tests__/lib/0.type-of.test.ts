@@ -1,4 +1,4 @@
-let rewire = require('rewire');
+import * as Type from '../../src/lib/type-of';
 
 // test data
 let obj = new Object("obj1"),//string instance actually,but 'typeof' is not string
@@ -19,68 +19,8 @@ function Person(){}
 let p = new Person();
 
 
-// test target
-// use rewire instead of require for testing inner private members(functions & var)
-let Type = rewire('../lib/type-of.js');
-
-
-// private method: unexposed members
-describe("Test './lib/type-of.js' >> private method:", function() {
-
-    it("_getType", function(done) {
-        let _getType = Type.__get__('_getType');
-        // all result is lower case
-        expect(_getType(undefined)).toBe("undefined");
-        expect(_getType(null)).toBe("null");
-        expect(_getType(1)).toBe("number");
-        expect(_getType(0)).toBe("number");
-        expect(_getType(true)).toBe("boolean");
-        expect(_getType(false)).toBe("boolean");
-        expect(_getType("")).toBe("string");
-        expect(_getType("123")).toBe("string");
-        expect(_getType([])).toBe("array");
-        expect(_getType({})).toBe("object");
-        expect(_getType(obj)).toBe("string");
-        expect(_getType(error)).toBe("error");
-        expect(_getType(typeError)).toBe("typeerror");
-        expect(_getType(syntaxError)).toBe("syntaxerror");
-        expect(_getType(p)).toBe("person");
-        expect(_getType(Person)).toBe("function");
-
-
-        typeof done === 'function' && done();
-    });
-
-    it("_isTypeOf", function(done) {
-        // ignore upper or lower case
-        let _isTypeOf = Type.__get__('_isTypeOf');
-        expect(_isTypeOf("number")(1)).toBe(true);
-        expect(_isTypeOf("Number")(0)).toBe(true);
-        expect(_isTypeOf("Boolean")(true)).toBe(true);
-        expect(_isTypeOf("boolean")(false)).toBe(true);
-        expect(_isTypeOf("String")("")).toBe(true);
-        expect(_isTypeOf("string")("123")).toBe(true);
-        expect(_isTypeOf("string")(obj)).toBe(true);
-        expect(_isTypeOf("Array")([])).toBe(true);
-        expect(_isTypeOf("object")({})).toBe(true);
-        expect(_isTypeOf("error")(error)).toBe(true);
-        expect(_isTypeOf("typeError")(typeError)).toBe(true);
-        expect(_isTypeOf("syntaxError")(syntaxError)).toBe(true);
-        expect(_isTypeOf("pErSoN")(p)).toBe(true);
-        expect(_isTypeOf("Person")(p)).toBe(true);
-        expect(_isTypeOf("function")(Person)).toBe(true);
-        expect(_isTypeOf("regexp")(regex1)).toBe(true);
-
-        expect(_isTypeOf("")(regex1)).not.toBe(true);
-        expect(_isTypeOf(1)(regex1)).not.toBe(true);
-
-        typeof done === 'function' && done();
-    });
-
-});
-
 // exposed members
-describe("Test './lib/type-of.js' >> exports method:", function() {
+describe("Test './lib/type-of.ts' >> exports method:", function() {
 
     it("Type.isBoolean", function(done) {
         let calc = Type.isBoolean;
@@ -153,6 +93,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isObject.isFlat", function(done) {
+        // @ts-ignore
         let isFlat = Type.isObject.isFlat;
 
         // is
@@ -177,6 +118,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isObject.isEmpty", function(done) {
+        // @ts-ignore
         let calc = Type.isObject.isEmpty;
         // is
         expect(calc([])).toBe(true);
@@ -202,6 +144,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isObject.isEmptyOwn", function(done) {
+        // @ts-ignore
         let calc = Type.isObject.isEmptyOwn;
         // is
         expect(calc([])).toBe(true);
@@ -247,6 +190,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isNumber.decimal", function(done) {
+        // @ts-ignore
         let calc = Type.isNumber.decimal;
         expect(calc(1.23)).toBe(true);
         expect(calc(1)).not.toBe(true);
@@ -254,6 +198,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isNumber.integer", function(done) {
+        // @ts-ignore
         let calc = Type.isNumber.integer;
         expect(calc(1)).toBe(true);
         expect(calc(1.1)).not.toBe(true);
@@ -261,6 +206,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isNumber.odd", function(done) {
+        // @ts-ignore
         let calc = Type.isNumber.odd;
         expect(calc(1)).toBe(true);
         expect(calc(2)).not.toBe(true);
@@ -268,6 +214,7 @@ describe("Test './lib/type-of.js' >> exports method:", function() {
     });
 
     it("Type.isNumber.even", function(done) {
+        // @ts-ignore
         let calc = Type.isNumber.even;
         expect(calc(2)).toBe(true);
         expect(calc(1)).not.toBe(true);

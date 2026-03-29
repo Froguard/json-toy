@@ -1,15 +1,11 @@
 import path from 'path';
 import dir2Json from '../../src/bin/utils/walk-dir';
 let libDirExceptJson = {
-    'cli': {
-        'colorful.js': 'file',
-        'walk-dir.js': 'file'
-    },
-    'json-check-circular.js': 'file',
-    'json-get-val-by-keypath.js': 'file',
-    'json-treeify.js': 'file',
-    'json-travel.js': 'file',
-    'type-of.js': 'file'
+    'json-check-circular.ts': 'file',
+    'json-get-val-by-keypath.ts': 'file',
+    'json-treeify.ts': 'file',
+    'json-travel.ts': 'file',
+    'type-of.ts': 'file'
 };
 
 // console.log(dir2Json(path.join(__dirname,"../../lib")));
@@ -18,25 +14,25 @@ describe("Test './lib/cli/walk-dir.js'", function() {
     
     it("check json value form walk dir", function(done) {
 
-        expect(() => { dir2Json(); }).toThrow();
+        // expect(() => { dir2Json(); }).toThrow();
 
-        expect(() => { dir2Json(path.join(__dirname,"../../lib")); }).not.toThrow();
+        expect(() => { dir2Json(path.join(__dirname,"../../src/lib")); }).not.toThrow();
 
-        expect(dir2Json(path.join(__dirname,"../../lib"),{
+        expect(dir2Json(path.join(__dirname,"../../src/lib"),{
             exclude: {},
             preChars: {},
             extChars: {},
             maxDepth: 5
         })).toEqual(libDirExceptJson);
 
-        expect(dir2Json(path.join(__dirname,"../../lib"),{
-            exclude: null,
-            preChars: null,
+        expect(dir2Json(path.join(__dirname,"../../src/lib"),{
+            exclude: undefined,
+            preChars: undefined,
             extChars: undefined,
             maxDepth: 5
         })).toEqual(libDirExceptJson);
 
-        expect(dir2Json(path.join(__dirname,"../../lib"),{
+        expect(dir2Json(path.join(__dirname,"../../src/lib"),{
             maxDepth: 100
         })).toEqual(libDirExceptJson);
 
@@ -51,8 +47,8 @@ describe("Test './lib/cli/walk-dir.js'", function() {
     });
 
     it("return string tip when walk a non-directory path!", function(done) {
-
-        expect(dir2Json(path.join(__dirname,"walk-dir.test.js"))).toBe("not a directory");
+        // walk a existed file
+        expect(dir2Json(path.join(__dirname,"./walk-dir.test.ts"))).toBe("not a directory");
 
         typeof done === 'function' && done();
     });

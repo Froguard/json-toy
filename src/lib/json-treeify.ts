@@ -152,7 +152,7 @@ function repeatChar(char: string, n: number): string {
 }
 
 function formatOption(options: TreeifyOptions = {}): FormatedOptions {
-    const { jsonName, space, vSpace, needValueOut, msReturnChar } = options;
+    const { jsonName, space, vSpace, needValueOut, msReturnChar } = options || {};
     
     const formattedJsonName = (isString(jsonName) ? jsonName : '') || 'ROOT';
     
