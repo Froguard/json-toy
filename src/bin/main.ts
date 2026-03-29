@@ -2,15 +2,15 @@ import os from 'os';
 import fs from 'fs';
 import path from 'path';
 import yargs from 'yargs';
-import clipboardy from 'clipboardy';
-import { treeify } from '../index';
-import dir2Json from './utils/walk-dir';
-import * as Type from '../lib/type-of';
-import argHelp from './args-help.json';
 import colorful from 'color-cc';
+import argHelp from './utils/args-help.json';
+import { copyTxtToClipboard } from './utils/clipboard';
+import dir2Json, { Dir2JsonOptions } from './utils/walk-dir';
+import * as Type from '../lib/type-of';
+import { treeify } from '../index';
 
 const cwd = process.cwd();
-const existsSync = fs.existsSync || path.existsSync;
+const existsSync = fs.existsSync;
 const EOL = os.EOL;
 const needMsEol = EOL === '\r\n';
 
@@ -130,7 +130,8 @@ function _doMain(jsonObj: any, isDir2TreeStr?: boolean): void {
             }
 
             if (!(Type.isObject as any).isEmptyOwn(jsonObj) && needCopy) {
-                clipboardy.write(treeStr)
+                // clipboardy.write(treeStr)
+                copyTxtToClipboard(treeStr)
                     .then(() => console.log(colorful.success("Copy tree-string success!")));
             }
         }
@@ -141,7 +142,7 @@ function _doMain(jsonObj: any, isDir2TreeStr?: boolean): void {
 function dir2TreeStr(): void {
     argD = Type.isBoolean(argD) ? "./" : trimAndDelQuotes(String(argD));
     let dirJson: any;
-    const djOpt = {
+    const djOpt: Dir2JsonOptions = {
         exclude: {
             outExcludeDir: true //将过滤掉的文件夹输出
         },
@@ -189,7 +190,7 @@ function jsonFile2TreeStr(): void {
 
     if (Type.isString(argJson) && argJson.match(/^\{[\S\s:.]+}$/g)) {
         try {
-            targetJson = JSON.parse(argJson);
+            targetJson = JSON.parse(argJson as any);
         } catch (e1: any) {
             try {
                 targetJson = (new Function("return " + argJson + ";"))();

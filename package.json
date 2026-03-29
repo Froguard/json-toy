@@ -3,12 +3,11 @@
   "version": "3.0.0",
   "description": "json-treeify: Get tree string(├└│─) via json, support browser|node, browser none dependencies!",
   "dependencies": {
-    "clipboardy": "^5.3.1",
+    "clipboardy": "=3.0.0",
     "color-cc": "^0.1.0",
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@types/clipboardy": "^2.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.8.7",
     "@types/yargs": "^17.0.24",

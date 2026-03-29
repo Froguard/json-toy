@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { isNill, isObject, isRegExp, isString } from '../../lib/type-of';//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
+import { isArray, isNill, isObject, isRegExp, isString } from '../../lib/type-of';//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
 const fileExistSync = fs.existsSync;// || path.existsSync;//node@0.8.0
 import colorful from 'color-cc';
 
@@ -18,17 +18,18 @@ interface PreChars {
 }
 
 interface ExcludeOptions {
-    all?: RegExp | string;
-    file?: RegExp | string;
-    directory?: RegExp | string;
-    outExcludeDir?: boolean;
+    all?: RegExp | string | false;
+    file?: RegExp | string | false;
+    directory?: RegExp | string | false;
+    outExcludeDir?: boolean | false;
 }
 
-interface Dir2JsonOptions {
+export interface Dir2JsonOptions {
     exclude?: ExcludeOptions;
     extChars?: ExtChars;
     preChars?: PreChars;
-    maxDepth?: number | string;
+    maxDepth?: number | string | boolean;
+    [k: string]: any;
 }
 
 /**
@@ -119,7 +120,7 @@ function dir2Json(rootPath: string, options?: Dir2JsonOptions): any { // eslint-
                 console.log(colorful.error(`Occur error with read dirs from '${pathArg}',${e.toString()}`));
                 dirs = false;
             }
-            if(dirs && dirs.length){
+            if(isArray(dirs)){
                 if(dirs.length>=30){
                     console.log(`${colorful.warn('Too many files|directories was found, type-in an exact target to simplify or reduce result.')
                     }\n          ${colorful.yellow('path: ')}${colorful.cyan(`'${pathArg.replace(/\\/g, '/')}'`)}`);
@@ -127,7 +128,7 @@ function dir2Json(rootPath: string, options?: Dir2JsonOptions): any { // eslint-
                 // todo 子项太多未考虑
                 dirs.forEach((item: string) => {
                     const curPath = path.join(pathArg, item);
-                    let stat;// 获取fsStatInfo，用以后面的判断
+                    let stat: fs.Stats | false;// 获取fsStatInfo，用以后面的判断
                     try{
                         // todo 读大文件时候情况未考虑
                         stat = fs.statSync(curPath);// 读取文件信息
@@ -136,7 +137,7 @@ function dir2Json(rootPath: string, options?: Dir2JsonOptions): any { // eslint-
                         stat = false;
                     }
                     // 通配检查
-                    if(!filterGlobal || (!!filterGlobal && !item.match(filterGlobal))){
+                    if(!filterGlobal || (!!filterGlobal && !item.match(filterGlobal as string))){
                         // 文件夹类型的值为"其对应的实际对象"，文件类型值为"file",
                         // 读取stat失败的类型对应值为"unreadableStatType",其他的为"unknownStatType"
                         if(!stat){

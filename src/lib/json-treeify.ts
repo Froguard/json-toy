@@ -9,6 +9,11 @@ interface TreeifyOptions {
     msReturnChar?: boolean;
 }
 
+interface FormatedOptions extends Required<TreeifyOptions> {
+    space: number;
+    // vSpace: number;
+}
+
 interface TreeCharacters {
     I: string;
     T: string;
@@ -146,7 +151,7 @@ function repeatChar(char: string, n: number): string {
     return res;
 }
 
-function formatOption(options: TreeifyOptions = {}): Required<TreeifyOptions> {
+function formatOption(options: TreeifyOptions = {}): FormatedOptions {
     const { jsonName, space, vSpace, needValueOut, msReturnChar } = options;
     
     const formattedJsonName = (isString(jsonName) ? jsonName : '') || 'ROOT';

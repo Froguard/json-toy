@@ -79,7 +79,7 @@ export const isWeakSet = _Type_.isWeakSet;
 export const isMap = _Type_.isMap;
 export const isWeakMap = _Type_.isWeakMap;
 
-export function isArray(obj: any): boolean {
+export function isArray(obj: any): obj is Array<any> {
     return _Type_.isArray(obj) || (typeof Array.isArray !== 'undefined' && Array.isArray(obj));
 }
 
@@ -131,11 +131,11 @@ export function isBoolean(obj: any): boolean {
     return obj === true || obj === false || obj instanceof Boolean;
 }
 
-export function isString(obj: any): boolean {
+export function isString(obj: any): obj is string {
     return typeof obj === 'string' || obj instanceof String;
 }
 
-export function isChar(obj: any): boolean {
+export function isChar(obj: any): obj is string {
     return isString(obj) && obj.length === 1;
 }
 
@@ -175,7 +175,7 @@ function _isJSON(value: any, visited: any[] = []): boolean {
     visited.push(value);
     return isPrimitive(value) ||
         (isArray(value) && value.every(element => _isJSON(element, visited))) ||
-        (isObject.isFlat(value) && Object.keys(value).every((key) => {
+        ((isObject as any).isFlat(value) && Object.keys(value).every((key) => {
             let $ = Object.getOwnPropertyDescriptor(value, key);
             return $ && ((!isObject($.value) || !visited.includes($.value))
                     && !('get' in $) && !('set' in $)
