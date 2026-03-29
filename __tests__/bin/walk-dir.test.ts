@@ -1,6 +1,5 @@
-let path = require('path');
-let should = require('should');
-let dir2Json = require('../../lib/cli/walk-dir');
+import path from 'path';
+import dir2Json from '../../src/bin/utils/walk-dir';
 let libDirExceptJson = {
     'cli': {
         'colorful.js': 'file',
@@ -19,112 +18,105 @@ describe("Test './lib/cli/walk-dir.js'", function() {
     
     it("check json value form walk dir", function(done) {
 
-        should.throws(function(){
-            dir2Json();
-        });
+        expect(() => { dir2Json(); }).toThrow();
 
-        should.doesNotThrow(function(){
-            dir2Json(path.join(__dirname,"../../lib"));
-        });
+        expect(() => { dir2Json(path.join(__dirname,"../../lib")); }).not.toThrow();
 
-        should.deepEqual(libDirExceptJson, dir2Json(path.join(__dirname,"../../lib"),{
+        expect(dir2Json(path.join(__dirname,"../../lib"),{
             exclude: {},
             preChars: {},
             extChars: {},
             maxDepth: 5
-        }));
+        })).toEqual(libDirExceptJson);
 
-        should.deepEqual(libDirExceptJson, dir2Json(path.join(__dirname,"../../lib"),{
+        expect(dir2Json(path.join(__dirname,"../../lib"),{
             exclude: null,
             preChars: null,
             extChars: undefined,
             maxDepth: 5
-        }));
+        })).toEqual(libDirExceptJson);
 
-        should.deepEqual(libDirExceptJson, dir2Json(path.join(__dirname,"../../lib"),{
+        expect(dir2Json(path.join(__dirname,"../../lib"),{
             maxDepth: 100
-        }));
+        })).toEqual(libDirExceptJson);
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it("throw error when walk a dir is not existed!", function(done) {
 
-        should.throws(function(){
-            dir2Json(path.join(__dirname,"../../abcdefg"))
-        });
+        expect(() => { dir2Json(path.join(__dirname,"../../abcdefg")); }).toThrow();
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it("return string tip when walk a non-directory path!", function(done) {
 
-        should.equal("not a directory",dir2Json(path.join(__dirname,"walk-dir.test.js")));
+        expect(dir2Json(path.join(__dirname,"walk-dir.test.js"))).toBe("not a directory");
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it("check json value form ignore directory or file, and no output ignored-dir-props", function(done) {
 
-        should.deepEqual({a_ignore_dir: {}}, dir2Json(path.join(__dirname,"./test_dir"),{
+        expect(dir2Json(path.join(__dirname,"./test_dir"),{
             exclude: {
                 all: /^\..+/g // 所有 . 开头的文件或文件夹
             },
             maxDepth: 5
-        }));
+        })).toEqual({a_ignore_dir: {}});
 
-        should.deepEqual(
-            {
-                ".gitkeep": "file"
-            }, dir2Json(path.join(__dirname,"./test_dir"),{
+        expect(dir2Json(path.join(__dirname,"./test_dir"),{
                 exclude: {
                     directory: /a_ignore_dir/g // 所有 . 开头的文件或文件夹
                 },
                 maxDepth: 5
-            })
-        );
-        done && done.call(this);
+            })).toEqual(
+            {
+                ".gitkeep": "file"
+            });
+        typeof done === 'function' && done();
     });
 
     it("check json value form ignore directory, and output ignored-dir-props with flag 'xxx (ignored)'", function(done) {
 
-        should.deepEqual(
-            {
-                "a_ignore_dir (ignored)": {},
-                ".gitkeep": "file"
-            }, dir2Json(path.join(__dirname,"./test_dir"),{
+        expect(dir2Json(path.join(__dirname,"./test_dir"),{
                 exclude: {
                     directory: /a_ignore_dir/g, // 所有 . 开头的文件或文件夹
                     outExcludeDir: true
                 },
                 maxDepth: 5
-            })
-        );
-
-        should.deepEqual(
+            })).toEqual(
             {
-                "a_ignore_dir": {}
-            }, dir2Json(path.join(__dirname,"./test_dir"),{
+                "a_ignore_dir (ignored)": {},
+                ".gitkeep": "file"
+            });
+
+        expect(dir2Json(path.join(__dirname,"./test_dir"),{
                 exclude: {
                     file: /^\..*/g, // 所有 . 开头的文件或文件夹
                     outExcludeDir: true
                 },
                 maxDepth: 5
-            })
-        );
+            })).toEqual(
+            {
+                "a_ignore_dir": {}
+            });
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it("check json value form empty directory", function(done) {
 
-        should.deepEqual(null, dir2Json(path.join(__dirname,"./test_dir/a_ignore_dir"),{
+        expect(dir2Json(path.join(__dirname,"./test_dir/a_ignore_dir"),{
             exclude: {
                 all: /^\..+/g // 所有 . 开头的文件或文件夹
             },
             maxDepth: 5
-        }));
+        })).toEqual(null);
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 });
+
+export {};

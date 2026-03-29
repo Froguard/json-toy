@@ -1,7 +1,6 @@
-let should = require('should');
-let travel = require('../lib/json-travel');
+import { travelJson as travel } from '../../src/lib/json-travel';
 
-function typeOf(obj){
+function typeOf(obj: any){
     return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 }
 
@@ -38,7 +37,7 @@ let keysFortestJson = [
 ];
 
 // circularObj 循环自引用
-let circularObj = {};
+let circularObj: any = {};
 circularObj.circularRef = circularObj;
 circularObj.list = [circularObj, circularObj];
 circularObj.a = {b: circularObj, c: circularObj};
@@ -47,31 +46,33 @@ circularObj.a = {b: circularObj, c: circularObj};
 describe('Test \'./lib/json-travel.js\':', () => {
 
     it('throwing error when travel a primitive type', function(done) {
-        should.throws(() => {
+        expect(() => {
             travel(1);
-        });
-        should.throws(() => {
+        }).toThrow();
+        expect(() => {
+            // @ts-ignore
             travel();
             travel(null);
-        });
-        done && done.call(this);
+        }).toThrow();
+        typeof done === 'function' && done();
     });
 
     it('travel a correct json without throwing error, and return a array', function(done) {
-        should.doesNotThrow(() => {
+        expect(() => {
             travel(testJson);
-        });
-        should.doesNotThrow(() => {
+        }).not.toThrow();
+        expect(() => {
+            // @ts-ignore
             travel(testJson, 1);
-        });
-        should.equal('array', typeOf(travel(testJson)));
-        done && done.call(this);
+        }).not.toThrow();
+        expect(typeOf(travel(testJson))).toBe('array');
+        typeof done === 'function' && done();
     });
 
     it('travel a correct json without throwing error, and return correct values', function(done) {
         let res = travel(testJson),
             isEqual = true;
-        should.doesNotThrow(() => {
+        expect(() => {
             let i, iLen = keysFortestJson.length;
             for (i = 0; i < iLen; i++) {
                 if(keysFortestJson[i] !== res[i]){
@@ -79,16 +80,16 @@ describe('Test \'./lib/json-travel.js\':', () => {
                     break;
                 }
             }
-        });
-        should.equal(true, isEqual);
-        done && done.call(this);
+        }).not.toThrow();
+        expect(isEqual).toBe(true);
+        typeof done === 'function' && done();
     });
 
     it('travel a circular obj without throwing error', function(done) {
-        should.doesNotThrow(() => {
+        expect(() => {
             travel(circularObj);
-        });
-        done && done.call(this);
+        }).not.toThrow();
+        typeof done === 'function' && done();
     });
 
     it('travel a circular obj without throwing error. obj is changed from a correct json by incorrect-operate-code(like change value of json prop in callback)', function(done) {
@@ -98,20 +99,23 @@ describe('Test \'./lib/json-travel.js\':', () => {
                 z: 2
             }
         };
-        should.doesNotThrow(() => {
+        expect(() => {
             travel(testJson2, () => {
-                testJson2.x.y = testJson2;//change the json prop value
+                // @ts-ignore
+                testJson2.x.y = testJson2; // change the json prop value
             });
-        });
-        done && done.call(this);
+        }).not.toThrow();
+        typeof done === 'function' && done();
     });
 
     it('travel a circular obj with throwing error on \'unsafe mode\'', function(done) {
-        should.throws(() => {
+        expect(() => {
+            // @ts-ignore
             travel(circularObj, null, null, false);
-        });
-        done && done.call(this);
+        }).toThrow();
+        typeof done === 'function' && done();
     });
 
 });
 
+export {};

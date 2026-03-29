@@ -1,16 +1,15 @@
-let fs = require('fs');
-let path = require('path');
-let should = require('should');
-let treeStr = require('./json-treeify');
+import fs from 'fs';
+import path from 'path';
+import { treeify as treeStr } from '../../src/lib/json-treeify';
 let tcPath = path.join(__dirname, './test-cases');
-let testCaseDir = fs.readdirSync(tcPath);
+let testCaseDir = fs.readdirSync(tcPath) as string[];
 let opts = {
     rootName: 'ROOT',
     space: 3,
     vSpace: 1,
     valueOut: true
 };
-let ioMap = [];//输入输出检查
+let ioMap: any[] = [];//输入输出检查
 testCaseDir.forEach((item) => {
     if(path.extname(item).match(/(\.json)$/i)){
         let key = path.basename(item);
@@ -30,7 +29,9 @@ testCaseDir.forEach((item) => {
         }
         ioMap.push({
             key,
+            // @ts-ignore
             resExpect: eTxt && eTxt.replace(/\r/g, ''),
+            // @ts-ignore
             resActual: aTxt && aTxt.replace(/\r/g, '')
         });
     }
@@ -40,10 +41,12 @@ describe('Test \'./lib/json-treeify.js result values\':', () => {
     ioMap.forEach((item) => {
         if(!!item.resExpect && !!item.resActual){
             it(`return correct string after converting json to treeString: '${`${item.key}.json`} <=> ${`${item.key}.txt`}'`, function(done) {
-                should.deepEqual(item.resExpect, item.resActual);
-                done && done.call(this);
+                expect(item.resActual).toEqual(item.resExpect);
+                typeof done === 'function' && done();
             });
         }
     });
 });
+
+export {};
 

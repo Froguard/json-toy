@@ -1,9 +1,4 @@
-let should = require('should');
-let check = require('./json-check-circular');
-
-function typeOf(obj){
-    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
-}
+import { checkCircular as check } from '../../src/lib/json-check-circular';
 
 // correct-obj
 let testJson = {
@@ -25,7 +20,7 @@ let testJson = {
 };
 
 // circular-obj
-let circularObj = {};
+let circularObj :any = {};
 circularObj.circularRef = circularObj;
 circularObj.list = [circularObj, circularObj];
 circularObj.a = {b: circularObj};
@@ -34,16 +29,16 @@ circularObj.a = {b: circularObj};
 describe('Test \'./lib/json-check-circular.js\':', () => {
 
     it('check a obj, without error throwing', function(done) {
-        should.doesNotThrow(() => check(testJson));
+        expect(() => check(testJson)).not.toThrow();
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it('return \'result.isCircular=false\' res when check a unCircular obj', function(done) {
 
-        should.equal(false, check(testJson).isCircular);
+        expect(check(testJson).isCircular).toBe(false);
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it('return \'result.isCircular=true\' when check a circular obj', function(done) {
@@ -52,7 +47,7 @@ describe('Test \'./lib/json-check-circular.js\':', () => {
         let isCircular = checkRes.isCircular;
         let circularProps = checkRes.circularProps;
 
-        should.equal(true, isCircular);
+        expect(isCircular).toBe(true);
 
         let isCheckResultCorrect = true;
         [
@@ -83,11 +78,11 @@ describe('Test \'./lib/json-check-circular.js\':', () => {
         ].forEach((item) => {
             // check include in circularProps
             let hasInclude = false;
-            circularProps.forEach((cp) => {
+            (circularProps as Array<any>).forEach((cp) => {
                 if(cp.key === item.key
                     && cp.keyPath === item.keyPath
                       && cp.circularTo === item.circularTo
-                        && cp.v === item.v
+                        && cp.v === item.value
                 ){
                     hasInclude = true;
                 }
@@ -98,10 +93,12 @@ describe('Test \'./lib/json-check-circular.js\':', () => {
             }
         });
 
-        should.equal(true, isCheckResultCorrect);
+        expect(isCheckResultCorrect).toBe(true);
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
 });
+
+export {};
 

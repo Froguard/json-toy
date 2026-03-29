@@ -1,5 +1,4 @@
-let should = require('should');
-let treeStr = require('./json-treeify');
+import { treeify as treeStr } from '../../src/lib/json-treeify';
 // correct
 let testJson: any = {
     x: {
@@ -16,7 +15,7 @@ let testJson: any = {
                 3
             ]
         ],
-        z(a){}
+        z(a: any){}
     }
 };
 
@@ -30,54 +29,58 @@ circularObj.a = {b: circularObj};
 describe('Test \'./lib/json-treeify.js\':', () => {
 
     it('convert json to tree-string without throwing error, and return a string', function(done) {
-        should.doesNotThrow(() => {
+        expect(() => {
             treeStr('');
+            // @ts-ignore
             treeStr();
             treeStr(null);
             treeStr(undefined);
-        });
+        }).not.toThrow();
 
-        should.doesNotThrow(() => {
+        expect(() => {
             treeStr(testJson, {space: '\t'});
-        });
+        }).not.toThrow();
 
-        should.doesNotThrow(() => {
+        expect(() => {
             treeStr(testJson, {needValueOut: false, vSpace: -1, space: -1, jsonName: ''});
-        });
+        }).not.toThrow();
 
-        should.doesNotThrow(() => {
+        expect(() => {
             treeStr(testJson, {needValueOut: false, vSpace: 4, space: 9, jsonName: ''});
-        });
+        }).not.toThrow();
 
-        should.doesNotThrow(() => {
+        expect(() => {
             treeStr(testJson, {needValueOut: false, vSpace: NaN, space: 9, jsonName: ''});
-        });
+        }).not.toThrow();
 
-        should.equal('string', typeof treeStr(testJson, null));
+        // @ts-ignore
+        expect(typeof treeStr(testJson, null)).toBe('string');
 
-        should.equal(true, treeStr(testJson, {msReturnChar: true}).includes('\r'));
-        
-        done && done.call(this);
+        expect(treeStr(testJson, {msReturnChar: true}).includes('\r')).toBe(true);
+
+        typeof done === 'function' && done();
     });
 
     it('convert a circularObj to tree-string without throwing error', function(done) {
-        should.doesNotThrow(() => {
+        expect(() => {
             treeStr(circularObj);
-        });
+        }).not.toThrow();
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it('undefined,null,primitive type return a string', function(done) {
-        should.equal('string', typeof treeStr(1));
-        should.equal('string', typeof treeStr({}));
-        should.equal('string', typeof treeStr([]));
-        should.equal('string', typeof treeStr(null));
-        should.equal('string', typeof treeStr(undefined));
-        should.equal('string', typeof treeStr('abd13'));
+        expect(typeof treeStr(1)).toBe('string');
+        expect(typeof treeStr({})).toBe('string');
+        expect(typeof treeStr([])).toBe('string');
+        expect(typeof treeStr(null)).toBe('string');
+        expect(typeof treeStr(undefined)).toBe('string');
+        expect(typeof treeStr('abd13')).toBe('string');
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
 });
+
+export {};
 

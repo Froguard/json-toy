@@ -1,5 +1,4 @@
-let should = require('should');
-let getVal = require('../lib/json-get-val-by-keypath');
+import { getValByKeyPath as getVal } from '../../src/lib/json-get-val-by-keypath';
 
 let testJson = {
     x: {
@@ -33,37 +32,39 @@ let testJson = {
 describe('Test \'./lib/json-get-val-by-keypath.js\':', () => {
 
     it('get correct value of existed prop by keyPath', function(done) {
-        should.equal(1, getVal(testJson, 'x.y.1'));
-        should.equal(1, getVal(testJson, 'x.y.1', false));
-        should.equal(1, getVal(testJson, 'x.y.1', true));
-        should.equal('helloZ', getVal(testJson, 'x.y.2.z'));
-        should.equal(3, getVal(testJson, 'x.y.3.3'));
-        should.equal(2, getVal(testJson, '[.]'));
+        expect(getVal(testJson, 'x.y.1')).toBe(1);
+        expect(getVal(testJson, 'x.y.1', false)).toBe(1);
+        expect(getVal(testJson, 'x.y.1', true)).toBe(1);
+        expect(getVal(testJson, 'x.y.2.z')).toBe('helloZ');
+        expect(getVal(testJson, 'x.y.3.3')).toBe(3);
+        expect(getVal(testJson, '[.]')).toBe(2);
 
         // special char
-        should.equal('include_dot_char', getVal(testJson, 'hasDotChar.jquery&bull;min&bull;js'));
-        should.equal('just_a_dot_char', getVal(testJson, 'hasDotChar.&bull;'));
-        should.equal('just_a_convert_char_set_1', getVal(testJson, 'hasDotChar.&amp;bull;'));
-        should.equal('just_a_convert_char_set_2', getVal(testJson, 'hasDotChar.&amp;amp;'));
-        should.equal('one_sp_char', getVal(testJson, 'hasDotChar.&amp;'));
+        expect(getVal(testJson, 'hasDotChar.jquery&bull;min&bull;js')).toBe('include_dot_char');
+        expect(getVal(testJson, 'hasDotChar.&bull;')).toBe('just_a_dot_char');
+        expect(getVal(testJson, 'hasDotChar.&amp;bull;')).toBe('just_a_convert_char_set_1');
+        expect(getVal(testJson, 'hasDotChar.&amp;amp;')).toBe('just_a_convert_char_set_2');
+        expect(getVal(testJson, 'hasDotChar.&amp;')).toBe('one_sp_char');
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it('get undefined if prop corresponding in keypath is not existed in json obj', function(done) {
 
-        should.deepEqual(undefined, getVal(testJson, 'a.b.c.d'));
-        should.deepEqual(undefined, getVal(testJson, 'x.y.-1'));
-        should.deepEqual(undefined, getVal(testJson, 'x.y.4'));
+        expect(getVal(testJson, 'a.b.c.d')).toBeUndefined();
+        expect(getVal(testJson, 'x.y.-1')).toBeUndefined();
+        expect(getVal(testJson, 'x.y.4')).toBeUndefined();
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 
     it('throw error during getVal(nill)', function(done) {
 
-        should.throws(() => getVal(null, 'a.b.c.d'));
+        expect(() => getVal(null, 'a.b.c.d')).toThrow();
 
-        done && done.call(this);
+        typeof done === 'function' && done();
     });
 });
+
+export {};
 
