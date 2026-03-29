@@ -1,0 +1,25 @@
+ ROOT
+  │
+  ├─ one
+  │   │
+  │   ├─ two: 2
+  │   │
+  │   ├─ three
+  │   │   │
+  │   │   └─ four
+  │   │       │
+  │   │       └─ five: 5
+  │   │
+  │   ├─ six
+  │   │   │
+  │   │   └─ seven: 7
+  │   │
+  │   └─ eight
+  │       │
+  │       └─ nine: 9
+  │
+  ├─ ten
+  │   │
+  │   └─ eleven: 11
+  │
+  └─ twelve: 12
