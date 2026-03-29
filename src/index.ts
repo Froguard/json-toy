@@ -34,7 +34,7 @@ export {
      *        {Boolean} options.valueOut
      * @returns {string|*} a tree-like string
      */
-    treeify,
+    treeify: treeify,
     treeString: treeify,
 
     /**

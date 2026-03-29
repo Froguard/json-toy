@@ -24,7 +24,7 @@ $ npm run pack
 
 ## main process
 
-![image](/example/img/flow.png)
+![image](../example/img/flow.png)
 
 
 travel:

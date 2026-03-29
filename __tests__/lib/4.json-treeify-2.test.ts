@@ -1,7 +1,7 @@
 let fs = require('fs');
 let path = require('path');
 let should = require('should');
-let treeStr = require('../lib/json-treeify');
+let treeStr = require('./json-treeify');
 let tcPath = path.join(__dirname, './test-cases');
 let testCaseDir = fs.readdirSync(tcPath);
 let opts = {

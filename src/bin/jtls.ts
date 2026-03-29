@@ -1,16 +1,15 @@
 #!/usr/bin/env node
-'use strict';
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 const cwd = process.cwd();
-const colorful = require('../lib/cli/colorful');
-function warningOut(str){
+import colorful from 'color-cc';
+function warningOut(str: string){
     console.log(colorful.warn(str));
 }
 
 // jts --dir=./ --max=1 --copy=0
 let i = 2;
-let d,m,c,x,o,jtls;
+let d: number | undefined, m: number | undefined, c: number | undefined, x: number | undefined, o: number | undefined, jtls: number | undefined;
 // default
 const vd = "--dir=./";  // current directory
 const vm = "--max=1";   // 1 max depth
@@ -20,7 +19,7 @@ const vx = "--xspace=3";// 3 xSpace
 const vov = '--outv=0';
 const isjtls = '--jtls=1';
 
-let argArr = [];
+let argArr: string[] = [];
 
 // check if has set
 while(process.argv[i]!=undefined){
@@ -64,4 +63,4 @@ while(process.argv[i]!=undefined){
 // console.log(`jts ${argArr.join(" ")}`);
 
 // main
-require('./main');
+import './main';

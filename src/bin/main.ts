@@ -4,10 +4,10 @@ import path from 'path';
 import yargs from 'yargs';
 import clipboardy from 'clipboardy';
 import { treeify } from '../index';
-import { dir2Json } from '../lib/cli/walk-dir';
+import dir2Json from './utils/walk-dir';
 import * as Type from '../lib/type-of';
 import argHelp from './args-help.json';
-import { colorful } from '../lib/cli/colorful';
+import colorful from 'color-cc';
 
 const cwd = process.cwd();
 const existsSync = fs.existsSync || path.existsSync;

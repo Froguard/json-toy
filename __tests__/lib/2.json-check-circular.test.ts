@@ -1,5 +1,5 @@
 let should = require('should');
-let check = require('../lib/json-check-circular');
+let check = require('./json-check-circular');
 
 function typeOf(obj){
     return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();

@@ -1,7 +1,7 @@
 let should = require('should');
-let treeStr = require('../lib/json-treeify');
+let treeStr = require('./json-treeify');
 // correct
-let testJson = {
+let testJson: any = {
     x: {
         y: [
             0,
@@ -21,7 +21,7 @@ let testJson = {
 };
 
 // circularObj 循环自引用
-let circularObj = {};
+let circularObj: any = {};
 circularObj.circularRef = circularObj;
 circularObj.list = [circularObj, circularObj];
 circularObj.a = {b: circularObj};

@@ -15,7 +15,7 @@ interface TreeCharacters {
     L: string;
     _: string;
     SPLIT: string;
-    [key: number]: string;
+    [key: number|string]: string;
 }
 
 /*

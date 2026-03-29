@@ -1,29 +1,53 @@
-let path = require('path');
-let fs = require('fs');
-let {isNill, isObject, isRegExp, isString} = require('../type-of');//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
-let fileExistSync = fs.existsSync;// || path.existsSync;//node@0.8.0
-let colorful = require('./colorful');
+import path from 'path';
+import fs from 'fs';
+import { isNill, isObject, isRegExp, isString } from '../../lib/type-of';//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
+const fileExistSync = fs.existsSync;// || path.existsSync;//node@0.8.0
+import colorful from 'color-cc';
 
-let REGEXP_IGNORE_DIR = /(\.git|\.svn|\.idea|node_modules|bower_components)/g;
-let REGEXP_IGNORE_FILE = /(Thumbs\.db|\.DS_store)/g;
+const REGEXP_IGNORE_DIR = /(\.git|\.svn|\.idea|node_modules|bower_components)/g;
+const REGEXP_IGNORE_FILE = /(Thumbs\.db|\.DS_store)/g;
+
+interface ExtChars {
+    file?: string;
+    directory?: string;
+}
+
+interface PreChars {
+    file?: string;
+    directory?: string;
+}
+
+interface ExcludeOptions {
+    all?: RegExp | string;
+    file?: RegExp | string;
+    directory?: RegExp | string;
+    outExcludeDir?: boolean;
+}
+
+interface Dir2JsonOptions {
+    exclude?: ExcludeOptions;
+    extChars?: ExtChars;
+    preChars?: PreChars;
+    maxDepth?: number | string;
+}
 
 /**
  * 将文件目录转换为json对象
  * @param {String} rootPath 目标根目录
  * @param {Object} options
  *        {Object} options.exclude
- *        {RegExp} options.exclude.all,file,directory 正则表达式去匹配 “排除项”
+ *        {RegExp} options.exclude.all,file,directory 正则表达式去匹配 "排除项"
  *        {Object} options.extChars
  *        {String} options.extChars.file,directory 文件节点，文件夹节点的末尾字符
  * @returns {JSON|String}
  */
-function dir2Json(rootPath, options) { // eslint-disable-line
+function dir2Json(rootPath: string, options?: Dir2JsonOptions): any { // eslint-disable-line
     // root
     rootPath = path.normalize(rootPath) || './';
     if(!fileExistSync(rootPath)){
         throw new Error(`The path '${rootPath}' is not existed!`);
     }
-    let statRootPath = fs.statSync(rootPath);
+    const statRootPath = fs.statSync(rootPath);
     if(!statRootPath.isDirectory()){
         return 'not a directory';
     }
@@ -33,10 +57,10 @@ function dir2Json(rootPath, options) { // eslint-disable-line
     let exclude = options.exclude;
     let extChars = options.extChars;
     let preChars = options.preChars;
-    let maxDepth = parseInt(options.maxDepth);
+    let maxDepth = parseInt(options.maxDepth as string);
     maxDepth = maxDepth || 0;
     if(!maxDepth || maxDepth>5){
-        // “潜在的长时等待”提示
+        // "潜在的长时等待"提示
         console.log(colorful.warn('Potential long-time-wait: You`d better set a max depth (less than 5) to access directories,or it will spend a long time!'));
     }
     // options.exclude: 排除某些文件或文件夹
@@ -76,22 +100,22 @@ function dir2Json(rootPath, options) { // eslint-disable-line
         preChars.file = isString(preChars.file) ? preChars.file : '';
         preChars.directory = isString(preChars.directory) ? preChars.directory : '';
     }
-    let fPre = preChars.file;
-    let dPre = preChars.directory;
-    let fExt = extChars.file;
-    let dExt = extChars.directory;
+    const fPre = preChars.file;
+    const dPre = preChars.directory;
+    const fExt = extChars.file;
+    const dExt = extChars.directory;
 
     // result json
-    let json = {};
+    const json: any = {};
 
     // do main
-    function travel(pathArg, far, curDepth){
+    function travel(pathArg: string, far: any, curDepth: number){
         if(!maxDepth || (maxDepth && curDepth<=maxDepth)){
             let dirs;
             try{
                 // todo 目录太多时候崩溃未考虑
                 dirs = fs.readdirSync(pathArg);//第一级子目录（文件|文件夹）
-            }catch(e){
+            }catch(e: any){
                 console.log(colorful.error(`Occur error with read dirs from '${pathArg}',${e.toString()}`));
                 dirs = false;
             }
@@ -101,19 +125,19 @@ function dir2Json(rootPath, options) { // eslint-disable-line
                     }\n          ${colorful.yellow('path: ')}${colorful.cyan(`'${pathArg.replace(/\\/g, '/')}'`)}`);
                 }
                 // todo 子项太多未考虑
-                dirs.forEach((item) => {
-                    let curPath = path.join(pathArg, item);
+                dirs.forEach((item: string) => {
+                    const curPath = path.join(pathArg, item);
                     let stat;// 获取fsStatInfo，用以后面的判断
                     try{
                         // todo 读大文件时候情况未考虑
                         stat = fs.statSync(curPath);// 读取文件信息
-                    }catch(e1){
+                    }catch(e1: any){
                         console.log(colorful.warn(`Skip to read stat info from '${curPath}'\n${e1.toString()}`));
                         stat = false;
                     }
                     // 通配检查
                     if(!filterGlobal || (!!filterGlobal && !item.match(filterGlobal))){
-                        // 文件夹类型的值为“其对应的实际对象”，文件类型值为"file",
+                        // 文件夹类型的值为"其对应的实际对象"，文件类型值为"file",
                         // 读取stat失败的类型对应值为"unreadableStatType",其他的为"unknownStatType"
                         if(!stat){
                             far[item] = 'unreadableStatType';
@@ -146,7 +170,7 @@ function dir2Json(rootPath, options) { // eslint-disable-line
         }
     }
     travel(rootPath, json, 1);
-    return isObject.isEmptyOwn(json) ? null : json;
+    return (isObject as any).isEmptyOwn(json) ? null : json;
 }
 
-module.exports = dir2Json;
+export default dir2Json;

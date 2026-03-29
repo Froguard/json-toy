@@ -1,2 +1,2 @@
 service_name: travis-ci
-json_path: coverage/coverage.json
+json_path: __coverage__/coverage.json

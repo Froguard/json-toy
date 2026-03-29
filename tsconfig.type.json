@@ -1,0 +1,17 @@
+// tsconfig.type.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ES2022",
+    "outDir": "dist/types",
+    "emitDeclarationOnly": true, // 仅仅生成声明文件
+    /**
+     * 这个文件单独存在的意义，因为 removeComments 会同时控制声明文件 & 其他文件
+     * - 即：要么都加注释，要么都不加注释
+     * 而 tsconfig.base|esm|cjs.json 中 removeComments 是 true
+     */
+    "removeComments": false, // 保留注释
+    "declaration": true,
+    "declarationDir": "dist/types"
+  }
+}

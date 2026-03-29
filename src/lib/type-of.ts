@@ -46,7 +46,7 @@ function _getType(obj: any): string {
  * @returns {Function}
  */
 function _isTypeOf(type: string): (obj: any) => boolean {
-    type = ((typeof type === 'string' || type instanceof String) ? type : '').toLowerCase();
+    type = ((typeof type === 'string' || (type as any) instanceof String) ? type : '').toLowerCase();
     return function(obj: any): boolean {
         return type === _getType(obj);
     };
