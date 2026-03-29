@@ -1,11 +1,21 @@
 /**
  * Type check
  *
- * You'd better do not init a primitive type variable via 'new Object'
- * is would make somme confused in program!!!
+ * You'd better do not init a primitive type via 'new Object'
+ * is would make some confused in program!!!
  */
 
-type TypeName = 'arguments' | 'array' | 'date' | 'error' | 'syntaxError' | 'typeError' | 'rangeError' | 'regExp' | 'symbol' | 'set' | 'weakSet' | 'map' | 'weakMap' | 'object' | 'function' | 'boolean' | 'string' | 'number' | 'undefined' | 'null';
+// type TypeName = 'arguments' | 'array' | 'date' | 'error' | 'syntaxError' | 'typeError' | 'rangeError' | 'regExp' | 'symbol' | 'set' | 'weakSet' | 'map' | 'weakMap' | 'object' | 'function' | 'boolean' | 'string' | 'number' | 'undefined' | 'null';
+
+// 定义原始类型
+type Primitive = string | number | boolean | null | undefined | symbol | bigint;
+
+// 定义 JSON 类型
+type JSONValue = string | number | boolean | null | JSONObject | JSONArray;
+interface JSONObject {
+    [key: string]: JSONValue;
+}
+interface JSONArray extends Array<JSONValue> {}
 
 /*
  * 获取typeString，结果里会带有'['和']'字符
@@ -45,9 +55,9 @@ function _getType(obj: any): string {
  * @param type
  * @returns {Function}
  */
-function _isTypeOf(type: string): (obj: any) => boolean {
+function _isTypeOf<T>(type: string): (obj: any) => obj is T {
     type = ((typeof type === 'string' || (type as any) instanceof String) ? type : '').toLowerCase();
-    return function(obj: any): boolean {
+    return function(obj: any): obj is T {
         return type === _getType(obj);
     };
 }
@@ -72,62 +82,62 @@ const _Type_: TypeCheckers = {};
     _Type_[`is${t[0].toUpperCase()}${t.slice(1)}`] = _isTypeOf(t);
 });
 
-export const isArguments = _Type_.isArguments;
-export const isSymbol = _Type_.isSymbol;
-export const isSet = _Type_.isSet;
-export const isWeakSet = _Type_.isWeakSet;
-export const isMap = _Type_.isMap;
-export const isWeakMap = _Type_.isWeakMap;
+export const isArguments = _Type_.isArguments as (obj: any) => obj is IArguments;
+export const isSymbol = _Type_.isSymbol as (obj: any) => obj is symbol;
+export const isSet = _Type_.isSet as (obj: any) => obj is Set<any>;
+export const isWeakSet = _Type_.isWeakSet as (obj: any) => obj is WeakSet<any>;
+export const isMap = _Type_.isMap as (obj: any) => obj is Map<any, any>;
+export const isWeakMap = _Type_.isWeakMap as (obj: any) => obj is WeakMap<any, any>;
 
 export function isArray(obj: any): obj is Array<any> {
-    return _Type_.isArray(obj) || (typeof Array.isArray !== 'undefined' && Array.isArray(obj));
+    return (typeof Array.isArray !== 'undefined' && Array.isArray(obj)) || _Type_.isArray(obj);
 }
 
-export function isDate(obj: any): boolean {
+export function isDate(obj: any): obj is Date {
     return obj instanceof Date || _Type_.isDate(obj);
 }
 
-export function isRegExp(obj: any): boolean {
+export function isRegExp(obj: any): obj is RegExp {
     return obj instanceof RegExp || _Type_.isRegExp(obj);
 }
 
-export function isError(obj: any): boolean {
+export function isError(obj: any): obj is Error {
     return _Type_.isError(obj) || obj instanceof Error;
 }
 
-export function isSyntaxError(obj: any): boolean {
+export function isSyntaxError(obj: any): obj is SyntaxError {
     return _Type_.isSyntaxError(obj) || obj instanceof SyntaxError;
 }
 
-export function isTypeError(obj: any): boolean {
+export function isTypeError(obj: any): obj is TypeError {
     return _Type_.isTypeError(obj) || obj instanceof TypeError;
 }
 
-export function isRangeError(obj: any): boolean {
+export function isRangeError(obj: any): obj is RangeError {
     return _Type_.isRangeError(obj) || obj instanceof RangeError;
 }
 
-export function isObject(obj: any): boolean {
+export function isObject(obj: any): obj is Record<string, any> {
     return (typeof obj === 'object' || obj instanceof Object) && obj !== null;
 }
 
-export function isFunction(obj: any): boolean {
+export function isFunction(obj: any): obj is Function {
     return typeof obj === 'function' || obj instanceof Function;
 }
 
-export function isNull(obj: any): boolean {
+export function isNull(obj: any): obj is null {
     return obj === null;
 }
 
-export function isUndefined(obj: any): boolean {
+export function isUndefined(obj: any): obj is undefined {
     return obj === undefined;
 }
 
-export function isNill(obj: any): boolean {
+export function isNill(obj: any): obj is null | undefined {
     return (obj === null || obj === undefined);
 }
 
-export function isBoolean(obj: any): boolean {
+export function isBoolean(obj: any): obj is boolean {
     return obj === true || obj === false || obj instanceof Boolean;
 }
 
@@ -139,7 +149,7 @@ export function isChar(obj: any): obj is string {
     return isString(obj) && obj.length === 1;
 }
 
-export function isNumber(obj: any, warn: boolean = true): boolean {
+export function isNumber(obj: any, warn: boolean = true): obj is number {
     if(warn && obj !== obj) {
         console.warn('obj is NaN. Using \'isRealNumber(obj)\' instead of \'isNumber(obj)\'\nOr using \'isNumber(obj,false)\' to stop warning out\n');
     }
@@ -150,15 +160,15 @@ export function isNaN(obj: any): boolean {
     return obj !== obj;
 }
 
-export function isRealNumber(obj: any): boolean {
+export function isRealNumber(obj: any): obj is number {
     return !isNaN(obj) && isNumber(obj);
 }
 
-export function isPrimitive(obj: any): boolean {
+export function isPrimitive(obj: any): obj is Primitive {
     return !isObject(obj) && !isFunction(obj);
 }
 
-export function isSpreadable(obj: any): boolean {
+export function isSpreadable(obj: any): obj is Array<any> | Record<string, any> {
     if(isArray(obj)){
         return !!obj.length;
     } else if(isObject(obj) || isFunction(obj)){
@@ -183,7 +193,7 @@ function _isJSON(value: any, visited: any[] = []): boolean {
         }));
 }
 
-export function isJSON(obj: any): boolean {
+export function isJSON(obj: any): obj is JSONValue {
     return _isJSON(obj);
 }
 
@@ -259,4 +269,4 @@ export interface NumberExtensions {
  */
 export function getTypeOf(obj: any): string {
     return _getType(obj);
-} 
+}
