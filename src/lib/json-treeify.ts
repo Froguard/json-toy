@@ -193,7 +193,7 @@ function formatOption(options: TreeifyOptions = {}): FormatedOptions {
  * @returns {string} a tree-like string
  */
 export function treeify(json: any, options: TreeifyOptions = {}): string {
-    const { jsonName, space, vSpace, needValueOut } = formatOption(options);
+    const { jsonName, space, vSpace, needValueOut, msReturnChar } = formatOption(options);
 
     if (isNill(json)) {
         return `${jsonName}'s content is ${String(json)}`;
@@ -265,7 +265,11 @@ export function treeify(json: any, options: TreeifyOptions = {}): string {
         }
     });
 
+    const lineSplitChar = msReturnChar ? '\r\n' : '\n';
     return fixArr(res)
-        .map(row => row.filter(item => item !== undefined).join(''))
-        .join('\n');
+        .map(
+          row => row.filter(item => item !== undefined).join('')
+          .trimEnd()
+        )
+        .join(lineSplitChar);
 } 

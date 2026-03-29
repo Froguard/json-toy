@@ -56,7 +56,9 @@ describe('Test \'./lib/json-treeify.ts\':', () => {
         // @ts-ignore
         expect(typeof treeStr(testJson, null)).toBe('string');
 
-        expect(treeStr(testJson, {msReturnChar: true}).includes('\r')).toBe(true);
+        expect(
+          treeStr(testJson, { msReturnChar: true }).includes('\r')
+        ).toBe(true);
 
         typeof done === 'function' && done();
     });
