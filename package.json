@@ -44,7 +44,7 @@
   },
   "scripts": {
     "dev": "ts-node ./_example_/demo.ts",
-    "dev:bin": "ts-node ./src/bin/index.ts",
+    "dev:bin": "ts-node ./src/bin/main.ts",
     "-------------------build-------------------": "echo '------------------- build -------------------'",
     "build": "run-p build:esm build:cjs build:types",
     "build:esm": "tsc --project tsconfig.esm.json",
