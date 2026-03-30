@@ -58,7 +58,9 @@ let v = parseInt(String(args.y !== undefined ? args.y : args.yspace));
 let outputVal = args.outv === undefined ? true : !!args.outv;
 let jsonName = '';
 
-/* main */
+/*
+ * main
+ */
 if (argJ) {
   jsonFile2TreeStr();
 } else if (argD) {

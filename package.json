@@ -5,7 +5,7 @@
   "dependencies": {
     "clipboardy": "=3.0.0",
     "color-cc": "^0.1.0",
-    "yargs": "^18.0.0"
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",
