@@ -1,0 +1,10 @@
+/node_modules
+/tpl
+/dist
+/assets
+.eslintrc.js
+.prettierrc.js
+.lintstagedrc.js
+.frontendrc.*
+tsconfig.json
+tsconfig.*.json
