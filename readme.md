@@ -25,7 +25,7 @@ Some simple methods for operating object as json in an easy way
 
    ````$ jts -d```` or ````$ j-tree-str -d```` convert a file directory to tree string, and some diy in github-issues by diy-theme
 
-   ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/dirTree.jpg) &nbsp; ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/issuesTree.jpg)
+   ![image](https://raw.githubusercontent.com/Froguard/json-toy/master/example/img/dirTree.jpg) 
 
 
 - 2.**convert directory to json obj and tree-structure-string**
@@ -50,26 +50,6 @@ Some simple methods for operating object as json in an easy way
 $ npm install json-toy -g
 $ jtls
 ````
-
-Or if you haven't use the npm,you can do like this ,add [json-treeify.min.js](https://github.com/Froguard/json-toy/blob/master/dist/json-treeify.min.js)
-or [json-treeify.min.js-on-cdn-resource](https://unpkg.com/json-toy/dist/json-treeify.min.js) **just 3.6kb**
-
-```html
-<script src="https://unpkg.com/json-toy/dist/json-treeify.min.js"></script>
-<script>
-    let treeify = window.jsonTreeify;
-    let testData = {
-        a: 1,
-        b: {
-            c: "hello world"
-        }
-    };
-    console.log(treeify(testData));
-    //...
-</script>
-```
-
-The core file has no dependencies,and just **3.6kb** size;
 
 ## Usage
 
