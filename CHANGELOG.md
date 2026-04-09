@@ -1,3 +1,11 @@
+## 3.0.0 (2026-4-9)
+
+- Convert All code files, from javascript to typescript
+- Add type-definition file
+- Export cjs, esm, types
+- Simplify example
+- Add Claude Code Harness config
+
 ## 2.0.1 (2019-8-9)
 
 - Change args in travelJson callback, shorten it into option
