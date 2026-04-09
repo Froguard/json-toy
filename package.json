@@ -31,12 +31,40 @@
     "tslib": "^2.6.2",
     "typescript": "^4.5.5"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "types": "dist/esm/index.d.ts",
   "bin": {
-    "j-tree-str": "dist/bin/j-tree-str.js",
-    "jts": "dist/bin/j-tree-str.js",
+    "jts": "dist/bin/jts.js",
+    "j-tree-str": "dist/bin/jts.js",
+    "json-treeify": "dist/bin/jts.js",
     "jtls": "dist/bin/jtls.js"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./lib/json-check-circular": {
+      "require": "./dist/cjs/lib/json-check-circular.js",
+      "import": "./dist/esm/lib/json-check-circular.js",
+      "types": "./dist/types/lib/json-check-circular.d.ts"
+    },
+    "./lib/json-get-val-by-keypath": {
+      "require": "./dist/cjs/lib/json-get-val-by-keypath.js",
+      "import": "./dist/esm/lib/json-get-val-by-keypath.js",
+      "types": "./dist/types/lib/json-get-val-by-keypath.d.ts"
+    },
+    "./lib/json-travel": {
+      "require": "./dist/cjs/lib/json-travel.js",
+      "import": "./dist/esm/lib/json-travel.js",
+      "types": "./dist/types/lib/json-travel.d.ts"
+    },
+    "./lib/json-treeify": {
+      "require": "./dist/cjs/lib/json-treeify.js",
+      "import": "./dist/esm/lib/json-treeify.js",
+      "types": "./dist/types/lib/json-treeify.d.ts"
+    }
   },
   "scripts": {
     "dev": "ts-node ./_example_/demo.ts",
