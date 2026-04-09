@@ -328,16 +328,7 @@
 <a name='L263'></a><a href='#L263'>263</a>
 <a name='L264'></a><a href='#L264'>264</a>
 <a name='L265'></a><a href='#L265'>265</a>
-<a name='L266'></a><a href='#L266'>266</a>
-<a name='L267'></a><a href='#L267'>267</a>
-<a name='L268'></a><a href='#L268'>268</a>
-<a name='L269'></a><a href='#L269'>269</a>
-<a name='L270'></a><a href='#L270'>270</a>
-<a name='L271'></a><a href='#L271'>271</a>
-<a name='L272'></a><a href='#L272'>272</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L266'></a><a href='#L266'>266</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -392,12 +383,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">91x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
@@ -438,6 +423,7 @@
 <span class="cline-any cline-yes">2183x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2089x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -504,10 +490,9 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -540,7 +525,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -605,14 +589,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Type check
- *
- * You'd better do not init a primitive type via 'new Object'
- * is would make some confused in program!!!
  */
 &nbsp;
-// type TypeName = 'arguments' | 'array' | 'date' | 'error' | 'syntaxError' | 'typeError' | 'rangeError' | 'regExp' | 'symbol' | 'set' | 'weakSet' | 'map' | 'weakMap' | 'object' | 'function' | 'boolean' | 'string' | 'number' | 'undefined' | 'null';
+// 类型名称集合（已精简）
+// type TypeName = 'arguments' | 'array' | 'date' | 'error' | 'object' | 'function' | ...
 &nbsp;
 // 定义原始类型
 type Primitive = string | number | boolean | null | undefined | symbol | bigint;
@@ -620,7 +606,7 @@ type Primitive = string | number | boolean | null | undefined | symbol | bigint;
 // 定义 JSON 类型
 type JSONValue = string | number | boolean | null | JSONObject | JSONArray;
 interface JSONObject {
-    [key: string]: JSONValue;
+  [key: string]: JSONValue;
 }
 interface JSONArray extends Array&lt;JSONValue&gt; {}
 &nbsp;
@@ -631,7 +617,7 @@ interface JSONArray extends Array&lt;JSONValue&gt; {}
  * @private
  */
 function _typeString(obj: any): string {
-    return Object.prototype.toString.call(obj);
+  return Object.prototype.toString.call(obj);
 }
 &nbsp;
 /*
@@ -640,21 +626,21 @@ function _typeString(obj: any): string {
  * @returns {string}
  *   _getType(1);//"number"
  *   _getType([]);//"array"
- *   _getType({});//"object"
- *   let p1 = new Person("petter");//custom type<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+ *   _getType({});//"object"<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+ *   let p1 = new Person("petter");//custom type
  *   _getType(p1);//"person"
  */
 function _getType(obj: any): string {
-    if(obj === null || obj === undefined){
-        return obj === undefined ? 'undefined' : 'null';
-    }
-    let typeName = _typeString(obj).slice(8, -1).toLowerCase();
-    //将object类型再细化一下,以区分出自定义类型以及细化类型
-    let tpOf = typeof obj;
-    if(typeName !== 'arguments' &amp;&amp; (tpOf <span class="branch-1 cbranch-no" title="branch not covered" >=== 'object' || tpOf ==</span>= 'functio<span class="branch-1 cbranch-no" title="branch not covered" >n')</span>){
-        typeName = (obj.constructor &amp;&amp; obj.constructor.name) ? obj.constructor.name.toLowerCase() : typeName;
-    }
-    return typeName;
+  if (obj === null || obj === undefined) {
+    return obj === undefined ? 'undefined' : 'null';
+  }
+  let typeName = _typeString(obj).slice(8, -1).toLowerCase();
+  //将object类型再细化一下,以区分出自定义类型以及细化类型
+  const tpOf = typeof obj;<span class="branch-1 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
+  if (typeName !== 'arguments' &amp;&amp; (tpOf === 'object' || tpOf === 'function')) {
+    typeName = obj.constructor &amp;&amp; obj.constructor.name ? obj.constructor.name.toLowerCase() : typeName;
+  }
+  return typeName;
 }
 &nbsp;
 /*
@@ -663,14 +649,14 @@ function _getType(obj: any): string {
  * @returns {Function}
  */
 function _isTypeOf&lt;T&gt;(type: string): (obj: any) =&gt; obj is T {
-    type = ((typeof type === 'string' || (type as any) instanceof String) ? type : '').toLowerCase();
-    return function(obj: any): obj is T {
-        return type === _getType(obj);
-    };
+  type = (typeof type === 'string' || (type as any) instanceof String ? type : '').toLowerCase();
+  return function (obj: any): obj is T {
+    return type === _getType(obj);
+  };
 }
 &nbsp;
 interface TypeCheckers {
-    [key: string]: (obj: any) =&gt; boolean;
+  [key: string]: (obj: any) =&gt; boolean;
 }
 &nbsp;
 /*
@@ -679,14 +665,8 @@ interface TypeCheckers {
  * @returns {Boolean}
  */
 const _Type_: TypeCheckers = {};
-[
-    'arguments', 'array', 'date',
-    'error', 'syntaxError', 'typeError', 'rangeError',
-    'regExp', 'symbol',
-    'set', 'weakSet',
-    'map', 'weakMap'
-].forEach((t) =&gt; {
-    _Type_[`is${t[0].toUpperCase()}${t.slice(1)}`] = _isTypeOf(t);
+['arguments', 'array', 'date', 'error', 'syntaxError', 'typeError', 'rangeError', 'regExp', 'symbol', 'set', 'weakSet', 'map', 'weakMap'].forEach(t =&gt; {
+  _Type_[`is${t[0].toUpperCase()}${t.slice(1)}`] = _isTypeOf(t);
 });
 &nbsp;
 export const isArguments = _Type_.isArguments as (obj: any) =&gt; obj is IArguments;
@@ -697,171 +677,172 @@ export const isMap = _Type_.isMap as (obj: any) =&gt; obj is Map&lt;any, any&gt;
 export const isWeakMap = _Type_.isWeakMap as (obj: any) =&gt; obj is WeakMap&lt;any, any&gt;;
 &nbsp;
 export function isArray(obj: any): obj is Array&lt;any&gt; {
-    return (typeof Array.isArray !== 'undefined' &amp;&amp; Array.isArray(obj)) || _Type_.isArray(obj);
+  return (typeof Array.isArray !== 'undefined' &amp;&amp; Array.isArray(obj)) || _Type_.isArray(obj);
 }
 &nbsp;
 export function isDate(obj: any): obj is Date {
-    return obj instanceof Date || _Type_.isDate(obj);
+  return obj instanceof Date || _Type_.isDate(obj);
 }
 &nbsp;
 export function isRegExp(obj: any): obj is RegExp {
-    return obj instanceof RegExp || _Type_.isRegExp(obj);
+  return obj instanceof RegExp || _Type_.isRegExp(obj);
 }
 &nbsp;
 export function isError(obj: any): obj is Error {
-    return _Type_.isError(obj) || obj instanceof Error;
+  return _Type_.isError(obj) || obj instanceof Error;
 }
 &nbsp;
 export function isSyntaxError(obj: any): obj is SyntaxError {
-    return _Type_.isSyntaxError(obj) || obj instanceof SyntaxError;
+  return _Type_.isSyntaxError(obj) || obj instanceof SyntaxError;
 }
 &nbsp;
 export function isTypeError(obj: any): obj is TypeError {
-    return _Type_.isTypeError(obj) || obj instanceof TypeError;
+  return _Type_.isTypeError(obj) || obj instanceof TypeError;
 }
 &nbsp;
 export function isRangeError(obj: any): obj is RangeError {
-    return _Type_.isRangeError(obj) || obj instanceof RangeError;
+  return _Type_.isRangeError(obj) || obj instanceof RangeError;
 }
 &nbsp;
 export function isObject(obj: any): obj is Record&lt;string, any&gt; {
-    return (typeof obj === 'object' || obj instanceof Object) &amp;&amp; obj !== null;
+  return (typeof obj === 'object' || obj instanceof Object) &amp;&amp; obj !== null;
 }
 &nbsp;
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction(obj: any): obj is Function {
-    return typeof obj === 'function' || obj instanceof Function;
+  return typeof obj === 'function' || obj instanceof Function;
 }
 &nbsp;
 export function isNull(obj: any): obj is null {
-    return obj === null;
+  return obj === null;
 }
 &nbsp;
 export function isUndefined(obj: any): obj is undefined {
-    return obj === undefined;
+  return obj === undefined;
 }
 &nbsp;
 export function isNill(obj: any): obj is null | undefined {
-    return (obj === null || obj === undefined);
+  return obj === null || obj === undefined;
 }
 &nbsp;
 export function isBoolean(obj: any): obj is boolean {
-    return obj === true || obj === false || obj instanceof Boolean;
+  return obj === true || obj === false || obj instanceof Boolean;
 }
 &nbsp;
 export function isString(obj: any): obj is string {
-    return typeof obj === 'string' || obj instanceof String;
+  return typeof obj === 'string' || obj instanceof String;
 }
 &nbsp;
 export function isChar(obj: any): obj is string {
-    return isString(obj) &amp;&amp; obj.length === 1;
+  return isString(obj) &amp;&amp; obj.length === 1;
 }
 &nbsp;
 export function isNumber(obj: any, warn: boolean = true): obj is number {
-    if(warn &amp;&amp; obj !== obj) {
-        console.warn('obj is NaN. Using \'isRealNumber(obj)\' instead of \'isNumber(obj)\'\nOr using \'isNumber(obj,false)\' to stop warning out\n');
-    }
-    return typeof obj === 'number' || obj instanceof Number;
-}
-<span class="missing-if-branch" title="else path not taken" >E</span>
+  if (warn &amp;&amp; obj !== obj) {
+    console.warn("obj is NaN. Using 'isRealNumber(obj)' instead of 'isNumber(obj)'\nOr using 'isNumber(obj,false)' to stop warning out\n");
+  }
+  return typeof obj === 'number' || obj instanceof Number;
+}<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
 export function isNaN(obj: any): boolean {
-    return obj !== obj;
+  return obj !== obj;
 }
 &nbsp;
 export function isRealNumber(obj: any): obj is number {
-    return !isNaN(obj) &amp;&amp; isNumber(obj);
+  return !isNaN(obj) &amp;&amp; isNumber(obj);
 }
 &nbsp;
 export function isPrimitive(obj: any): obj is Primitive {
-    return !isObject(obj) &amp;&amp; !isFunction(obj);
+  return !isObject(obj) &amp;&amp; !isFunction(obj);
 }
 &nbsp;
 export function isSpreadable(obj: any): obj is Array&lt;any&gt; | Record&lt;string, any&gt; {
-    if(isArray(obj)){<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-        return !!obj.length;
-    } else if(isObject(obj) || isFunction(obj)){
-        for(let j in obj){
-            if(obj.hasOwnProperty(j)){
-                return true;
-            }
-        }
+  if (isArray(obj)) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    return !!obj.length;
+  } else if (isObject(obj) || isFunction(obj)) {
+    for (const j in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, j)) {
+        return true;
+      }
     }
-    return false;
+  }
+  return false;
 }
 &nbsp;
 function _isJSON(value: any, visited: any[] = []): boolean {
-    visited.push(value);
-    return isPrimitive(value) ||
-        (isArray(value) &amp;&amp; value.every(element =&gt; _isJSON(element, visited))) ||
-        ((is<span class="missing-if-branch" title="else path not taken" >E</span>Object as any).isFlat(value) &amp;&amp; Object.keys(value).every((key) =&gt; {
-            let $ = Object.getOwnPropertyDescriptor(value, key);
-            return $ &amp;&amp; ((!isObject($.value) || !visited.includes($.value))
-                    &amp;&amp; !('get' in $) &amp;&amp; !('set' in $)
-                    &amp;&amp; _isJSON($.value, visited));
-        }));
+  visited.push(value);
+  return (<span class="missing-if-branch" title="else path not taken" >E</span>
+    isPrimitive(value) ||
+    (isArray(value) &amp;&amp; value.every(element =&gt; _isJSON(element, visited))) ||
+    ((isObject as any).isFlat(value) &amp;&amp;
+      Object.keys(value).every(key =&gt; {
+        const $ = Object.getOwnPropertyDescriptor(value, key);
+        return $ &amp;&amp; (!isObject($.value) || !visited.includes($.value)) &amp;&amp; !('get' in $) &amp;&amp; !('set' in $) &amp;&amp; _isJSON($.value, visited);
+      }))
+  );
 }
 &nbsp;
 export function isJSON(obj: any): obj is JSONValue {
-    return _isJSON(obj);
+  return _isJSON(obj);
 }
 &nbsp;
 export interface ObjectExtensions {
-    isEmpty: (obj: any, ownCheck?: boolean) =&gt; boolean;
-    isEmptyOwn: (obj: any) =&gt; boolean;
-    isFlat: (obj: any) =&gt; boolean;
+  isEmpty: (obj: any, ownCheck?: boolean) =&gt; boolean;
+  isEmptyOwn: (obj: any) =&gt; boolean;
+  isFlat: (obj: any) =&gt; boolean;
 }
 &nbsp;
 export interface NumberExtensions {
-    decimal: (obj: any) =&gt; boolean;
-    integer: (obj: any) =&gt; boolean;
-    odd: (obj: any) =&gt; boolean;
-    even: (obj: any) =&gt; boolean;
+  decimal: (obj: any) =&gt; boolean;
+  integer: (obj: any) =&gt; boolean;
+  odd: (obj: any) =&gt; boolean;
+  even: (obj: any) =&gt; boolean;
 }
 &nbsp;
-(isObject as any as ObjectExtensions).isEmpty = function(obj: any, ownCheck?: boolean): boolean {
-    if(!isObject(obj) &amp;&amp; !isArray(obj)){
-        return false;
-    }
-    ownCheck = ownCheck || false;
-    for(let k in obj){
-        if(ownCheck){
-            if(obj.hasOwnProperty(k)){
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-    return true;
-};
-&nbsp;
-(isObject as any as ObjectExtensions).isEmptyOwn = function(obj: any): boolean {
-    return (isObject as any as ObjectExtensions).isEmpty(obj, true);
-};
-&nbsp;
-(isObject as any as ObjectExtensions).isFlat = function(obj: any): boolean {
-    if(isNull(obj)){
-        return true;
-    }else if(isObject(obj)){
-        return null === Object.getPrototypeOf(obj)
-            || (null === Object.getPrototypeOf(Object.getPrototypeOf(obj)));
-    }
+(isObject as any as ObjectExtensions).isEmpty = function (obj: any, ownCheck?: boolean): boolean {
+  if (!isObject(obj) &amp;&amp; !isArray(obj)) {
     return false;
+  }
+  ownCheck = ownCheck || false;
+  for (const k in obj) {
+    if (ownCheck) {
+      if (Object.prototype.hasOwnProperty.call(obj, k)) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 &nbsp;
-(isNumber as any as NumberExtensions).decimal = function(obj: any): boolean {
-    return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; (obj % 1 !== 0);
+(isObject as any as ObjectExtensions).isEmptyOwn = function (obj: any): boolean {
+  return (isObject as any as ObjectExtensions).isEmpty(obj, true);
 };
 &nbsp;
-(isNumber as any as NumberExtensions).integer = function(obj: any): boolean {
-    return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; (obj % 1 === 0);
+(isObject as any as ObjectExtensions).isFlat = function (obj: any): boolean {
+  if (isNull(obj)) {
+    return true;
+  } else if (isObject(obj)) {
+    return null === Object.getPrototypeOf(obj) || null === Object.getPrototypeOf(Object.getPrototypeOf(obj));
+  }
+  return false;
 };
 &nbsp;
-(isNumber as any as NumberExtensions).odd = function(obj: any): boolean {
-    return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; (obj % 2 !== 0);
+(isNumber as any as NumberExtensions).decimal = function (obj: any): boolean {
+  return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; obj % 1 !== 0;
 };
 &nbsp;
-(isNumber as any as NumberExtensions).even = function(obj: any): boolean {
-    return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; (obj % 2 === 0);
+(isNumber as any as NumberExtensions).integer = function (obj: any): boolean {
+  return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; obj % 1 === 0;
+};
+&nbsp;
+(isNumber as any as NumberExtensions).odd = function (obj: any): boolean {
+  return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; obj % 2 !== 0;
+};
+&nbsp;
+(isNumber as any as NumberExtensions).even = function (obj: any): boolean {
+  return !isNaN(obj) &amp;&amp; isNumber(obj) &amp;&amp; obj % 2 === 0;
 };
 &nbsp;
 /*
@@ -875,15 +856,16 @@ export interface NumberExtensions {
  *   _getType(p1);//"person"
  */
 export function getTypeOf(obj: any): string {
-    return _getType(obj);
-}</pre></td></tr></table></pre>
+  return _getType(obj);
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-29T18:51:25.626Z
+                at 2026-04-09T06:22:20.993Z
             </div>
         <script src="../prettify.js"></script>
         <script>
