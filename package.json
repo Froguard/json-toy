@@ -74,6 +74,7 @@
     "build:esm": "tsc --project tsconfig.esm.json",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build:types": "tsc --project tsconfig.type.json",
+    "prebuild": "rm -rf ./dist",
     "-------------------check-------------------": "echo '------------------- check -------------------'",
     "pretest:cover": "rm -rf ./__coverage__",
     "test:cover": "jest --coverage",
