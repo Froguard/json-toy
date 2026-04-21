@@ -18,23 +18,23 @@ import { isObject, isString, isNill } from './type-of';
  * 对于属性名中含有'&'的，需要转化成'&amp;',这样一来，如果属性名中含有'&bull;'，可以转化写成'&amp;bull;'
  */
 export function getValByKeyPath(json: any, keyPath: string, ownKeyCheck?: boolean): any {
-    if (!isObject(json) || !isString(keyPath)) {
-        throw new TypeError('Error type-in,check plz! (jsonObj,stringKeyPath)');
+  if (!isObject(json) || !isString(keyPath)) {
+    throw new TypeError('Error type-in,check plz! (jsonObj,stringKeyPath)');
+  }
+
+  ownKeyCheck = isNill(ownKeyCheck) ? true : !!ownKeyCheck;
+  let v: any = json;
+  const propsArr = keyPath.split('.');
+
+  propsArr.forEach(k => {
+    if (!isNill(v)) {
+      k = k.replace(/&bull;/g, '.'); // &bull; -> .
+      k = k.replace(/&amp;/g, '&'); // &amp; -> &  eg:如果你需要'&bull;'这个组合，可以写成'&amp;bull'
+      v = !ownKeyCheck ? v[k] : Object.prototype.hasOwnProperty.call(v, k) ? v[k] : undefined;
+    } else {
+      return v;
     }
+  });
 
-    ownKeyCheck = isNill(ownKeyCheck) ? true : !!ownKeyCheck;
-    let v: any = json;
-    const propsArr = keyPath.split('.');
-
-    propsArr.forEach((k) => {
-        if (!isNill(v)) {
-            k = k.replace(/&bull;/g, '.'); // &bull; -> .
-            k = k.replace(/&amp;/g, '&'); // &amp; -> &  eg:如果你需要'&bull;'这个组合，可以写成'&amp;bull'
-            v = !ownKeyCheck ? v[k] : (v.hasOwnProperty(k) ? v[k] : undefined);
-        } else {
-            return v;
-        }
-    });
-
-    return v;
-} 
+  return v;
+}

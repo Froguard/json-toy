@@ -18,9 +18,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 代码架构
 
 ### 入口
+
 - `src/index.ts` 导出 4 个 API：`travelJson`、`checkCircular`、`getValByKeyPath`、`treeify`。
 
 ### 核心库（`src/lib/`）
+
 - **`type-of.ts`** — 类型判断工具。注意 `isObject` 和 `isNumber` 被动态挂载了扩展方法（如 `isEmptyOwn`、`isFlat`、`integer` 等）。
 - **`json-travel.ts`** — 安全的递归遍历器，`safeMode` 默认开启，用栈检测循环引用，遇到循环会替换为 `[Circular->keyPath]`。
 - **`json-check-circular.ts`** — 基于 `travelJson` 检测循环引用，返回 `{ isCircular, circularProps }`。
@@ -28,6 +30,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **`json-treeify.ts`** — 将对象转换为树形字符串。内部调用 `travelJson` 收集节点，用二维数组拼接字符，再通过 `fixArr` 处理末尾分支符号（`├` 改 `└`）。
 
 ### CLI（`src/bin/`）
+
 - **`main.ts`** — 共享的 CLI 逻辑，基于 `yargs`，支持 JSON 文件（`-j`）和目录（`-d`）两种输入模式。
 - **`j-tree-str.ts`** / **`jtls.ts`** — CLI 入口。`jtls` 会强制设置 `--dir`、`--max=1`、`--outv=0` 后再进入 `main.ts`。
 - **`utils/walk-dir.ts`** — 仅 Node 可用，将目录结构转成 JSON。默认过滤 `.git`、`node_modules` 等。
