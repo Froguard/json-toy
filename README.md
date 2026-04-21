@@ -5,7 +5,7 @@
 Some simple methods for operating object as json in an easy way
 
 [![version](https://img.shields.io/npm/v/json-toy.svg 'version')](https://www.npmjs.com/package/json-toy)&nbsp;
-[![Coverage Status](https://coveralls.io/repos/github/Froguard/json-toy/badge.svg?branch=develop&_ty=2019)](https://coveralls.io/github/Froguard/json-toy?branch=master&_ty=2019)&nbsp;
+[![Coverage Status](https://coveralls.io/repos/github/Froguard/json-toy/badge.svg?branch=develop&_ty=2019)](https://coveralls.io/github/Froguard/json-toy?branch=develop&_ty=2019)&nbsp;
 [![GitHub issues](https://img.shields.io/github/issues/Froguard/json-toy.svg)](https://github.com/Froguard/json-toy/issues?q=is%3Aopen+is%3Aissue)&nbsp;
 [![download](https://img.shields.io/npm/dt/json-toy.svg 'download')](https://www.npmjs.com/package/json-toy)&nbsp;
 [![license](https://img.shields.io/github/license/froguard/json-toy.svg)](https://github.com/froguard/json-toy/blob/master/LICENSE)
