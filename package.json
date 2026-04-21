@@ -1,6 +1,6 @@
 {
   "name": "json-toy",
-  "version": "3.0.0",
+  "version": "3.0.0-alpha",
   "description": "json-treeify: Get tree string(├└│─) via json, support browser|node, browser none dependencies!",
   "dependencies": {
     "clipboardy": "=3.0.0",

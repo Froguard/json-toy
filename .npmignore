@@ -118,6 +118,9 @@ README-DEV.md
 index.ts
 bin/**/*.ts
 src/**/*.ts
+src/**/*.tsx
+src/**/*.json
+src/**/*.json5
 
 # build scripts
 build/**/*
