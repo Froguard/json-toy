@@ -34,10 +34,10 @@
   "main": "dist/cjs/index.js",
   "types": "dist/esm/index.d.ts",
   "bin": {
-    "jts": "dist/bin/jts.js",
-    "j-tree-str": "dist/bin/jts.js",
-    "json-treeify": "dist/bin/jts.js",
-    "jtls": "dist/bin/jtls.js"
+    "jts": "dist/cjs/bin/jts.js",
+    "j-tree-str": "dist/cjs/bin/jts.js",
+    "json-treeify": "dist/cjs/bin/jts.js",
+    "jtls": "dist/cjs/bin/jtls.js"
   },
   "exports": {
     ".": {
@@ -85,7 +85,7 @@
     "-------------------publish-----------------": "echo '------------------- publish -----------------'",
     "prerelease": "npm rum build",
     "release": "npm publish --registry=https://registry.npmjs.org",
-    "postinstall": "husky install",
+    "_postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   },

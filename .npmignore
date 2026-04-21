@@ -1,12 +1,129 @@
-.DS_Store
-.idea/
-build/
-coverage/lcov-report
-example/img/
-node_modules/
+# system & log files
+Thumbs.db
+.DS_store
+log*
 *.log
-develop.md
-.travis.yml
-.omc/
+tmp
+tmp*/
+tmp-*/
+local-*/
 
-# test/
+# node_modules 
+node_modules
+node_modules/
+
+# test directories
+tests/
+_tests_/
+__tests__/
+coverage/
+_coverage_/
+__coverage__/
+# test files
+test.js
+test.ts
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+
+# demo & demo directories
+demo.js
+demo.cjs
+demo.json
+demo.json5
+demo.ts
+example/
+_example_/
+__example__/
+
+# docs
+doc/
+docs/
+_docs_/
+__docs__/
+
+# root config files
+.idea/
+.husky/
+.vscode/
+.omc/
+.claude/
+CLAUDE.md
+.claudeignore
+.commitlintrc.ts
+.commitlintrc.js
+.commitlintrc.json
+.eslintignore
+.eslintrc
+.eslintrc.ts
+.eslintrc.js
+.eslintrc.json
+.lintstagedrc
+.lintstagedrc.ts
+.lintstagedrc.js
+.lintstagedrc.json
+.gitignore
+.nodemonrc
+.nodemonrc.ts
+.nodemonrc.js
+.nodemonrc.json
+.npmrc
+.nvmrc
+.prettierignore
+.prettierrc
+.prettierrc.ts
+.prettierrc.js
+.prettierrc.json
+.yarnrc
+.yarnrc.yml
+jest.config.ts
+jest.config.js
+jest.config.json
+
+# mihawkrc file
+.mihawkrc
+.mihawkrc.ts
+.mihawkrc.js
+.mihawkrc.json
+
+# mocks
+mock/
+mocks/
+
+# other config files
+.*rc
+.*rc.ts
+.*rc.js
+*.rc.json
+*.config
+*.config.ts
+*.config.js
+*.config.json
+
+# tsconfig
+tsconfig.json
+tsconfig.*.json
+tslint.json
+typedoc.json
+
+# lock
+# package-lock.json
+# yarn.lock
+
+# docs
+README-DEV.md
+
+# typescript surce code
+index.ts
+bin/**/*.ts
+src/**/*.ts
+
+# build scripts
+build/**/*
+
+# d.ts 要保留
+!*.d.ts
+
+
+dist/.gitkeep
