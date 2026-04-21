@@ -8,3 +8,4 @@
 .frontendrc.*
 tsconfig.json
 tsconfig.*.json
+/.omc
