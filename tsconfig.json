@@ -1,0 +1,62 @@
+{
+  // This is an alias to @tsconfig/node16: https://github.com/tsconfig/bases
+  "extends": "@tsconfig/node16/tsconfig.json", // 需要先执行 npm install
+  // Most ts-node options can be specified here using their programmatic names.
+  "ts-node": {
+    // It is faster to skip typechecking.
+    // Remove if you want ts-node to do typechecking.
+    "transpileOnly": true, // 编译时不进行类型检查，这样能够提升 ts-node 指令执行性能
+    "files": true,
+    "compilerOptions": {
+      // compilerOptions specified here will override those declared below,
+      // but *only* in ts-node.  Useful if you want ts-node and tsc to use
+      // different options with a single tsconfig.json.
+    }
+  },
+  "compilerOptions": {
+    // "baseUrl": ".", // 路径
+    // 【⚠️警告】此处不能设置路径别名，会让打包之后的产物中，也带上路径别名，会出现找不到模块的情况（当然，要强行用，也有专门的解决办法，这里先不处理）
+    // "paths": { "@/*": ["./*"] }, // 路径别名
+    //
+    /**
+     * common build config:
+     */
+    "types": ["node", "jest"], // 包含 Node.js 和 Jest 类型定义
+    "lib": ["ES2022"], // 方便 ts 识别最新的 es 语法
+    "moduleResolution": "node16", // 默认以 nodejs 模块的方式进行模块解析，需要同时设置 module=node16
+    "esModuleInterop": true, // 确保在 CommonJS 环境中使用 ES Modules 导出时不会出现类型错误或导入问题
+    //
+    /**
+     * ⚠️ non-common build config:
+     */
+    "target": "ES2015",
+    "module": "Node16",
+    "declaration": true,
+    "removeComments": true,
+    //
+    /**
+     * others:
+     */
+    "allowJs": true,
+    "resolveJsonModule":true,
+    "sourceMap": false,
+    "newLine": "lf", // bin 文件必须是 lf，否则会报错（crlf 为 window 下格式，不兼容 unix 格式）
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "allowUnusedLabels": true,
+    "allowUnreachableCode": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false
+  },
+  "include": [
+    // 没有被 include 进去的文件，一些公共的类型定义是没办法识别的
+    "./src/**/*.ts",
+    "./src/**/*.d.ts"
+    // "jest.config.ts",
+    // "./__tests__/**/*.ts",
+  ],
+  "exclude": ["node_modules", "__tests__", "__coverage__"],
+  }

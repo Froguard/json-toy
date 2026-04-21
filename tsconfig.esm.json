@@ -1,0 +1,11 @@
+// tsconfig.esm.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022", // 或者 "ESnext"
+    "removeComments": true, // 删除注释（因为 d.ts 中会保留注释，所以这里就不用生成了）
+    "module": "ES2022",
+    "outDir": "dist/esm",
+    "declaration": false // 生成对应的类型定义文件 *.d.ts 实在 tsconfig.type.json 中配置的，这里就不重复生成了
+  }
+}

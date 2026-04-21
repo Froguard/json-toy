@@ -1,50 +1,100 @@
 {
   "name": "json-toy",
-  "version": "2.0.2",
+  "version": "3.0.0-beta",
   "description": "json-treeify: Get tree string(├└│─) via json, support browser|node, browser none dependencies!",
   "dependencies": {
-    "clipboardy": "^1.2.3",
-    "yargs": "^12.0.1"
+    "clipboardy": "=3.0.0",
+    "color-cc": "^0.1.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "babel-eslint": "^10.0.2",
-    "babel-loader": "^8.0.0",
-    "coveralls": "^3.0.2",
-    "cross-env": "^5.2.0",
-    "eslint": "^4.11.0",
-    "eslint-config-kaola": "^0.1.3",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "npm-run-all": "^4.1.3",
-    "rewire": "^2.5.2",
-    "should": "^11.1.1",
-    "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-common-shake": "^2.0.1"
+    "@commitlint/cli": "^17.8.1",
+    "@commitlint/config-conventional": "^17.8.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.8.7",
+    "@types/yargs": "^17.0.24",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "jest": "^30.3.0",
+    "lint-staged": "^12.3.3",
+    "npm-run-all": "^4.1.5",
+    "pinst": "^2.1.6",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.4.0",
+    "tslib": "^2.6.2",
+    "typescript": "^4.5.5"
   },
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "types": "dist/esm/index.d.ts",
   "bin": {
-    "j-tree-str": "bin/j-tree-str.js",
-    "jts": "bin/j-tree-str.js",
-    "jtls": "bin/jtls.js"
+    "jts": "dist/cjs/bin/jts.js",
+    "j-tree-str": "dist/cjs/bin/jts.js",
+    "json-treeify": "dist/cjs/bin/jts.js",
+    "jtls": "dist/cjs/bin/jtls.js"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./lib/json-check-circular": {
+      "require": "./dist/cjs/lib/json-check-circular.js",
+      "import": "./dist/esm/lib/json-check-circular.js",
+      "types": "./dist/types/lib/json-check-circular.d.ts"
+    },
+    "./lib/json-get-val-by-keypath": {
+      "require": "./dist/cjs/lib/json-get-val-by-keypath.js",
+      "import": "./dist/esm/lib/json-get-val-by-keypath.js",
+      "types": "./dist/types/lib/json-get-val-by-keypath.d.ts"
+    },
+    "./lib/json-travel": {
+      "require": "./dist/cjs/lib/json-travel.js",
+      "import": "./dist/esm/lib/json-travel.js",
+      "types": "./dist/types/lib/json-travel.d.ts"
+    },
+    "./lib/json-treeify": {
+      "require": "./dist/cjs/lib/json-treeify.js",
+      "import": "./dist/esm/lib/json-treeify.js",
+      "types": "./dist/types/lib/json-treeify.d.ts"
+    }
   },
   "scripts": {
-    "test": "npm run test:cover",
-    "test:cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --harmony",
-    "test:nocover": "mocha --harmony",
-    "test:one": "mocha --harmony ./test/4.json-treeify-2.test.js",
-    "pack": "webpack --progress --colors --display-error-details --config ./build/webpack.config.js",
-    "lint": "eslint --fix"
+    "dev": "ts-node ./_example_/demo.ts",
+    "dev:bin": "ts-node ./src/bin/main.ts",
+    "-------------------build-------------------": "echo '------------------- build -------------------'",
+    "build": "run-p build:esm build:cjs build:types",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:types": "tsc --project tsconfig.type.json",
+    "prebuild": "rm -rf ./dist",
+    "postbuild": "rm -rf ./dist/esm/bin & rm -rf dist/types/bin",
+    "-------------------check-------------------": "echo '------------------- check -------------------'",
+    "pretest:cover": "rm -rf ./__coverage__",
+    "test:cover": "jest --coverage",
+    "test": "jest",
+    "test:one": "jest ./__tests__/lib/5.json-get-val-by-keypath.test.ts",
+    "lint:fix": "eslint --fix 'src/**/*.ts'",
+    "-------------------publish-----------------": "echo '------------------- publish -----------------'",
+    "prerelease": "npm rum build",
+    "release": "npm publish --registry=https://registry.npmjs.org",
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Froguard/json-toy.git"
   },
   "engines": {
-    "node": ">= 6.0",
-    "npm": ">= 3"
+    "node": ">=16.0.0"
   },
   "keywords": [
     "treeify",

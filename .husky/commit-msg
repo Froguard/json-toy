@@ -1,0 +1,19 @@
+#!/bin/bash
+. "$(dirname "$0")/_/husky.sh"
+
+# 获取 commit 消息文件的路径
+COMMIT_MSG_FILE=$1
+# 读取第一行 commit 消息
+FIRST_LINE=$(head -n 1 "$COMMIT_MSG_FILE")
+
+# log
+echo ""
+echo -e "\x1b[1;35m[commit-msg]\x1b[0m: Start git-hooks via husky@^8.0.3..."
+echo -e "检查 git commit 提交是否遵循格式： \x1b[1;35m<type>: <subject>\x1b[0m 如：\x1b[1;36m feat: 新增 xx 能力. \x1b[0m "
+echo -e "\x1b[1;90m$ npx commitlint \x1b[0m"
+echo -e "git commit 信息为 >> \x1b[1;36m $FIRST_LINE \x1b[0m"
+
+# 调用 commitlint 验证 commit 消息格式
+npx commitlint --edit $COMMIT_MSG_FILE
+
+echo ""

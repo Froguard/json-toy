@@ -1,0 +1,9 @@
+#!/bin/bash
+. "$(dirname "$0")/_/husky.sh"
+
+# log
+echo ""
+echo -e "\x1b[1;35m[pre-commit]\x1b[0m: Start git-hooks via husky@^8.0.3..."
+
+echo -e "\x1b[1;90m$ npx lint-staged --allow-empty\x1b[0m" 
+npx lint-staged --allow-empty

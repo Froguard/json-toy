@@ -1,5 +1,0 @@
---reporter spec
---recursive
---bail
---timeout 10000
---slow 500
