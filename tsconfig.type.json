@@ -13,5 +13,10 @@
     "removeComments": false, // 保留注释
     "declaration": true,
     "declarationDir": "dist/types"
-  }
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "__tests__", "__coverage__"]
 }

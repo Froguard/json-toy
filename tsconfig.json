@@ -54,9 +54,9 @@
   "include": [
     // 没有被 include 进去的文件，一些公共的类型定义是没办法识别的
     "./src/**/*.ts",
-    "./src/**/*.d.ts"
-    // "jest.config.ts",
-    // "./__tests__/**/*.ts",
+    "./src/**/*.d.ts",
+    "jest.config.ts",
+    "./__tests__/**/*.ts",
   ],
-  "exclude": ["node_modules", "__tests__", "__coverage__"],
+  "exclude": ["node_modules", "__coverage__"],
   }
